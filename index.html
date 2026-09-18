@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name — Design Portfolio</title>
+
+  <!-- Tailwind via CDN: no build step needed to get started -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts: a serif display paired with a clean sans for body/UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#FAFAF8',
+            ink: '#1C1C1A',
+            stone: '#6B6B64',
+            accent: '#22344C',
+          },
+          fontFamily: {
+            display: ['"Fraunces"', 'serif'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-paper text-ink font-sans antialiased">
+
+  <!-- ========== NAV ========== -->
+  <header class="max-w-5xl mx-auto px-6 md:px-10 py-8 flex items-center justify-between">
+    <a href="#" class="font-display text-lg">Your Name</a>
+    <nav class="flex gap-8 text-sm text-stone">
+      <a href="#work" class="hover:text-ink transition-colors">Work</a>
+      <a href="#about" class="hover:text-ink transition-colors">About</a>
+      <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="max-w-5xl mx-auto px-6 md:px-10 pt-16 pb-24 md:pt-24 md:pb-32">
+    <p class="text-stone text-sm mb-4">Product & brand designer</p>
+    <h1 class="font-display text-4xl md:text-6xl leading-[1.1] max-w-2xl">
+      I design interfaces that feel like they were always meant to be there.
+    </h1>
+    <p class="mt-6 text-stone max-w-md">
+      Based in [City]. Currently open for freelance and select full-time roles.
+    </p>
+  </section>
+
+  <!-- ========== WORK / PORTFOLIO GRID ========== -->
+  <section id="work" class="max-w-5xl mx-auto px-6 md:px-10 pb-24">
+    <h2 class="font-display text-2xl mb-10">Selected work</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
+
+      <!-- Project card — duplicate this block for each project -->
+      <a href="#" class="group block">
+        <div class="aspect-[4/3] bg-stone/10 overflow-hidden mb-4">
+          <img src="https://placehold.co/800x600/EDEBE6/1C1C1A?text=Project+Image"
+               alt="Project thumbnail"
+               class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
+        </div>
+        <h3 class="font-display text-lg">Project Title</h3>
+        <p class="text-stone text-sm mt-1">Short description — client, type of work</p>
+      </a>
+
+      <a href="#" class="group block">
+        <div class="aspect-[4/3] bg-stone/10 overflow-hidden mb-4">
+          <img src="https://placehold.co/800x600/EDEBE6/1C1C1A?text=Project+Image"
+               alt="Project thumbnail"
+               class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
+        </div>
+        <h3 class="font-display text-lg">Project Title</h3>
+        <p class="text-stone text-sm mt-1">Short description — client, type of work</p>
+      </a>
+
+      <a href="#" class="group block">
+        <div class="aspect-[4/3] bg-stone/10 overflow-hidden mb-4">
+          <img src="https://placehold.co/800x600/EDEBE6/1C1C1A?text=Project+Image"
+               alt="Project thumbnail"
+               class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
+        </div>
+        <h3 class="font-display text-lg">Project Title</h3>
+        <p class="text-stone text-sm mt-1">Short description — client, type of work</p>
+      </a>
+
+      <a href="#" class="group block">
+        <div class="aspect-[4/3] bg-stone/10 overflow-hidden mb-4">
+          <img src="https://placehold.co/800x600/EDEBE6/1C1C1A?text=Project+Image"
+               alt="Project thumbnail"
+               class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
+        </div>
+        <h3 class="font-display text-lg">Project Title</h3>
+        <p class="text-stone text-sm mt-1">Short description — client, type of work</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" class="max-w-5xl mx-auto px-6 md:px-10 py-24 border-t border-ink/10">
+    <div class="max-w-xl">
+      <h2 class="font-display text-2xl mb-6">About</h2>
+      <p class="text-stone leading-relaxed">
+        A couple of paragraphs about your background, how you approach design work,
+        and what kind of projects you like taking on. Keep it specific and human —
+        skip generic phrases like "passionate about creating pixel-perfect experiences."
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" class="max-w-5xl mx-auto px-6 md:px-10 py-24 border-t border-ink/10">
+    <h2 class="font-display text-2xl mb-6">Get in touch</h2>
+    <p class="text-stone max-w-md mb-8">
+      Have a project in mind? Send a few details and I'll get back to you within a couple of days.
+    </p>
+
+    <!--
+      Starter version: a mailto link, works immediately with zero setup.
+      Swap the <a> below for a <form> pointed at a service like Formspree
+      when you want a real in-page form instead of opening the user's email client.
+    -->
+    <a href="mailto:you@example.com"
+       class="inline-block bg-accent text-paper px-6 py-3 text-sm hover:bg-ink transition-colors">
+      you@example.com
+    </a>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="max-w-5xl mx-auto px-6 md:px-10 py-10 text-sm text-stone flex justify-between">
+    <span>© 2026 Your Name</span>
+    <div class="flex gap-6">
+      <a href="#" class="hover:text-ink transition-colors">LinkedIn</a>
+      <a href="#" class="hover:text-ink transition-colors">Instagram</a>
+    </div>
+  </footer>
+
+</body>
+</html>
