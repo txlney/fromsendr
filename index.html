@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name — Design Portfolio</title>
+  <link rel="icon" href="images/favicon.png">
+  <title>Sendr - Browsers into buyers</title>
 
   <!-- Tailwind via CDN: no build step needed to get started -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,6 +12,7 @@
   <!-- Fonts: a serif display paired with a clean sans for body/UI -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script>
@@ -36,28 +38,30 @@
 <body class="bg-paper text-ink font-sans antialiased">
 
   <!-- ========== NAV ========== -->
-  <header class="max-w-5xl mx-auto px-6 md:px-10 py-8 flex items-center justify-between">
-    <a href="#" class="font-display text-lg">Your Name</a>
+  <header class="bg-ink mx-auto px-6 md:px-10 py-8 flex items-center justify-between">
+    <a href="#" class="text-paper font-display text-3xl">Sendr</a>
     <nav class="flex gap-8 text-sm text-stone">
-      <a href="#work" class="hover:text-ink transition-colors">Work</a>
-      <a href="#about" class="hover:text-ink transition-colors">About</a>
-      <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
+      <a href="#" class="nav-link">Services</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </nav>
   </header>
 
   <!-- ========== HERO ========== -->
-  <section class="max-w-5xl mx-auto px-6 md:px-10 pt-16 pb-24 md:pt-24 md:pb-32">
-    <p class="text-stone text-sm mb-4">Product & brand designer</p>
+  <section class="mx-auto px-6 md:px-10 pt-16 pb-24 md:pt-24 md:pb-32">
+    <p class="text-stone text-sm mb-4">Email marketing specialists</p>
     <h1 class="font-display text-4xl md:text-6xl leading-[1.1] max-w-2xl">
-      I design interfaces that feel like they were always meant to be there.
+      We design email strategies that turn <strong class="bold">browsers into buyers.</strong>
     </h1>
     <p class="mt-6 text-stone max-w-md">
-      Based in [City]. Currently open for freelance and select full-time roles.
+      Based in the United Kingdom.
     </p>
   </section>
 
   <!-- ========== WORK / PORTFOLIO GRID ========== -->
-  <section id="work" class="max-w-5xl mx-auto px-6 md:px-10 pb-24">
+  <section id="work" class="mx-auto px-6 md:px-10 pb-24 hidden">
+    <!-- ! Hidden -->
     <h2 class="font-display text-2xl mb-10">Selected work</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
@@ -107,7 +111,8 @@
   </section>
 
   <!-- ========== ABOUT ========== -->
-  <section id="about" class="max-w-5xl mx-auto px-6 md:px-10 py-24 border-t border-ink/10">
+  <section id="about" class="mx-auto px-6 md:px-10 py-24 border-t border-ink/10 hidden">
+    <!-- ! Hidden -->
     <div class="max-w-xl">
       <h2 class="font-display text-2xl mb-6">About</h2>
       <p class="text-stone leading-relaxed">
@@ -119,7 +124,8 @@
   </section>
 
   <!-- ========== CONTACT ========== -->
-  <section id="contact" class="max-w-5xl mx-auto px-6 md:px-10 py-24 border-t border-ink/10">
+  <section id="contact" class="mx-auto px-6 md:px-10 py-24 border-t border-ink/10 hidden">
+    <!-- ! Hidden -->
     <h2 class="font-display text-2xl mb-6">Get in touch</h2>
     <p class="text-stone max-w-md mb-8">
       Have a project in mind? Send a few details and I'll get back to you within a couple of days.
@@ -137,11 +143,10 @@
   </section>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="max-w-5xl mx-auto px-6 md:px-10 py-10 text-sm text-stone flex justify-between">
-    <span>© 2026 Your Name</span>
+  <footer class="mx-auto px-6 md:px-10 py-10 text-sm text-stone flex justify-between">
+    <span>© 2026 Sendr</span>
     <div class="flex gap-6">
-      <a href="#" class="hover:text-ink transition-colors">LinkedIn</a>
-      <a href="#" class="hover:text-ink transition-colors">Instagram</a>
+      <a href="#" class="nav-link">Instagram</a>
     </div>
   </footer>
 

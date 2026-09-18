@@ -1,0 +1,32 @@
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #6B6B64;
+    left: 0;
+    bottom: -8px;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #FFFFFF;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover:after {
+    width: 100%;
+
+}
