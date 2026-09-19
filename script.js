@@ -1,3 +1,22 @@
+const mobileMenu = document.getElementById("mobile-menu");
+const menuLinks = mobileMenu.querySelectorAll("nav a");
+const menuBackdrop = mobileMenu.querySelector('[data-menu-backdrop]');
+
+const closeMobileMenu = () => {
+    mobileMenu.removeAttribute("open");
+    document.body.classList.remove("overflow-hidden");
+};
+
+mobileMenu.addEventListener("toggle", () => {
+    document.body.classList.toggle("overflow-hidden", mobileMenu.open);
+});
+
+menuBackdrop.addEventListener("click", closeMobileMenu);
+menuLinks.forEach(link => link.addEventListener("click", closeMobileMenu));
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && mobileMenu.open) closeMobileMenu();
+});
+
 const phrases = [
     "browsers into buyers.",
     "leads into customers.",
