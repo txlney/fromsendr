@@ -64,3 +64,24 @@
     width: 100%;
 
 }
+
+@media (max-width: 768px) {
+    .nav-link:hover {
+        color: var(--color-mint);
+        transition: none;
+    }
+
+    .nav-link:after {
+        width: 0;
+    }
+
+    .nav-link:hover:after {
+        width: 0;
+        transition: none;
+    }
+
+    .button-underline:hover:after {
+        width: 0;
+        transition: none;
+    }
+}
