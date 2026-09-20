@@ -1,6 +1,6 @@
 :root {
     --color-mint: #CADACF;
-    --color-deepgreen: #1A2B20;
+    --color-deepgreen: #212721;
     --color-ink: #0B0B0B;
     --color-paper: #FDFDFD;
     --color-accent: #90BA92;
@@ -65,6 +65,31 @@
 
 }
 
+.button-underline-dark {
+    position: relative;
+}
+
+.button-underline-dark:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-accent);
+    left: 0;
+    bottom: -3px;
+    transition: 0.2s;
+}
+
+.button-underline-dark:hover {
+    color: #FFFFFF;
+    transition: all 0.2s ease;
+}
+
+.button-underline-dark:hover:after {
+    width: 100%;
+
+}
+
 @media (max-width: 768px) {
     .nav-link:hover {
         color: var(--color-mint);
@@ -84,4 +109,14 @@
         width: 0;
         transition: none;
     }
+}
+
+/* Scroll-linked charts: --progress (0 to 1) is set per chart in script.js */
+.return-donut {
+    /* 36/37 of the ring is the return; the remaining sliver is the $1 invested */
+    background: conic-gradient(#212721 calc(var(--progress, 0) * 350.27deg), #CADACF 0);
+}
+
+.share-bar-fill {
+    width: calc(var(--progress, 0) * var(--target));
 }

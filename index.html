@@ -21,6 +21,7 @@
         extend: {
           colors: {
             paper: '#FAFAF8',
+            paperdark: '#EFEFEA',
             ink: '#1C1C1A',
             stone: '#6B6B64',
             deepgreen: '#212721',
@@ -78,8 +79,130 @@
       </p>
     </div>
     <div class="flex justify-center">
-      <button class="flex items-center justify-between gap-12 md:gap-18 my-36 md:my-24 bg-deepgreen bg-opacity-50 md:hover:bg-opacity-70 text-paper w-auto py-4 px-6 md:px-8 text-left text-md md:text-2xl font-display button-underline">
+      <button class="flex items-center justify-between gap-12 md:gap-18 my-36 md:my-24 bg-deepgreen bg-opacity-50 md:hover:bg-opacity-70 md:hover:translate-y-[-2px] text-paper shadow-xl w-auto py-4 px-6 md:px-8 text-left text-md md:text-2xl font-display button-underline">
         Book a call with us
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="w-8 h-3 md:w-12 md:h-4">
+          <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ========== STATISTICS ========== -->
+  <section id="statistics" class="mx-auto px-6 md:px-10 py-16 md:py-24 border-t border-ink/10">
+    <div class="mx-auto text-center mb-12">
+      <h2 class="font-display text-5xl md:text-8xl mb-4">Email isn't just an inbox</h2>
+      <h3 class="font-display text-3xl md:text-6xl mb-8">It's a revenue stream</h3>
+      <p class="text-stone text-sm md:text-lg max-w-5xl mx-auto">
+        When email is treated as a system rather than a series of sends, it can become one of the most measurable and efficient channels in your marketing mix.
+      </p>
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="my-16 mx-auto w-8 h-3 md:w-12 md:h-4 rotate-90">
+        <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="flex flex-col items-center justify-between gap-6 lg:flex-row lg:gap-20">
+        <div class="text-center md:mt-12">
+          <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone text-center">Average return on email investment</p>
+          <div class="flex flex-col items-center justify-center gap-4">
+            <span class="font-display text-[clamp(8rem,22vw,18rem)] leading-[.75]">$36</span>
+            <span class="mb-2 font-display text-xl leading-tight text-ink md:mb-5 md:text-3xl md:mt-4">returned for every $1 spent</span>
+          </div>
+        </div>
+        <div class="h-0 lg:h-1 w-full bg-stone/20"></div>
+        <div class="flex flex-col gap-6">
+          <div data-scroll-chart class="return-donut flex h-64 w-64 shrink-0 items-center justify-center rounded-full md:h-80 md:w-80" aria-label="36 dollar return for every 1 dollar invested">
+            <div class="flex h-[68%] w-[68%] flex-col items-center justify-center rounded-full bg-paper text-center">
+              <span class="font-display text-5xl">36x</span>
+              <span class="mt-1 max-w-28 text-xs uppercase tracking-widest text-stone">return on investment</span>
+            </div>
+          </div>
+          <a href="https://www.omnisend.com/blog/email-marketing-roi/" target="_blank" rel="noopener noreferrer" class="text-center text-xs text-stone/30 hover:underline cursor-pointer">[Omnisend, 2025]</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATISTICS: SHARE OF SALES ========== -->
+  <section class="bg-paperdark px-6 md:px-10 py-16 md:py-32">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="text-center md:text-left">
+        <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone">Where the revenue comes from</p>
+        <div class="flex flex-col items-center gap-4 md:flex-row md:items-end md:gap-6">
+          <span class="font-display text-[clamp(8rem,22vw,18rem)] leading-[.75]">2%</span>
+          <span class="max-w-xs font-display text-xl leading-tight text-ink md:mb-5 md:max-w-sm md:text-3xl">of sends drive 37% of email-driven sales</span>
+        </div>
+      </div>
+
+      <div data-scroll-chart class="mt-16 space-y-8 md:mt-24" role="img" aria-label="2 percent of email sends account for 37 percent of email-driven sales">
+        <div>
+          <div class="mb-3 flex justify-between text-sm uppercase tracking-[0.2em] text-stone">
+            <span>Share of sends</span>
+            <span class="text-stone">2%</span>
+          </div>
+          <div class="h-12 overflow-hidden bg-mint/60 md:h-20">
+            <div class="share-bar-fill h-full bg-deepgreen" style="--target: 4%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="mb-3 flex justify-between text-sm uppercase tracking-[0.2em] text-stone">
+            <span>Share of email-driven sales</span>
+            <span class="text-stone">37%</span>
+          </div>
+          <div class="h-12 overflow-hidden bg-mint/60 md:h-20">
+            <div class="share-bar-fill h-full bg-deepgreen" style="--target: 74%"></div>
+          </div>
+        </div>
+        <a href="https://www.omnisend.com/2025-ecommerce-marketing-report/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center text-center text-xs text-stone/30 hover:underline cursor-pointer">[Omnisend, 2025]</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATISTICS: FLOW REVENUES ========== -->
+  <section id="statistics" class="mx-auto px-6 md:px-10 py-16 md:py-32">
+    <div class="mx-auto max-w-7xl px-6">
+      <p class="mb-2 text-sm uppercase tracking-[0.2em] text-stone text-center">Revenue per type of email</p>
+      <div class="flex flex-col items-center justify-between gap-12 xl:flex-row xl:gap-20">
+        <div class="text-center md:mt-12">
+          <div class="flex flex-col items-center justify-center gap-4">
+            <span class="font-display text-stone text-[clamp(8rem,22vw,16rem)] leading-[.75]">$0.18</span>
+            <span class="mb-2 font-display text-xl leading-tight text-stone md:mb-5 md:text-3xl md:mt-4">revenue per scheduled email</span>
+          </div>
+        </div>
+        <div class="text-center md:mt-12">
+          <div class="flex flex-col items-center justify-center gap-4">
+            <span data-scroll-chart data-count-to="2.87" class="font-display tabular-nums text-[clamp(8rem,22vw,16rem)] leading-[.75]">$2.87</span>
+            <span class="mb-2 font-display text-xl leading-tight text-ink md:mb-5 md:text-3xl md:mt-4">revenue per automated email</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://saasgoodies.com/email-automation-statistics/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center pt-4 text-center text-xs text-stone/30 hover:underline cursor-pointer">[SaasGoodies, 2026]</a>
+    </div>
+  </section>
+
+  <!-- ========== STATISTICS: SUMMARY ========== -->
+  <section class="bg-paperdark px-6 md:px-10 py-20 md:py-32">
+    <div class="flex flex-col justify-center align-center gap-16 mx-auto max-w-6xl px-6 font-display text-center">
+      <div class="text-5xl">
+        <h2 class="flex flex-col items-center justify-center gap-2 text-4xl sm:text-5xl md:flex-row md:gap-[0.3em] md:whitespace-nowrap md:text-[min(5.5vw,5rem)]">
+          <span>More emails</span>
+          <span class="text-4xl font-bold md:text-[0.75em]">≠</span>
+          <span>More results</span>
+        </h2>
+      </div>
+      <div class="flex flex-col justify-center align-center gap-5 max-w-4xl mx-auto text-stone">
+        <h3 class="text-2xl md:text-4xl">Timing matters.</h3>
+        <h3 class="text-2xl md:text-4xl">We build the email systems that respond to what your customers <span class="italic">actually</span> do.</h3>
+      </div>
+      <button class="hidden md:flex items-center justify-between mx-auto md:gap-18 md:my-16 bg-deepgreen bg-opacity-80 md:hover:bg-opacity-70 md:hover:translate-y-[-2px] text-paper shadow-xl w-2/3 py-4 px-6 md:px-8 text-left text-md md:text-2xl font-display button-underline-dark">
+        Let's maximize your revenue
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="w-8 h-3 md:w-12 md:h-4">
+          <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="md:hidden flex items-center justify-between mx-auto gap-12 my-8 bg-deepgreen bg-opacity-80 text-paper shadow-xl w-auto py-4 px-6 text-left text-md font-display button-underline">
+        Let's get your strategy
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="w-8 h-3 md:w-12 md:h-4">
           <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -110,7 +233,7 @@
   <footer class="mx-auto px-6 md:px-10 py-8 text-sm bg-ink border-t-2 border-mint text-stone flex justify-between">
     <span>© 2026 Sendr</span>
     <div class="flex gap-6">
-      <a href="#" class="nav-link">
+      <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="nav-link" id="Instagram" aria-label="Sendr on Instagram">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="fill-stone md:w-30 md:h-30" viewBox="0 0 16 16">
           <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
         </svg>

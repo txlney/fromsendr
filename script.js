@@ -62,3 +62,41 @@ function tick() {
 }
 
 tick();
+
+// Scroll-linked charts: each [data-scroll-chart] gets a --progress value (0 to 1)
+// that runs from 0 when its top enters the bottom of the viewport to 1 when its
+// centre reaches ~40% down the viewport. Charts use --progress in styles.css.
+const scrollCharts = document.querySelectorAll("[data-scroll-chart]");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let scrollTicking = false;
+
+const updateScrollCharts = () => {
+    scrollTicking = false;
+    const vh = window.innerHeight;
+
+    scrollCharts.forEach((chart) => {
+        const rect = chart.getBoundingClientRect();
+        const start = vh;
+        const end = vh * 0.4 - rect.height / 2;
+        const progress = reduceMotion ? 1 : Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+        chart.style.setProperty("--progress", progress.toFixed(4));
+
+        // Counters (data-count-to="2.87") finish at half the scroll range, easing out
+        // so the value races up early and settles on the final figure.
+        if (chart.dataset.countTo) {
+            const eased = 1 - Math.pow(1 - Math.min(1, progress * 1.5), 3);
+            chart.textContent = "$" + (eased * parseFloat(chart.dataset.countTo)).toFixed(2);
+        }
+    });
+};
+
+const onScroll = () => {
+    if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(updateScrollCharts);
+    }
+};
+
+window.addEventListener("scroll", onScroll, { passive: true });
+window.addEventListener("resize", onScroll);
+updateScrollCharts();
