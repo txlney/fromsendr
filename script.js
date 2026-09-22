@@ -100,3 +100,49 @@ const onScroll = () => {
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
 updateScrollCharts();
+
+// Work page: continuously scrolling email marquee. Position is tracked in JS
+// (rAF) rather than a CSS animation so pausing (on hover, or while a card is
+// being scrolled) can never desync it or cause it to snap/restart - it's just
+// a boolean that stops the offset from advancing. Pointer events are used
+// instead of :hover so touch doesn't get stuck "hovering" until the next tap
+// elsewhere, which is what caused the pause to outlast the interaction.
+const marquee = document.querySelector(".marquee");
+const marqueeTrack = marquee ? marquee.querySelector(".marquee-track") : null;
+
+if (marqueeTrack) {
+    const speed = 40; // pixels per second
+    let paused = reduceMotion;
+    let offset = 0;
+    let lastTime = null;
+    let loopWidth = 0;
+
+    const measureLoopWidth = () => {
+        const cards = marqueeTrack.querySelectorAll(".marquee-card");
+        const half = cards.length / 2;
+        // Set A and Set B are identical, so the distance from the first card
+        // to the first card of the second set is exactly one seamless loop.
+        loopWidth = cards[half].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+    };
+
+    marquee.addEventListener("pointerenter", () => { paused = true; });
+    marquee.addEventListener("pointerleave", () => { paused = reduceMotion; });
+    marquee.addEventListener("pointercancel", () => { paused = reduceMotion; });
+
+    const step = (time) => {
+        if (lastTime === null) lastTime = time;
+        const delta = time - lastTime;
+        lastTime = time;
+
+        if (!paused && loopWidth > 0) {
+            offset = (offset + (speed * delta) / 1000) % loopWidth;
+            marqueeTrack.style.transform = `translateX(${-offset}px)`;
+        }
+
+        requestAnimationFrame(step);
+    };
+
+    measureLoopWidth();
+    window.addEventListener("resize", measureLoopWidth);
+    if (!reduceMotion) requestAnimationFrame(step);
+}

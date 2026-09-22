@@ -194,11 +194,10 @@
     align-items: flex-start;
     gap: 0.8rem;
     width: max-content;
-    animation: marquee-scroll 34s linear infinite;
-}
-
-.marquee:hover .marquee-track {
-    animation-play-state: paused;
+    /* Position driven by script.js (rAF), not a CSS animation: a JS-tracked
+       offset can be paused/resumed any number of times with no drift or
+       restart, which a CSS animation-play-state toggle can't guarantee
+       across browsers, especially under mobile's sticky-:hover-on-tap. */
 }
 
 .marquee-card {
@@ -229,16 +228,6 @@
 
 .marquee-card-fill {
     width: 100%;
-}
-
-@keyframes marquee-scroll {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        /* Set A and Set B are identical, so -50% lands exactly back on Set A's start */
-        transform: translateX(-50%);
-    }
 }
 
 @media (min-width: 768px) {
