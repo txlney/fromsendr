@@ -102,16 +102,18 @@ window.addEventListener("resize", onScroll);
 updateScrollCharts();
 
 // Work page: continuously scrolling email marquee. Position is tracked in JS
-// (rAF) rather than a CSS animation so pausing (on hover, or while a card is
-// being scrolled) can never desync it or cause it to snap/restart - it's just
-// a boolean that stops the offset from advancing. Pointer events are used
-// instead of :hover so touch doesn't get stuck "hovering" until the next tap
-// elsewhere, which is what caused the pause to outlast the interaction.
+// (rAF) rather than a CSS animation so pausing can never desync it or cause
+// it to snap/restart - it's just a boolean that stops the offset advancing.
 const marquee = document.querySelector(".marquee");
 const marqueeTrack = marquee ? marquee.querySelector(".marquee-track") : null;
 
 if (marqueeTrack) {
     const speed = 40; // pixels per second
+    // Only mouse-like pointers (hover-capable, precise) pause the marquee on
+    // contact. Touch has no real "hover," so pausing on touch just meant the
+    // strip stopped every time someone tried to scroll a tall card - on
+    // mobile it now keeps scrolling underneath instead, uninterrupted.
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     let paused = reduceMotion;
     let offset = 0;
     let lastTime = null;
@@ -125,13 +127,19 @@ if (marqueeTrack) {
         loopWidth = cards[half].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
     };
 
-    marquee.addEventListener("pointerenter", () => { paused = true; });
-    marquee.addEventListener("pointerleave", () => { paused = reduceMotion; });
-    marquee.addEventListener("pointercancel", () => { paused = reduceMotion; });
+    if (canHover) {
+        marquee.addEventListener("pointerenter", () => { paused = true; });
+        marquee.addEventListener("pointerleave", () => { paused = reduceMotion; });
+        marquee.addEventListener("pointercancel", () => { paused = reduceMotion; });
+    }
 
     const step = (time) => {
         if (lastTime === null) lastTime = time;
-        const delta = time - lastTime;
+        // Cap the per-frame delta: mobile browsers can suspend rAF mid-gesture
+        // (e.g. iOS Safari during a native touch-scroll) and fire the next
+        // frame long after, which would otherwise jump the offset forward all
+        // at once - this is almost certainly the "snapping" on mobile.
+        const delta = Math.min(time - lastTime, 100);
         lastTime = time;
 
         if (!paused && loopWidth > 0) {
