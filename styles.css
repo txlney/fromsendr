@@ -5,6 +5,7 @@
     --color-paper: #FDFDFD;
     --color-accent: #90BA92;
     --color-stone: #D9D9D9;
+    --color-paperdark: #EFEFEA;
 }
 
 *,
@@ -119,4 +120,152 @@
 
 .share-bar-fill {
     width: calc(var(--progress, 0) * var(--target));
+}
+
+/* Work page: cropped email preview with a fade-out, so long emails stay card-sized */
+.email-preview {
+    position: relative;
+    display: block;
+    height: 28rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 8px;
+}
+
+.email-preview:hover {
+    transform: scale(1.02);
+}
+
+.email-preview img {
+    width: 100%;
+    display: block;
+}
+
+.email-preview:after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, #FAFAF8);
+    pointer-events: none;
+}
+
+.email-preview-cta {
+    position: absolute;
+    left: 50%;
+    bottom: 1.25rem;
+    z-index: 1;
+    transform: translateX(-50%);
+    padding: 0.6rem 1.25rem;
+    background: var(--color-deepgreen);
+    color: var(--color-mint);
+    font-size: 0.875rem;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.email-preview-cta:hover {
+    color: #FFFFFF;
+}
+
+/* Placeholder email until real screenshots exist: header bar, hero block, text lines */
+.email-skeleton {
+    height: 100%;
+    min-height: 28rem;
+    background:
+        linear-gradient(#CADACF, #CADACF) 10% 4% / 30% 1.5rem no-repeat,
+        linear-gradient(#90BA92, #90BA92) 10% 16% / 80% 10rem no-repeat,
+        repeating-linear-gradient(#D9D9D9 0 0.6rem, transparent 0.6rem 1.4rem) 10% 60% / 80% 12rem no-repeat,
+        #FAFAF8;
+}
+
+.email-skeleton-full {
+    min-height: 90rem;
+}
+
+/* Work page: continuously scrolling strip of email design thumbnails */
+.marquee {
+    width: 100%;
+}
+
+.marquee-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    width: max-content;
+    animation: marquee-scroll 34s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.marquee-card {
+    position: relative;
+    flex: 0 0 auto;
+    width: 9rem;
+    height: 16rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--color-paperdark);
+    padding: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink) transparent;
+}
+
+.marquee-card::-webkit-scrollbar {
+    width: 5px;
+}
+
+.marquee-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.marquee-card::-webkit-scrollbar-thumb {
+    background: var(--color-ink);
+    opacity: 0.4;
+}
+
+.marquee-card-fill {
+    width: 100%;
+}
+
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* Set A and Set B are identical, so -50% lands exactly back on Set A's start */
+        transform: translateX(-50%);
+    }
+}
+
+@media (min-width: 768px) {
+    .marquee-card {
+        width: 16rem;
+        height: 30rem;
+        padding: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none;
+        gap: 1rem;
+    }
+}
+
+.mobile-description {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-description {
+        display: none;
+    }
+
+    .mobile-description {
+        display: block;
+    }
 }

@@ -61,7 +61,7 @@ function tick() {
     setTimeout(tick, delay);
 }
 
-tick();
+if (typewriter) tick();
 
 // Scroll-linked charts: each [data-scroll-chart] gets a --progress value (0 to 1)
 // that runs from 0 when its top enters the bottom of the viewport to 1 when its
