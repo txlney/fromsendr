@@ -7,7 +7,7 @@ tailwind.config = {
         paperdark: '#EFEFEA',
         ink: '#1C1C1A',
         stone: '#6B6B64',
-        deepgreen: '#212721',
+        deepgreen: '#0B0B0B',
         accent: '#90BA92',
         mint: '#CADACF',
         gold: '#D9CBA0',

@@ -1,20 +1,39 @@
-const mobileMenu = document.getElementById("mobile-menu");
-const menuLinks = mobileMenu.querySelectorAll("nav a");
-const menuBackdrop = mobileMenu.querySelector('[data-menu-backdrop]');
+// Site nav: on hover devices the panel is pure CSS (see .site-nav in styles.css).
+// Touch has no hover, so the first tap on the logo opens the panel instead of
+// navigating; a second tap follows the link, and tapping elsewhere closes it.
+// While open the page can't scroll (set on <html>, so it can't clash with the
+// work page modal's overflow-hidden lock on <body>).
+const siteLogo = document.querySelector(".site-logo");
+const siteNav = document.getElementById("site-nav");
+const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-const closeMobileMenu = () => {
-    mobileMenu.removeAttribute("open");
-    document.body.classList.remove("overflow-hidden");
+const setNavOpen = (open) => {
+    siteNav.classList.toggle("is-open", open);
+    document.documentElement.style.overflow = open ? "hidden" : "";
 };
 
-mobileMenu.addEventListener("toggle", () => {
-    document.body.classList.toggle("overflow-hidden", mobileMenu.open);
-});
+if (!canHover) {
+    siteLogo.addEventListener("click", (event) => {
+        if (!siteNav.classList.contains("is-open")) {
+            event.preventDefault();
+            setNavOpen(true);
+        }
+    });
+    // Capture phase, so a tap on the dimmed page only closes the nav and
+    // doesn't also follow whatever link or button sits underneath it
+    document.addEventListener("click", (event) => {
+        if (!siteNav.classList.contains("is-open")) return;
+        if (siteLogo.contains(event.target) || siteNav.contains(event.target)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        setNavOpen(false);
+    }, true);
+}
 
-menuBackdrop.addEventListener("click", closeMobileMenu);
-menuLinks.forEach(link => link.addEventListener("click", closeMobileMenu));
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && mobileMenu.open) closeMobileMenu();
+    if (event.key !== "Escape") return;
+    setNavOpen(false);
+    if (siteNav.contains(document.activeElement)) document.activeElement.blur();
 });
 
 const phrases = [
@@ -101,6 +120,58 @@ window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("resize", onScroll);
 updateScrollCharts();
 
+// Slide-up reveal: any [data-reveal] element slides up out of its own bottom edge,
+// once, when its top reaches 75% down the viewport (styles.css has the visuals).
+// Checked on scroll rather than with an IntersectionObserver because the hidden
+// state is translated down by the element's own height, which would skew an
+// observer's trigger point for tall elements like cards.
+let pendingReveals = reduceMotion ? [] : Array.from(document.querySelectorAll("[data-reveal]"));
+
+const updateReveals = () => {
+    const vh = window.innerHeight;
+    const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    let batch = 0;
+
+    // Elements revealed in the same frame (e.g. side-by-side cards) are staggered top-down
+    pendingReveals = pendingReveals.filter((el) => {
+        // Subtract the hidden-state offset to get where the element really sits
+        const top = el.getBoundingClientRect().top - el.offsetHeight;
+        if (top >= vh * 0.75 && !atPageEnd) return true;
+        el.style.setProperty("--reveal-delay", batch++ * 0.12 + "s");
+        el.classList.add("is-revealed");
+        return false;
+    });
+};
+
+if (pendingReveals.length) {
+    pendingReveals.forEach((el) => {
+        el.classList.add("reveal-ready");
+        // Once it's in place, drop the reveal classes so the element is back to its
+        // normal styles (restores its own transitions, unclips its shadow, etc).
+        el.addEventListener("transitionend", function done(e) {
+            if (e.target !== el || e.propertyName !== "translate" || !el.classList.contains("is-revealed")) return;
+            el.classList.remove("reveal-ready", "is-revealed");
+            el.style.removeProperty("--reveal-delay");
+            el.removeEventListener("transitionend", done);
+        });
+    });
+
+    let revealTicking = false;
+    const onRevealScroll = () => {
+        if (!revealTicking) {
+            revealTicking = true;
+            requestAnimationFrame(() => {
+                revealTicking = false;
+                updateReveals();
+            });
+        }
+    };
+    window.addEventListener("scroll", onRevealScroll, { passive: true });
+    window.addEventListener("resize", onRevealScroll);
+    // After a frame, so the hidden state has been painted and the transition runs
+    requestAnimationFrame(updateReveals);
+}
+
 // Work page: continuously scrolling email marquee. Position is tracked in JS
 // (rAF) rather than a CSS animation so pausing can never desync it or cause
 // it to snap/restart - it's just a boolean that stops the offset advancing.
@@ -109,11 +180,10 @@ const marqueeTrack = marquee ? marquee.querySelector(".marquee-track") : null;
 
 if (marqueeTrack) {
     const speed = 40; // pixels per second
-    // Only mouse-like pointers (hover-capable, precise) pause the marquee on
+    // Only mouse-like pointers (canHover, above) pause the marquee on
     // contact. Touch has no real "hover," so pausing on touch just meant the
     // strip stopped every time someone tried to scroll a tall card - on
     // mobile it now keeps scrolling underneath instead, uninterrupted.
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     let paused = reduceMotion;
     let offset = 0;
     let lastTime = null;
@@ -154,3 +224,6 @@ if (marqueeTrack) {
     window.addEventListener("resize", measureLoopWidth);
     if (!reduceMotion) requestAnimationFrame(step);
 }
+
+const aboutVideo = document.getElementById("about-video");
+aboutVideo.playbackRate = 0.8;

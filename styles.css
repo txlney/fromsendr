@@ -1,10 +1,10 @@
 :root {
     --color-mint: #CADACF;
-    --color-deepgreen: #212721;
+    --color-deepgreen: #1a1f1a;
     --color-ink: #0B0B0B;
     --color-paper: #FDFDFD;
     --color-accent: #90BA92;
-    --color-stone: #D9D9D9;
+    --color-stone: #6B6B64;
     --color-paperdark: #EFEFEA;
 }
 
@@ -14,6 +14,103 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+/* Site nav: only the logo is visible by default, fixed top-centre. The logo is
+   white and blends with `difference`, so it always renders as the inverse of
+   whatever is behind it. That only works while nothing between it and <body>
+   creates a stacking context (transform, filter, opacity, isolation, z-index),
+   which is also why the panel is a sibling of the logo rather than a wrapper. */
+.site-logo {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    z-index: 50;
+    transform: translateX(-50%);
+    padding: 0.75rem;
+    mix-blend-mode: difference;
+}
+
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    /* Top padding clears the logo, so the links sit centred just below it */
+    padding: 5.5rem 1.5rem 2rem;
+    background-color: var(--color-deepgreen);
+    transform: translateY(-100%);
+    visibility: hidden;
+    /* Closing waits briefly, so a slightly slow move off the logo doesn't drop it */
+    transition: transform 0.1s ease, visibility 0s linear 0.5s;
+}
+
+.difference {
+    mix-blend-mode: difference;
+}
+
+/* Mobile (below Tailwind's md): logo sits top-right, and the panel is a
+   full-height drawer that slides in from the right. It only goes full width on
+   very narrow screens. Right padding lines the links up with the logo's right
+   edge (1rem offset + 0.75rem padding). */
+@media (max-width: 767px) {
+    .site-logo {
+        left: auto;
+        right: 1rem;
+        transform: none;
+    }
+
+    .site-nav {
+        bottom: 0;
+        left: auto;
+        width: max(min(75vw, 18rem), min(100vw, 14rem));
+        padding: 5.5rem 1.75rem 2rem;
+        text-align: right;
+        transform: translateX(100%);
+    }
+
+    /* Dims the rest of the page while open: a huge shadow spread instead of a
+       separate backdrop element (script.js catches taps on the dimmed area) */
+    .site-nav.is-open {
+        box-shadow: 0 0 0 100vmax rgb(0 0 0 / 0.5);
+    }
+}
+
+/* The panel covers the logo's area when open, so the pointer moves from logo
+   to panel without a gap and :hover carries over. Hover is gated to real
+   hover devices so a tap doesn't leave it stuck open; touch uses .is-open. */
+@media (hover: hover) {
+    .site-logo:hover ~ .site-nav,
+    .site-nav:hover {
+        transform: none;
+        visibility: visible;
+        transition: transform 0.35s ease, visibility 0s;
+    }
+}
+
+.site-logo:focus-visible ~ .site-nav,
+.site-nav:focus-within,
+.site-nav.is-open {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.35s ease, visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-nav,
+    .site-nav.is-open,
+    .site-nav:focus-within,
+    .site-logo:focus-visible ~ .site-nav {
+        transition: visibility 0s;
+    }
+
+    @media (hover: hover) {
+        .site-logo:hover ~ .site-nav,
+        .site-nav:hover {
+            transition: visibility 0s;
+        }
+    }
 }
 
 .nav-link {
@@ -28,7 +125,7 @@
     background-color: var(--color-mint);
     left: 0;
     bottom: -8px;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 .nav-link:hover {
@@ -41,54 +138,120 @@
 
 }
 
-.button-underline {
+.nav-link-selected {
     position: relative;
 }
 
-.button-underline:after {
+.nav-link-selected:after {
     content: "";
     position: absolute;
-    width: 0;
-    height: 3px;
-    background-color: var(--color-mint);
-    left: 0;
-    bottom: -3px;
-    transition: 0.2s;
-}
-
-.button-underline:hover {
-    color: #FFFFFF;
-    transition: all 0.2s ease;
-}
-
-.button-underline:hover:after {
     width: 100%;
-
-}
-
-.button-underline-dark {
-    position: relative;
-}
-
-.button-underline-dark:after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 3px;
+    height: 2px;
     background-color: var(--color-accent);
+    opacity: 0.5;
     left: 0;
-    bottom: -3px;
-    transition: 0.2s;
+    bottom: -8px;
 }
 
-.button-underline-dark:hover {
-    color: #FFFFFF;
-    transition: all 0.2s ease;
+/* Buttons: every CTA uses .btn (plus a colour variant like .btn-hero if needed).
+   Colours come from the --btn-* variables, so a variant only overrides those.
+   Base rules use `html body :where(.btn)`: two element selectors (0,0,2) beat
+   Tailwind's preflight reset (`* { border-width: 0 }`, `a { color: inherit }`)
+   whatever order the stylesheets load in, but any single Tailwind utility on the
+   element (width, margins, padding, hidden md:flex...) still wins. */
+.btn {
+    --btn-color: var(--color-ink);
+    --btn-bg: transparent;
+    --btn-border: var(--color-ink);
+    --btn-fill: var(--color-deepgreen);
+    --btn-hover-color: var(--color-mint);
 }
 
-.button-underline-dark:hover:after {
-    width: 100%;
+/* For dark/image backgrounds: translucent dark, no border, accent fill on hover */
+.btn-hero {
+    --btn-color: var(--color-paper);
+    --btn-bg: rgb(11 11 11 / 0.3);
+    --btn-border: transparent;
+    --btn-fill: var(--color-accent);
+    --btn-hover-color: var(--color-deepgreen);
+}
 
+html body :where(.btn) {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--btn-border);
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
+    /* Tailwind's shadow-xl */
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    font-family: "Fraunces", serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: left;
+    transition: color 0.3s ease;
+}
+
+html body :where(.btn):hover {
+    color: var(--btn-hover-color);
+    transition: color 0.1s ease;
+}
+
+/* Fill slides in from the left on hover, then exits to the right on hover-out */
+html body :where(.btn)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--btn-fill);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+html body :where(.btn:focus-visible) {
+    color: var(--btn-hover-color);
+}
+
+html body :where(.btn:focus-visible)::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Hover gated to real hover devices, so a tap doesn't leave the fill stuck on */
+@media (hover: hover) {
+    html body :where(.btn:hover) {
+        color: var(--btn-hover-color);
+    }
+
+    html body :where(.btn:hover)::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+}
+
+/* The trailing arrow SVG inside a .btn */
+:where(.btn-arrow) {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    html body :where(.btn) {
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    :where(.btn-arrow) {
+        width: 3rem;
+        height: 1rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -105,11 +268,6 @@
         width: 0;
         transition: none;
     }
-
-    .button-underline:hover:after {
-        width: 0;
-        transition: none;
-    }
 }
 
 /* Scroll-linked charts: --progress (0 to 1) is set per chart in script.js */
@@ -120,6 +278,30 @@
 
 .share-bar-fill {
     width: calc(var(--progress, 0) * var(--target));
+}
+
+/* Slide-up reveal for [data-reveal] (triggered by script.js). The element is moved
+   down by its own height and clipped at its resting bottom edge, so it slides up out
+   of that edge without fading. The clip is in the element's own (moving) coordinates,
+   so the bottom inset shrinks in step with the translate to keep that edge fixed; it
+   ends slightly negative so shadows aren't cut off. Uses `translate` rather than
+   `transform` so it doesn't clash with hover transforms like .email-preview's.
+   The hidden state only applies once JS adds .reveal-ready, so without JS (or with
+   reduced motion) everything just shows. */
+[data-reveal].reveal-ready {
+    translate: 0 100%;
+    clip-path: inset(0 0 100% 0);
+}
+
+/* The transition lives only on the revealed state, so applying the hidden state is
+   instant (otherwise it would animate down, and script.js's transitionend cleanup
+   would fire early and undo the whole thing). */
+[data-reveal].reveal-ready.is-revealed {
+    translate: 0 0;
+    clip-path: inset(-4rem);
+    transition:
+        translate 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
+        clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
 }
 
 /* Work page: cropped email preview with a fade-out, so long emails stay card-sized */

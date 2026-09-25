@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/favicon-v2.png">
+  <title>FromSendr | About Us</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="tailwind-config.js"></script>
+</head>
+
+<body class="bg-paper text-ink font-sans antialiased">
+
+  <!-- Header + intro together fill the first screen; the intro takes the remaining height -->
+  <div class="min-h-svh flex flex-col">
+
+  <video id="about-video" class="absolute inset-0 w-full h-full object-cover grayscale brightness-[1.1]" src="videos/12911908_1920_1080_30fps.mp4" poster="images/work-hero-bg-light.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+  <!-- ========== NAV (same as index.html) ========== -->
+  <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
+  <a href="index.html" class="site-logo" aria-label="FromSendr home">
+    <img src="images/modern-logo-2.png" alt="" class="w-10 md:w-16">
+  </a>
+  <nav id="site-nav" class="site-nav flex flex-col items-end gap-10 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-4 lg:gap-x-32 text-mint text-sm font-bold uppercase" aria-label="Main navigation">
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="work.html" class="nav-link">Work</a>
+    <a href="about.html" class="nav-link-selected">About</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+
+  <!-- ========== INTRO ========== -->
+  <section class="flex-1 flex flex-col justify-center relative w-full mx-auto max-w-xl md:max-w-5xl px-6 md:px-10 pt-16 pb-28 md:pt-24 md:pb-36 text-center">
+    <div class="w-full max-w-6xl py-8 md:p-16 mx-auto bg-paper bg-opacity-5 backdrop-blur-sm shadow-xl">
+      <p class="mb-5 text-xs md:text-sm uppercase tracking-[0.2em] text-stone">About us</p>
+      <h1 class="font-display text-4xl md:text-7xl leading-[1.1] mx-auto max-w-sm px-4 md:max-w-3xl">Who we are, and why we do what we do</h1>
+      <p class="mt-6 md:mt-16 text-ink/70 text-sm md:text-lg max-w-lg md:max-w-2xl mx-auto px-8">
+        We are a small and emerging team of email marketing specialists, focused on working alongside brands to help them grow their revenue through email.
+      </p>
+    </div>
+    <!-- Scroll cue: sits at the bottom of the first screen -->
+    <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-ink" aria-hidden="true">
+      <span class="text-xs uppercase tracking-[0.2em]">Scroll</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
+        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+  </div>
+
+  <!-- ========== OUR STORY ========== -->
+  <section data-reveal class="mx-auto max-w-3xl md:max-w-7xl px-6 md:px-10 py-16 md:py-24 text-center md:text-left">
+    <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone text-center md:text-left">Our story</p>
+    <p class="text-stone text-base md:text-lg leading-relaxed">
+      We noticed an issue in the email marketing space: too many brands were having to weigh up great design and copy vs. great strategy and deliverability. 
+      We wanted to create a service that could provide both, integrating into and working alongside your brand to produce effective email flows and campaigns that are on-brand, on-message, and on-time.
+    </p>
+  </section>
+
+  <!-- ========== WHAT WE DO / WHAT MAKES US DIFFERENT ==========
+    Two-card grid, stacked on mobile.
+  -->
+  <section class="bg-paperdark px-6 md:px-10 py-16 md:py-28">
+    <div class="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:gap-16">
+      <div data-reveal class="bg-paper p-8 md:p-10 shadow-xl">
+        <h2 class="font-display text-2xl md:text-4xl mb-4">What we do</h2>
+        <p class="text-stone text-sm md:text-base leading-relaxed">
+          Before anything, we take the time to understand your brand, and your current email situation. 
+          If we think you could benefit from our services, we will curate a strategy tailored to your brand and budget, whether that's a one-off flow set-up, or a long-term partnership to manage your email marketing. 
+          From there, you leave it with us to make you money.
+        </p>
+      </div>
+      <div data-reveal class="bg-paper p-8 md:p-10 shadow-xl">
+        <h2 class="font-display text-2xl md:text-4xl mb-4">How we're different</h2>
+        <p class="text-stone text-sm md:text-base leading-relaxed">
+          Many agencies focus on either the creative side of email marketing, or the technical side. We are passionate about both. 
+          A visually stunning email is only effective if the deliverability is optimised. We balance the two, pair it with a proven strategy, and follow up with continuous A/B testing to ensure you're getting the best results.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOUNDERS ========== -->
+  <section class="mx-auto max-w-5xl px-6 md:px-10 py-16 md:py-28">
+    <div class="text-center mb-12 md:mb-20">
+      <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone">The founders</p>
+      <h2 class="font-display text-3xl md:text-6xl">The people behind FromSendr</h2>
+    </div>
+    <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div class="text-center">
+        <img src="images/favicon-v2.png" alt="Jake, Co-Founder" class="w-full max-w-xs mx-auto border-b-2 shadow-lg border-accent aspect-square object-cover p-1 bg-deepgreen">
+        <h3 class="font-display text-xl md:text-2xl mt-6">Jake</h3>
+        <p class="text-xs md:text-sm uppercase tracking-widest text-stone mt-1">Co-Founder</p>
+        <p class="text-stone text-sm md:text-base leading-relaxed mt-4 max-w-sm mx-auto">
+          4+ years experience working with real e-commerce brands, helping them strategize and optimize their sales.
+        </p>
+      </div>
+      <div class="text-center">
+        <img src="images/favicon-v2.png" alt="Tom, Co-Founder" class="w-full max-w-xs mx-auto border-b-2 shadow-lg border-accent aspect-square object-cover p-1 bg-deepgreen">
+        <h3 class="font-display text-xl md:text-2xl mt-6">Tom</h3>
+        <p class="text-xs md:text-sm uppercase tracking-widest text-stone mt-1">Co-Founder</p>
+        <p class="text-stone text-sm md:text-base leading-relaxed mt-4 max-w-sm mx-auto">
+          10+ years experience in digital design, working with influencers and brands to create on-brand graphic design.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="bg-paperdark font-display px-6 md:px-10 py-20 md:py-28 text-center">
+    <h2 data-reveal class="text-3xl md:text-5xl max-w-xl md:max-w-4xl mx-auto">Like the sound of how we work?</h2>
+    <p data-reveal class="font-sans text-sm md:text-lg text-stone max-w-lg md:max-w-3xl mx-auto mt-4 md:mt-8 px-6">Let's talk about what email could do for your brand.</p>
+    <div class="flex justify-center mx-auto px-6">
+      <a href="contact.html" class="btn w-full max-w-lg mt-12 md:mt-20">
+        Book a strategy call
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
+          <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER (same as index.html) ========== -->
+  <footer class="mx-auto px-6 md:px-10 py-8 text-sm bg-ink border-t-2 border-mint text-stone flex flex-col gap-6">
+    <div class="flex justify-between">
+      <span>© 2026 FromSendr</span>
+      <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="fill-stone md:w-30 md:h-30" viewBox="0 0 16 16">
+          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

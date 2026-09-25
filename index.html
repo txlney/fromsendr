@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="images/favicon.png">
-  <title>FromSendr - Browsers into buyers</title>
+  <link rel="icon" href="images/favicon-v2.png">
+  <title>FromSendr | Browsers into buyers</title>
 
   <!-- Tailwind via CDN: no build step needed to get started -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,36 +20,23 @@
 
 <body class="bg-paper text-ink font-sans antialiased">
 
+  <!-- Header + hero together fill the first screen; the hero takes the remaining height -->
+  <div class="min-h-svh flex flex-col">
   <!-- ========== NAV ========== -->
-  <header class="bg-deepgreen mx-auto px-4 md:px-10 py-8 flex items-center justify-between">
-    <a href="#" class="ml-6 text-gold font-display text-2xl md:text-3xl">
-      <img src="images/wordmark-colours.png" alt="FromSendr logo" class="w-32 md:w-40 inline-block mr-2">
-    </a>
-    <nav class="mr-6 hidden md:flex gap-16 lg:gap-24 xl:gap-32 text-m text-mint">
-      <a href="#" class="nav-link">Services</a>
-      <a href="work.html" class="nav-link">Work</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="contact.html" class="nav-link">Contact</a>
-    </nav>
-    <details id="mobile-menu" class="mr-6 md:hidden text-mint">
-      <summary class="relative z-50 cursor-pointer list-none" aria-label="Open navigation menu">
-        <span class="block w-6 border-t-2 border-mint"></span>
-        <span class="block w-6 border-t-2 border-mint mt-1.5"></span>
-        <span class="block w-6 border-t-2 border-mint mt-1.5"></span>
-      </summary>
-      <div class="fixed inset-0 z-40 bg-ink/50" data-menu-backdrop></div>
-      <nav class="fixed right-0 top-0 z-40 flex h-screen w-[min(85vw,24rem)] flex-col gap-12 bg-deepgreen px-8 pt-28 text-right text-lg shadow-2xl" aria-label="Mobile navigation">
-        <a href="#" class="nav-link">Services</a>
-        <a href="work.html" class="nav-link">Work</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-    </details>
-  </header>
+  <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
+  <a href="index.html" class="site-logo" aria-label="FromSendr home">
+    <img src="images/modern-logo-2.png" alt="" class="w-10 md:w-16">
+  </a>
+  <nav id="site-nav" class="site-nav flex flex-col items-end gap-10 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-4 lg:gap-x-32 text-mint text-sm font-bold uppercase" aria-label="Main navigation">
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="work.html" class="nav-link">Work</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
 
   <!-- ========== HERO ========== -->
-  <section class="mx-auto text-center px-6 md:px-10 pt-16 pb-24 md:pt-24 md:pb-32 bg-[url('/images/hero-bg.png')] bg-cover bg-center">
-    <div class="max-w-5xl py-8 md:py-10 mt-10 mx-auto bg-paper bg-opacity-10 backdrop-blur-sm">
+  <section class="flex-1 flex flex-col justify-center relative w-full mx-auto text-center px-6 md:px-10 pt-16 pb-28 md:pt-24 md:pb-36 bg-[url('/images/index-hero-bg.png')] bg-cover bg-center">
+    <div class="w-full max-w-5xl py-8 md:py-12 mx-auto bg-paper bg-opacity-10 backdrop-blur-md">
       <h1 class="font-display text-paper text-2xl sm:text-4xl md:text-6xl leading-[1.0] md:leading-[1.2] max-w-80 sm:max-w-lg md:max-w-2xl mx-auto">
         We create email strategies that convert
       </h1>
@@ -60,29 +47,52 @@
         Founded and based in the United Kingdom.
       </p>
     </div>
-    <div class="flex justify-center">
-      <a href="contact.html" class="flex items-center justify-between gap-12 md:gap-18 my-36 md:my-24 bg-deepgreen bg-opacity-50 md:hover:bg-opacity-70 text-paper shadow-xl w-auto py-4 px-6 md:px-8 text-left text-md md:text-2xl font-display button-underline">
+    <div class="flex justify-center hidden">
+      <a href="contact.html" class="btn btn-hero border-none w-full max-w-lg mt-24 md:mt-20 py-5 px-8 md:px-10">
         Book a call with us
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="w-8 h-3 md:w-12 md:h-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
           <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
     </div>
-  </section>
-
-  <!-- ========== STATISTICS ========== -->
-  <section class="mx-auto px-6 md:px-10 py-16 md:py-24 border-t border-ink/10">
-    <div class="mx-auto text-center mb-12">
-      <h2 class="font-display text-5xl md:text-8xl mb-4">Email isn't just an inbox</h2>
-      <h3 class="font-display text-3xl md:text-6xl mb-8">It's a revenue stream</h3>
-      <p class="text-stone text-sm md:text-lg max-w-5xl mx-auto">
-        When email is treated as a system rather than a series of sends, it can become one of the most measurable and efficient channels in your marketing mix.
-      </p>
-      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="my-16 mx-auto w-8 h-3 md:w-12 md:h-4 rotate-90">
-        <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Scroll cue: sits at the bottom of the first screen -->
+    <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-mint" aria-hidden="true">
+      <span class="text-xs uppercase tracking-[0.2em]">Scroll</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
+        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
+  </section>
+  </div>
 
+  <!-- ========== STATISTICS ========== -->
+  <!-- Headline gets its own full screen, like the hero; each line slides up once when it scrolls into view (data-reveal, see styles.css/script.js) -->
+  <section class="min-h-svh flex flex-col justify-center relative px-6 md:px-10 py-24 text-center border-t border-ink/10">
+    <div class="flex flex-col gap-24 md:gap-16">
+      <div>
+        <h2 data-reveal class="font-display text-5xl md:text-8xl text-stone">Email isn't just an inbox</h2>
+        <h3 data-reveal class="font-display text-6xl md:text-9xl mt-8">It's a revenue stream</h3>
+      </div>
+      <a href="services.html" class="btn flex mx-auto w-full mx-16 max-w-xs md:max-w-lg md:my-16 gap-0 md:gap-32">
+        Find out more
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
+          <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <p class="text-stone text-sm md:text-lg max-w-5xl mx-auto hidden">
+      When email is treated as a system rather than a series of sends, it can become one of the most measurable and efficient channels in your marketing mix.
+    </p>
+    <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-deepgreen" aria-hidden="true">
+      <span class="text-xs uppercase tracking-[0.2em]">Scroll</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
+        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ========== STATISTICS: ROI ========== -->
+  <section class="mx-auto px-6 md:px-10 pb-16 pt-24 md:py-24">
     <div class="mx-auto max-w-6xl px-6">
       <div class="flex flex-col items-center justify-between gap-6 lg:flex-row lg:gap-20">
         <div class="text-center md:mt-12">
@@ -167,25 +177,20 @@
   <section class="bg-paperdark px-6 md:px-10 py-20 md:py-32">
     <div class="flex flex-col justify-center align-center gap-16 mx-auto max-w-6xl px-6 font-display text-center">
       <div class="text-5xl">
-        <h2 class="flex flex-col items-center justify-center gap-2 text-4xl sm:text-5xl md:flex-row md:gap-[0.3em] md:whitespace-nowrap md:text-[min(5.5vw,5rem)]">
+        <h2 data-reveal class="flex flex-col items-center justify-center gap-2 text-4xl sm:text-5xl md:flex-row md:gap-[0.3em] md:whitespace-nowrap md:text-[min(5.5vw,5rem)]">
           <span>More emails</span>
           <span class="text-4xl font-bold md:text-[0.75em]">≠</span>
           <span>More results</span>
         </h2>
       </div>
-      <div class="flex flex-col justify-center align-center gap-5 max-w-4xl mx-auto text-stone">
+      <div data-reveal class="flex flex-col justify-center align-center gap-5 max-w-4xl mx-auto text-stone">
         <h3 class="text-2xl md:text-4xl">Timing matters.</h3>
         <h3 class="text-2xl md:text-4xl">We build the email systems that respond to what your customers <span class="italic">actually</span> do.</h3>
       </div>
-      <a href="contact.html" class="hidden md:flex items-center justify-between mx-auto md:gap-18 md:my-16 bg-deepgreen bg-opacity-80 md:hover:bg-opacity-70 text-paper shadow-xl w-2/3 py-4 px-6 md:px-8 text-left text-md md:text-2xl font-display button-underline-dark">
-        Let's maximize your revenue
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="w-8 h-3 md:w-12 md:h-4">
-          <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <a href="contact.html" class="md:hidden flex items-center justify-between mx-auto gap-12 my-8 bg-deepgreen bg-opacity-80 text-paper shadow-xl w-auto py-4 px-6 text-left text-md font-display button-underline">
-        Let's get your strategy
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="w-8 h-3 md:w-12 md:h-4">
+      <a href="contact.html" class="btn mx-auto w-full max-w-lg my-8 md:my-16">
+        <span class="hidden md:flex">Let's maximize your revenue</span>
+        <span class="md:hidden">Let's get your strategy</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
           <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>

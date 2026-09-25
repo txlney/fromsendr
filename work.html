@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="images/favicon.png">
-  <title>FromSendr - Work</title>
+  <link rel="icon" href="images/favicon-v2.png">
+  <title>FromSendr | Previous Work</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,41 +17,40 @@
 
 <body class="bg-paper text-ink font-sans antialiased">
 
+  <!-- Header + intro together fill the first screen; the intro takes the remaining height -->
+  <div class="relative min-h-svh flex flex-col">
+  <!-- Background video. Painted first (no z-index) so the later nav/intro sit on top without creating a stacking context (see .site-logo) -->
+  <video class="absolute inset-0 w-full h-full object-cover brightness-[0.5]" src="videos/7679393-hd_1920_1080_25fps.mp4" poster="images/work-hero-bg-dark.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
   <!-- ========== NAV (same as index.html) ========== -->
-  <header class="bg-deepgreen mx-auto px-4 md:px-10 py-8 flex items-center justify-between">
-    <a href="index.html" class="ml-6 text-gold font-display text-2xl md:text-3xl">
-      <img src="images/wordmark-colours.png" alt="FromSendr logo" class="w-32 md:w-40 inline-block mr-2">
-    </a>
-    <nav class="mr-6 hidden md:flex gap-16 lg:gap-24 xl:gap-32 text-m text-mint">
-      <a href="index.html" class="nav-link">Services</a>
-      <a href="work.html" class="nav-link">Work</a>
-      <a href="index.html#about" class="nav-link">About</a>
-      <a href="contact.html" class="nav-link">Contact</a>
-    </nav>
-    <details id="mobile-menu" class="mr-6 md:hidden text-mint">
-      <summary class="relative z-50 cursor-pointer list-none" aria-label="Open navigation menu">
-        <span class="block w-6 border-t-2 border-mint"></span>
-        <span class="block w-6 border-t-2 border-mint mt-1.5"></span>
-        <span class="block w-6 border-t-2 border-mint mt-1.5"></span>
-      </summary>
-      <div class="fixed inset-0 z-40 bg-ink/50" data-menu-backdrop></div>
-      <nav class="fixed right-0 top-0 z-40 flex h-screen w-[min(85vw,24rem)] flex-col gap-12 bg-deepgreen px-8 pt-28 text-right text-lg shadow-2xl" aria-label="Mobile navigation">
-        <a href="index.html" class="nav-link">Services</a>
-        <a href="work.html" class="nav-link">Work</a>
-        <a href="index.html#about" class="nav-link">About</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-    </details>
-  </header>
+  <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
+  <a href="index.html" class="site-logo" aria-label="FromSendr home">
+    <img src="images/modern-logo-2.png" alt="" class="w-10 md:w-16">
+  </a>
+  <nav id="site-nav" class="site-nav flex flex-col items-end gap-10 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-4 lg:gap-x-32 text-mint text-sm font-bold uppercase" aria-label="Main navigation">
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="work.html" class="nav-link-selected">Work</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
 
   <!-- ========== INTRO ========== -->
-  <section class="mx-auto max-w-xl md:max-w-5xl px-6 md:px-10 py-16 md:py-24 text-center">
-    <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone">Selected case studies</p>
-    <h1 class="font-display text-4xl md:text-7xl leading-[1.1]">Emails that earn their place in the inbox</h1>
-    <p class="mt-6 md:mt-16 text-stone text-sm md:text-lg max-w-lg md:max-w-3xl mx-auto px-8">
-      A look at some example campaigns and flows. Tap any email to read it in full.
-    </p>
+  <section class="flex-1 flex flex-col justify-center relative w-full mx-auto max-w-xl md:max-w-5xl px-6 md:px-10 pt-16 pb-28 md:pt-24 md:pb-36 text-center">
+    <div class="w-full max-w-6xl py-8 md:p-16 mx-auto bg-paper bg-opacity-10 backdrop-blur-md shadow-2xl">
+      <p class="mb-5 text-sm uppercase tracking-[0.2em] text-paper/80">Selected case studies</p>
+      <h1 class="font-display text-4xl md:text-7xl leading-[1.1] text-paper">Emails that earn their place in the inbox</h1>
+      <p class="mt-6 md:mt-16 text-paper/90 text-sm md:text-lg max-w-lg md:max-w-3xl mx-auto px-8">
+        A look at some example campaigns and flows. Tap any email to read it in full.
+      </p>
+    </div>
+    <!-- Scroll cue: sits at the bottom of the first screen -->
+    <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-paper" aria-hidden="true">
+      <span class="text-xs uppercase tracking-[0.2em]">Scroll</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
+        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
   </section>
+  </div>
 
   <!-- ========== PROJECTS ==========
     Copy one <article data-work-item> per project.
@@ -61,13 +60,13 @@
       exported HTML file (images/work/name.html), which loads in an iframe.
       With no data-full, a placeholder is shown.
   -->
-  <section class="mx-auto max-w-6xl px-8 md:px-10 pb-24 md:pb-32">
+  <section class="mx-auto max-w-6xl px-8 md:px-10 pt-16 md:pt-24 pb-24 md:pb-32">
     <div class="grid gap-24 md:gap-32">
 
       <!-- Project 1 (text left, preview right; alternates on desktop) -->
       <article data-work-item data-title="Abandoned Cart Flow: CS Theory" data-full="images/work/cstheory-full.png" class="grid gap-8 md:grid-cols-2 md:gap-16 items-center">
-        <div class="md:bg-paperdark pt-8 md:p-10 border-t-2 border-stone/20 md:border-t-0">
-          <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Abandoned Cart Flow · Ecommerce</p>
+        <div data-reveal class="md:bg-paperdark pt-8 md:p-10 border-t border-stone/20 md:border-t-0">
+          <p class="hidden md:flex text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Abandoned Cart Flow · Ecommerce</p>
           <h2 class="font-display text-3xl md:text-5xl mt-3">CS Theory</h2>
           <p class="text-sm md:text-md text-stone/60 mt-5">
             <!-- Desktop description -->
@@ -81,7 +80,7 @@
               The first of which was a reminder, with customer reviews to push conversion. *
             </span>
           </p>
-          <dl class="mt-8 grid grid-cols-2 gap-6 max-w-md border-t border-ink/10 pt-6 hidden">
+          <dl class="mt-8 grid grid-cols-2 gap-6 max-w-md border-t border-ink/10 pt-6">
             <div>
               <dt class="text-xs uppercase tracking-widest text-stone">Metric one</dt>
               <dd class="font-display text-4xl mt-1">+00%</dd>
@@ -92,7 +91,7 @@
             </div>
           </dl>
         </div>
-        <button type="button" data-open-email class="email-preview mx-auto w-full max-w-sm bg-paperdark shadow-xl text-left" aria-label="View full email: Client Name">
+        <button type="button" data-open-email data-reveal class="email-preview mx-auto w-full max-w-sm bg-paperdark shadow-xl text-left" aria-label="View full email: Client Name">
           <img src="images/work/cstheory-full.png" alt="Preview of the full email: CS Theory" class="w-full">
           <span class="email-preview-cta">View full email</span>
         </button>
@@ -100,8 +99,8 @@
 
       <!-- Project 2 -->
       <article data-work-item data-title="Campaign: FromSendr" data-full="images/work/fromsendr-full.png" class="grid gap-8 md:grid-cols-2 md:gap-16 items-center">
-        <div class="md:order-2 md:bg-paperdark pt-8 md:p-10 border-t-2 border-stone/20 md:border-t-0">
-          <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Campaign · Educational</p>
+        <div data-reveal class="md:order-2 md:bg-paperdark pt-8 md:p-10 border-t border-stone/20 md:border-t-0">
+          <p class="hidden md:flex text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Campaign · Educational</p>
           <h2 class="font-display text-3xl md:text-5xl mt-3">FromSendr</h2>
           <p class="text-sm md:text-md text-stone/60 mt-5">
             <!-- Desktop description -->
@@ -115,7 +114,7 @@
               Featured is a step-by-step guide to our overall strategy, with a CTA to push engagement *
             </span>
           </p>
-          <dl class="mt-8 grid grid-cols-2 gap-6 max-w-md border-t border-ink/10 pt-6 hidden">
+          <dl class="mt-8 grid grid-cols-2 gap-6 max-w-md border-t border-ink/10 pt-6">
             <div>
               <dt class="text-xs uppercase tracking-widest text-stone">Metric one</dt>
               <dd class="font-display text-4xl mt-1">00%</dd>
@@ -126,7 +125,7 @@
             </div>
           </dl>
         </div>
-        <button type="button" data-open-email class="email-preview mx-auto w-full max-w-sm bg-paperdark shadow-xl text-left md:order-1" aria-label="View full email: Client Name">
+        <button type="button" data-open-email data-reveal class="email-preview mx-auto w-full max-w-sm bg-paperdark shadow-xl text-left md:order-1" aria-label="View full email: Client Name">
           <img src="images/work/fromsendr-full.png" alt="Preview of the full email: FromSendr" class="w-full">
           <span class="email-preview-cta">View full email</span>
         </button>
@@ -179,12 +178,12 @@
 
   <!-- ========== CTA ========== -->
   <section class="bg-paperdark font-display px-6 md:px-10 py-20 md:py-28 text-center">
-    <h2 class="text-3xl md:text-5xl max-w-xl md:max-w-4xl mx-auto">Want to deploy emails like these for your own brand?</h2>
-    <p class="font-sans text-sm md:text-lg text-stone max-w-lg md:max-w-3xl mx-auto mt-4 md:mt-8 px-6">Let's discuss how we can help you get the most out of your email marketing channels, maximize your ROI, and create a strategy that works for your business.</p>
+    <h2 data-reveal class="text-3xl md:text-5xl max-w-xl md:max-w-4xl mx-auto">Want to deploy emails like these for your own brand?</h2>
+    <p data-reveal class="font-sans text-sm md:text-lg text-stone max-w-lg md:max-w-3xl mx-auto mt-4 md:mt-8 px-6">Let's discuss how we can help you get the most out of your email marketing channels, maximize your ROI, and create a strategy that works for your business.</p>
     <div class="flex justify-center mx-auto px-6">
-      <a href="contact.html" class="flex items-center justify-between w-full md:gap-18 mt-12 md:mt-20 bg-deepgreen bg-opacity-80 md:hover:bg-opacity-70 text-paper shadow-xl max-w-lg py-4 px-6 md:px-8 text-md md:text-2xl button-underline-dark">
+      <a href="contact.html" class="btn w-full max-w-lg mt-12 md:mt-20">
         Book a strategy call
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="w-8 h-3 md:w-12 md:h-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
           <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
