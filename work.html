@@ -6,13 +6,13 @@
   <link rel="icon" href="images/favicon-v2.png">
   <title>FromSendr | Previous Work</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <script src="tailwind-config.js"></script>
+  <!-- Built from tailwind.input.css + tailwind.config.js (see CLAUDE.md); must stay after styles.css -->
+  <link rel="stylesheet" href="tailwind.css">
 </head>
 
 <body class="bg-paper text-ink font-sans antialiased">
@@ -20,7 +20,7 @@
   <!-- Header + intro together fill the first screen; the intro takes the remaining height -->
   <div class="relative min-h-svh flex flex-col">
   <!-- Background video. Painted first (no z-index) so the later nav/intro sit on top without creating a stacking context (see .site-logo) -->
-  <video class="absolute inset-0 w-full h-full object-cover brightness-[0.5]" src="videos/7679393-hd_1920_1080_25fps.mp4" poster="images/work-hero-bg-dark.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+  <video class="absolute inset-0 w-full h-full object-cover brightness-[0.5]" src="videos/work-bg.mp4" poster="images/work-hero-bg-dark.webp" autoplay muted loop playsinline aria-hidden="true"></video>
   <!-- ========== NAV (same as index.html) ========== -->
   <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
   <a href="index.html" class="site-logo" aria-label="FromSendr home">
@@ -54,17 +54,18 @@
 
   <!-- ========== PROJECTS ==========
     Copy one <article data-work-item> per project.
-    - Cropped preview: replace the .email-skeleton div with <img src="images/work/name-preview.png" alt="...">
-      (a screenshot of the TOP of the email; the fade-out at the bottom is added by .email-preview).
-    - Full email: set data-full to a tall screenshot (images/work/name-full.png) or an
+    - Preview: <img src="images/work/name-full-thumb.webp" loading="lazy" ...> (the whole email; the
+      card crops it and .email-preview adds the fade-out). Thumbs are 800px-wide WebP, also used by the marquee.
+    - Full email: set data-full to a 1200px-wide WebP (images/work/name-full.webp) or an
       exported HTML file (images/work/name.html), which loads in an iframe.
       With no data-full, a placeholder is shown.
+    Don't reference the original 2000px PNG screenshots directly: at 7-29 MB each they dominated load time.
   -->
   <section class="mx-auto max-w-6xl px-8 md:px-10 pt-16 md:pt-24 pb-24 md:pb-32">
     <div class="grid gap-24 md:gap-32">
 
       <!-- Project 1 (text left, preview right; alternates on desktop) -->
-      <article data-work-item data-title="Abandoned Cart Flow: CS Theory" data-full="images/work/cstheory-full.png" class="grid gap-8 md:grid-cols-2 md:gap-16 items-center">
+      <article data-work-item data-title="Abandoned Cart Flow: CS Theory" data-full="images/work/cstheory-full.webp" class="grid gap-8 md:grid-cols-2 md:gap-16 items-center">
         <div data-reveal class="md:bg-paperdark pt-8 md:p-10 border-t border-stone/20 md:border-t-0">
           <p class="hidden md:flex text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Abandoned Cart Flow · Ecommerce</p>
           <h2 class="font-display text-3xl md:text-5xl mt-3">CS Theory</h2>
@@ -91,14 +92,14 @@
             </div>
           </dl>
         </div>
-        <button type="button" data-open-email data-reveal class="email-preview mx-auto w-full max-w-sm bg-paperdark shadow-xl text-left" aria-label="View full email: Client Name">
-          <img src="images/work/cstheory-full.png" alt="Preview of the full email: CS Theory" class="w-full">
+        <button type="button" data-open-email data-reveal class="email-preview mx-auto w-full max-w-sm bg-paperdark shadow-xl text-left" aria-label="View full email: CS Theory">
+          <img src="images/work/cstheory-full-thumb.webp" alt="Preview of the full email: CS Theory" class="w-full" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
         </button>
       </article>
 
       <!-- Project 2 -->
-      <article data-work-item data-title="Campaign: FromSendr" data-full="images/work/fromsendr-full.png" class="grid gap-8 md:grid-cols-2 md:gap-16 items-center">
+      <article data-work-item data-title="Campaign: FromSendr" data-full="images/work/fromsendr-full.webp" class="grid gap-8 md:grid-cols-2 md:gap-16 items-center">
         <div data-reveal class="md:order-2 md:bg-paperdark pt-8 md:p-10 border-t border-stone/20 md:border-t-0">
           <p class="hidden md:flex text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Campaign · Educational</p>
           <h2 class="font-display text-3xl md:text-5xl mt-3">FromSendr</h2>
@@ -125,8 +126,8 @@
             </div>
           </dl>
         </div>
-        <button type="button" data-open-email data-reveal class="email-preview mx-auto w-full max-w-sm bg-paperdark shadow-xl text-left md:order-1" aria-label="View full email: Client Name">
-          <img src="images/work/fromsendr-full.png" alt="Preview of the full email: FromSendr" class="w-full">
+        <button type="button" data-open-email data-reveal class="email-preview mx-auto w-full max-w-sm bg-paperdark shadow-xl text-left md:order-1" aria-label="View full email: FromSendr">
+          <img src="images/work/fromsendr-full-thumb.webp" alt="Preview of the full email: FromSendr" class="w-full" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
         </button>
       </article>
@@ -146,7 +147,7 @@
     inside stands in for a screenshot and is deliberately taller than the frame
     on some cards, so it gets cropped at the bottom exactly like a real long
     email screenshot would. Swap a fill div's classes for
-    <img src="images/work/name.png" class="w-full" alt="..."> once real
+    <img src="images/work/name-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt="..."> once real
     screenshots exist. The card list is duplicated once in the track so the
     loop (0 to -50%) is seamless.
   -->
@@ -155,19 +156,19 @@
     <div class="marquee">
       <div class="marquee-track">
         <!-- Set A -->
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/cstheory-full.png" class="w-full" alt="CS Theory Abandoned Cart"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/fromsendr-full.png" class="w-full" alt="FromSendr Campaign"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/bucs-full.png" class="w-full" alt="Tampa Bay Buccaneers Welcome Series"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/cstheory-2-full.png" class="w-full" alt="CS Theory Campaign"></div></div>
+        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/cstheory-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt="CS Theory Abandoned Cart"></div></div>
+        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/fromsendr-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt="FromSendr Campaign"></div></div>
+        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/bucs-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt="Tampa Bay Buccaneers Welcome Series"></div></div>
+        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/cstheory-2-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt="CS Theory Campaign"></div></div>
         <div class="marquee-card"><div class="marquee-card-fill h-full bg-stone"></div></div>
         <div class="marquee-card"><div class="marquee-card-fill h-full bg-accent/50"></div></div>
         <div class="marquee-card"><div class="marquee-card-fill h-full bg-mint/60"></div></div>
         <div class="marquee-card"><div class="marquee-card-fill h-full bg-gold/80"></div></div>
         <!-- Set B (duplicate of Set A, for a seamless loop) -->
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/cstheory-full.png" class="w-full" alt="CS Theory Abandoned Cart"></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/fromsendr-full.png" class="w-full" alt="FromSendr Campaign"></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/bucs-full.png" class="w-full" alt="Tampa Bay Buccaneers Welcome Series"></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/cstheory-2-full.png" class="w-full" alt="CS Theory Campaign"></div></div>
+        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/cstheory-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt=""></div></div>
+        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/fromsendr-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt=""></div></div>
+        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/bucs-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt=""></div></div>
+        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/cstheory-2-full-thumb.webp" class="w-full" loading="lazy" decoding="async" alt=""></div></div>
         <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill h-full bg-stone"></div></div>
         <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill h-full bg-accent/50"></div></div>
         <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill h-full bg-mint/60"></div></div>
@@ -192,7 +193,7 @@
   </section>
 
   <!-- ========== FULL EMAIL MODAL ========== -->
-  <dialog id="email-modal" class="m-auto w-[min(86vw,38rem)] max-h-[90vh] scroll-top p-0 bg-paper shadow-2xl backdrop:bg-ink/60">
+  <dialog id="email-modal" class="m-auto w-[min(86vw,38rem)] max-h-[90vh] p-0 bg-paper shadow-2xl backdrop:bg-ink/60">
     <div class="sticky top-0 z-10 flex items-center justify-between bg-ink px-6 py-3 text-paper/60">
       <span id="email-modal-title" class="font-display text-lg"></span>
       <button type="button" id="email-modal-close" class="text-xl leading-none md:hover:rotate-90 md:duration-200" aria-label="Close">&#x2715;</button>
@@ -204,8 +205,8 @@
   <footer class="mx-auto px-6 md:px-10 py-8 text-sm bg-ink border-t-2 border-mint text-stone flex flex-col gap-6">
     <div class="flex justify-between">
       <span>© 2026 FromSendr</span>
-      <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="nav-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="fill-stone md:w-30 md:h-30" viewBox="0 0 16 16">
+      <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="FromSendr on Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="fill-stone" viewBox="0 0 16 16">
           <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
         </svg>
       </a>

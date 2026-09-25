@@ -1,5 +1,8 @@
-// Shared Tailwind CDN config: loaded by every page after the Tailwind script
-tailwind.config = {
+// Tailwind build config (standalone CLI v3.4.17, see CLAUDE.md for the build command).
+// `content` lists every file whose class names should end up in tailwind.css:
+// the pages, plus the scripts that add classes at runtime (e.g. work.js).
+module.exports = {
+  content: ['./*.html', './script.js', './work.js'],
   theme: {
     extend: {
       colors: {
@@ -16,6 +19,6 @@ tailwind.config = {
         display: ['"Fraunces"', 'serif'],
         sans: ['"Inter"', 'sans-serif'],
       },
-    }
-  }
+    },
+  },
 };

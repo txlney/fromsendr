@@ -46,10 +46,6 @@
     transition: transform 0.1s ease, visibility 0s linear 0.5s;
 }
 
-.difference {
-    mix-blend-mode: difference;
-}
-
 /* Mobile (below Tailwind's md): logo sits top-right, and the panel is a
    full-height drawer that slides in from the right. It only goes full width on
    very narrow screens. Right padding lines the links up with the logo's right
@@ -196,11 +192,6 @@ html body :where(.btn) {
     transition: color 0.3s ease;
 }
 
-html body :where(.btn):hover {
-    color: var(--btn-hover-color);
-    transition: color 0.1s ease;
-}
-
 /* Fill slides in from the left on hover, then exits to the right on hover-out */
 html body :where(.btn)::before {
     content: "";
@@ -226,6 +217,7 @@ html body :where(.btn:focus-visible)::before {
 @media (hover: hover) {
     html body :where(.btn:hover) {
         color: var(--btn-hover-color);
+        transition: color 0.1s ease;
     }
 
     html body :where(.btn:hover)::before {
@@ -254,7 +246,7 @@ html body :where(.btn:focus-visible)::before {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .nav-link:hover {
         color: var(--color-mint);
         transition: none;
@@ -376,6 +368,7 @@ html body :where(.btn:focus-visible)::before {
     align-items: flex-start;
     gap: 0.8rem;
     width: max-content;
+    will-change: transform;
     /* Position driven by script.js (rAF), not a CSS animation: a JS-tracked
        offset can be paused/resumed any number of times with no drift or
        restart, which a CSS animation-play-state toggle can't guarantee
@@ -405,7 +398,6 @@ html body :where(.btn:focus-visible)::before {
 
 .marquee-card::-webkit-scrollbar-thumb {
     background: var(--color-ink);
-    opacity: 0.4;
 }
 
 .marquee-card-fill {
@@ -422,21 +414,6 @@ html body :where(.btn:focus-visible)::before {
 
 @media (prefers-reduced-motion: reduce) {
     .marquee-track {
-        animation: none;
         gap: 1rem;
-    }
-}
-
-.mobile-description {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .desktop-description {
-        display: none;
-    }
-
-    .mobile-description {
-        display: block;
     }
 }

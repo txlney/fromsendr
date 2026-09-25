@@ -58,13 +58,8 @@ let isDeleting = false;
 function tick() {
     const currentPhrase = phrases[phraseIndex];
 
-    if (isDeleting) {
-        charIndex--;
-        typewriter.textContent = currentPhrase.substring(0, charIndex);
-    } else {
-        charIndex++;
-        typewriter.textContent = currentPhrase.substring(0, charIndex);
-    }
+    charIndex += isDeleting ? -1 : 1;
+    typewriter.textContent = currentPhrase.substring(0, charIndex);
 
     let delay = isDeleting ? deletingSpeed : typingSpeed;
 
@@ -85,40 +80,40 @@ if (typewriter) tick();
 // Scroll-linked charts: each [data-scroll-chart] gets a --progress value (0 to 1)
 // that runs from 0 when its top enters the bottom of the viewport to 1 when its
 // centre reaches ~40% down the viewport. Charts use --progress in styles.css.
-const scrollCharts = document.querySelectorAll("[data-scroll-chart]");
+const scrollCharts = Array.from(document.querySelectorAll("[data-scroll-chart]"), (el) => ({
+    el,
+    countTo: el.dataset.countTo ? parseFloat(el.dataset.countTo) : null,
+    last: null,
+}));
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-let scrollTicking = false;
 
 const updateScrollCharts = () => {
-    scrollTicking = false;
     const vh = window.innerHeight;
-
-    scrollCharts.forEach((chart) => {
-        const rect = chart.getBoundingClientRect();
-        const start = vh;
+    // Read every rect before writing any styles, so the loop doesn't force a
+    // layout per chart
+    const progresses = scrollCharts.map(({ el }) => {
+        const rect = el.getBoundingClientRect();
         const end = vh * 0.4 - rect.height / 2;
-        const progress = reduceMotion ? 1 : Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
-        chart.style.setProperty("--progress", progress.toFixed(4));
+        return reduceMotion ? 1 : Math.min(1, Math.max(0, (vh - rect.top) / (vh - end)));
+    });
+
+    scrollCharts.forEach((chart, i) => {
+        const progress = progresses[i].toFixed(4);
+        // Charts sit at 0 or 1 most of the time: skip the style/text writes then
+        if (progress === chart.last) return;
+        chart.last = progress;
+        chart.el.style.setProperty("--progress", progress);
 
         // Counters (data-count-to="2.87") finish at half the scroll range, easing out
         // so the value races up early and settles on the final figure.
-        if (chart.dataset.countTo) {
-            const eased = 1 - Math.pow(1 - Math.min(1, progress * 1.5), 3);
-            chart.textContent = "$" + (eased * parseFloat(chart.dataset.countTo)).toFixed(2);
+        if (chart.countTo !== null) {
+            const eased = 1 - Math.pow(1 - Math.min(1, progresses[i] * 1.5), 3);
+            chart.el.textContent = "$" + (eased * chart.countTo).toFixed(2);
         }
     });
 };
 
-const onScroll = () => {
-    if (!scrollTicking) {
-        scrollTicking = true;
-        requestAnimationFrame(updateScrollCharts);
-    }
-};
-
-window.addEventListener("scroll", onScroll, { passive: true });
-window.addEventListener("resize", onScroll);
-updateScrollCharts();
+if (scrollCharts.length) updateScrollCharts();
 
 // Slide-up reveal: any [data-reveal] element slides up out of its own bottom edge,
 // once, when its top reaches 75% down the viewport (styles.css has the visuals).
@@ -130,13 +125,14 @@ let pendingReveals = reduceMotion ? [] : Array.from(document.querySelectorAll("[
 const updateReveals = () => {
     const vh = window.innerHeight;
     const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    // Subtract the hidden-state offset to get where each element really sits.
+    // All reads happen before any class changes, so there's no forced layout per element.
+    const due = pendingReveals.map((el) => atPageEnd || el.getBoundingClientRect().top - el.offsetHeight < vh * 0.75);
     let batch = 0;
 
     // Elements revealed in the same frame (e.g. side-by-side cards) are staggered top-down
-    pendingReveals = pendingReveals.filter((el) => {
-        // Subtract the hidden-state offset to get where the element really sits
-        const top = el.getBoundingClientRect().top - el.offsetHeight;
-        if (top >= vh * 0.75 && !atPageEnd) return true;
+    pendingReveals = pendingReveals.filter((el, i) => {
+        if (!due[i]) return true;
         el.style.setProperty("--reveal-delay", batch++ * 0.12 + "s");
         el.classList.add("is-revealed");
         return false;
@@ -156,20 +152,35 @@ if (pendingReveals.length) {
         });
     });
 
-    let revealTicking = false;
-    const onRevealScroll = () => {
-        if (!revealTicking) {
-            revealTicking = true;
-            requestAnimationFrame(() => {
-                revealTicking = false;
-                updateReveals();
-            });
-        }
-    };
-    window.addEventListener("scroll", onRevealScroll, { passive: true });
-    window.addEventListener("resize", onRevealScroll);
     // After a frame, so the hidden state has been painted and the transition runs
     requestAnimationFrame(updateReveals);
+}
+
+// One rAF-throttled scroll/resize handler drives both charts and reveals. It's
+// only attached if the page has either, and detaches once there's nothing left
+// to do (charts stay live; reveals run out once everything has been shown).
+let scrollTicking = false;
+
+const onScrollFrame = () => {
+    scrollTicking = false;
+    if (scrollCharts.length) updateScrollCharts();
+    if (pendingReveals.length) updateReveals();
+    if (!scrollCharts.length && !pendingReveals.length) {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+    }
+};
+
+const onScroll = () => {
+    if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(onScrollFrame);
+    }
+};
+
+if (scrollCharts.length || pendingReveals.length) {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
 }
 
 // Work page: continuously scrolling email marquee. Position is tracked in JS
@@ -203,6 +214,8 @@ if (marqueeTrack) {
         marquee.addEventListener("pointercancel", () => { paused = reduceMotion; });
     }
 
+    let frame = null;
+
     const step = (time) => {
         if (lastTime === null) lastTime = time;
         // Cap the per-frame delta: mobile browsers can suspend rAF mid-gesture
@@ -217,13 +230,27 @@ if (marqueeTrack) {
             marqueeTrack.style.transform = `translateX(${-offset}px)`;
         }
 
-        requestAnimationFrame(step);
+        frame = requestAnimationFrame(step);
     };
 
     measureLoopWidth();
     window.addEventListener("resize", measureLoopWidth);
-    if (!reduceMotion) requestAnimationFrame(step);
+
+    // Only run the loop while the strip is on screen. It picks up from the same
+    // offset when it comes back (lastTime is reset so the gap isn't counted).
+    if (!reduceMotion) {
+        new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting && frame === null) {
+                lastTime = null;
+                frame = requestAnimationFrame(step);
+            } else if (!entry.isIntersecting && frame !== null) {
+                cancelAnimationFrame(frame);
+                frame = null;
+            }
+        }).observe(marquee);
+    }
 }
 
+// About page: slow the background video down slightly
 const aboutVideo = document.getElementById("about-video");
-aboutVideo.playbackRate = 0.8;
+if (aboutVideo) aboutVideo.playbackRate = 0.8;
