@@ -10,14 +10,6 @@
     --color-orange: #EB4511;
 }
 
-*,
-*:before,
-*:after {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 /* Site nav: only the logo is visible by default, fixed top-centre. The logo is
    white and blends with `difference`, so it always renders as the inverse of
    whatever is behind it. That only works while nothing between it and <body>
@@ -160,14 +152,10 @@
     }
 }
 
+/* Footer and nav links. The hover fade and the nav's sliding underline are
+   desktop-only (md+); on mobile the colour just switches. */
 .footer-link {
-    position: relative;
     color: var(--color-stone);
-}
-
-.footer-link:hover {
-    color: var(--color-platinum);
-    transition: all 0.2s ease;
 }
 
 .nav-link {
@@ -175,41 +163,45 @@
     color: var(--color-silver);
 }
 
-.nav-link:after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background-color: var(--color-blue);
-    left: 0;
-    bottom: -8px;
-    transition: 0.2s;
-}
-
-.nav-link:hover {
-    color: var(--color-platinum);
-    transition: all 0.2s ease;
-}
-
-.nav-link:hover:after {
-    width: 100%;
-
-}
-
 .nav-link-selected {
     position: relative;
     color: var(--color-platinum);
 }
 
+.footer-link:hover,
+.nav-link:hover {
+    color: var(--color-platinum);
+}
+
+.nav-link:after,
 .nav-link-selected:after {
     content: "";
     position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-blue);
-    opacity: 0.4;
     left: 0;
     bottom: -8px;
+    height: 2px;
+    background-color: var(--color-blue);
+}
+
+.nav-link:after {
+    width: 0;
+    transition: width 0.2s;
+}
+
+.nav-link-selected:after {
+    width: 100%;
+    opacity: 0.4;
+}
+
+@media (min-width: 768px) {
+    .footer-link:hover,
+    .nav-link:hover {
+        transition: color 0.2s ease;
+    }
+
+    .nav-link:hover:after {
+        width: 100%;
+    }
 }
 
 /* Buttons: every CTA uses .btn (plus a colour variant like .btn-hero if needed).
@@ -302,28 +294,7 @@ html body :where(.btn:focus-visible)::before {
     }
 }
 
-@media (max-width: 767px) {
-    .footer-link:hover {
-        color: var(--color-platinum);
-        transition: none;
-    }
-
-    .nav-link:hover {
-        color: var(--color-platinum);
-        transition: none;
-    }
-
-    .nav-link:after {
-        width: 0;
-    }
-
-    .nav-link:hover:after {
-        width: 0;
-        transition: none;
-    }
-}
-
-/* Index/work/about hero: fills the first screen, then shrinks as soon as the page is scrolled
+/* Every page's hero: fills the first screen, then shrinks as soon as the page is scrolled
    at all (script.js adds .is-collapsed), pulling the next section up. min-height rather
    than height so the content still fits on short phones. */
 .hero-shrink {
@@ -333,7 +304,7 @@ html body :where(.btn:focus-visible)::before {
 }
 
 .hero-shrink.is-collapsed {
-    min-height: 65vh;
+    min-height: 80vh;
     min-height: 80svh;
 }
 
@@ -361,7 +332,7 @@ html:has(.hero-shrink) {
     opacity: 0;
 }
 
-/* Backgrounds inside a shrinking hero (index photo, work/about aurora): at least screen-height
+/* Backgrounds inside a shrinking hero (index photo, other pages' aurora): at least screen-height
    and centred, so the hero's overflow-hidden crops them as it shrinks rather than
    squashing them. min-height keeps them covering a hero that's taller than the screen,
    and its +2px overhangs each edge by 1px so sub-pixel rounding of the centring can't
@@ -377,13 +348,13 @@ html:has(.hero-shrink) {
 }
 
 /* Index hero photo, washed out towards white so its colours don't compete with the text.
-   Sizing/position is shared with the work aurora, above. */
+   Sizing/position is shared with the aurora, above. The WebP is preloaded in index.html. */
 .hero-bg {
     background:
         radial-gradient(ellipse at 15% 0%, rgb(45 125 210 / 0.3), transparent 60%),
         radial-gradient(ellipse at 95% 100%, rgb(235 69 17 / 0.14), transparent 55%),
         linear-gradient(rgb(232 233 237 / 0.55), rgb(232 233 237 / 0.97)),
-        url("images/hero-bg.png") center / cover no-repeat;
+        url("images/hero-bg.webp") center / cover no-repeat;
     filter: saturate(0.85);
 }
 
@@ -614,20 +585,15 @@ html:has(.hero-shrink) {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-        gap: 1rem;
-    }
-}
-
-/* Work page hero: slowly drifting "aurora" of brand-colour glows (replaced the background video).
-   Each blob is a soft radial gradient (cheaper than filter: blur) and only its transform is
-   animated, so it stays on the compositor. Blob colour/position/path/speed are per-blob variables. */
+/* Services/work/about/contact hero: slowly drifting "aurora" of glows in the site palette
+   (blue, orange, navy) on a platinum base. Each blob is a soft radial gradient (cheaper than
+   filter: blur) and only its transform is animated, so it stays on the compositor. Blob
+   colour/position/path/speed are per-blob variables. */
 .aurora {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: radial-gradient(ellipse at 50% 110%, #2a303b, #101112 70%);
+    background: radial-gradient(ellipse at 50% 110%, #DCE6F2, #E8E9ED 70%);
     pointer-events: none;
 }
 
@@ -641,35 +607,10 @@ html:has(.hero-shrink) {
     animation: aurora-drift var(--blob-duration) ease-in-out var(--blob-delay) infinite alternate;
 }
 
-.aurora-blob-1 { --blob-color: rgba(127, 152, 190, 0.55); top: -35vmax; left: -25vmax;  --blob-duration: 22s; --blob-delay: -6s;  --blob-to: 30vw, 20vh;  --blob-scale: 1.15; }
-.aurora-blob-2 { --blob-color: rgba(130, 160, 206, 0.35); top: 10vh;    right: -35vmax; --blob-duration: 27s; --blob-delay: -14s; --blob-to: -35vw, -15vh; --blob-scale: 0.9; }
-.aurora-blob-3 { --blob-color: rgba(153, 176, 211, 0.3); bottom: -45vmax; left: 10vw;  --blob-duration: 31s; --blob-delay: -3s;  --blob-to: 20vw, -25vh; --blob-scale: 1.25; }
-.aurora-blob-4 { --blob-color: rgba(64, 94, 139, 0.6);   top: 20vh;    left: -40vmax;  --blob-duration: 25s; --blob-delay: -19s; --blob-to: 45vw, -10vh; --blob-scale: 1.1; }
-
-/* Light variant (about page, dark text on top): paper base with paler, softer glows */
-.aurora-light {
-    background: radial-gradient(ellipse at 50% 110%, #E4EBE3, #FAFAF8 70%);
-}
-
-.aurora-light .aurora-blob-1 { --blob-color: rgba(117, 150, 199, 0.781); }
-.aurora-light .aurora-blob-2 { --blob-color: rgba(122, 154, 214, 0.699); }
-.aurora-light .aurora-blob-3 { --blob-color: rgba(168, 196, 233, 0.8); }
-.aurora-light .aurora-blob-4 { --blob-color: rgba(112, 152, 204, 0.438); }
-
-/* Brand variant (add to .aurora-light, services hero): the glows in the site palette
-   (blue, orange, navy) on a platinum base, to match the coloured panels further down */
-.aurora-brand {
-    background: radial-gradient(ellipse at 50% 110%, #DCE6F2, #E8E9ED 70%);
-}
-
-.aurora-brand .aurora-blob-1 { --blob-color: rgba(45, 125, 210, 0.45); }
-.aurora-brand .aurora-blob-2 { --blob-color: rgba(235, 69, 17, 0.22); }
-.aurora-brand .aurora-blob-3 { --blob-color: rgba(45, 125, 210, 0.3); }
-.aurora-brand .aurora-blob-4 { --blob-color: rgba(1, 22, 39, 0.12); }
-
-.aurora-light::after {
-    opacity: 0.08;
-}
+.aurora-blob-1 { --blob-color: rgba(45, 125, 210, 0.45); top: -35vmax; left: -25vmax;  --blob-duration: 22s; --blob-delay: -6s;  --blob-to: 30vw, 20vh;  --blob-scale: 1.15; }
+.aurora-blob-2 { --blob-color: rgba(235, 69, 17, 0.22);  top: 10vh;    right: -35vmax; --blob-duration: 27s; --blob-delay: -14s; --blob-to: -35vw, -15vh; --blob-scale: 0.9; }
+.aurora-blob-3 { --blob-color: rgba(45, 125, 210, 0.3);  bottom: -45vmax; left: 10vw;  --blob-duration: 31s; --blob-delay: -3s;  --blob-to: 20vw, -25vh; --blob-scale: 1.25; }
+.aurora-blob-4 { --blob-color: rgba(1, 22, 39, 0.12);    top: 20vh;    left: -40vmax;  --blob-duration: 25s; --blob-delay: -19s; --blob-to: 45vw, -10vh; --blob-scale: 1.1; }
 
 @keyframes aurora-drift {
     from { transform: translate(0, 0) scale(1); }

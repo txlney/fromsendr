@@ -96,11 +96,7 @@ if (typewriter) {
 // Scroll-linked charts: each [data-scroll-chart] gets a --progress value (0 to 1)
 // that runs from 0 when its top enters the bottom of the viewport to 1 when its
 // centre reaches ~40% down the viewport. Charts use --progress in styles.css.
-const scrollCharts = Array.from(document.querySelectorAll("[data-scroll-chart]"), (el) => ({
-    el,
-    countTo: el.dataset.countTo ? parseFloat(el.dataset.countTo) : null,
-    last: null,
-}));
+const scrollCharts = Array.from(document.querySelectorAll("[data-scroll-chart]"), (el) => ({ el, last: null }));
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const updateScrollCharts = () => {
@@ -115,17 +111,10 @@ const updateScrollCharts = () => {
 
     scrollCharts.forEach((chart, i) => {
         const progress = progresses[i].toFixed(4);
-        // Charts sit at 0 or 1 most of the time: skip the style/text writes then
+        // Charts sit at 0 or 1 most of the time: skip the style write then
         if (progress === chart.last) return;
         chart.last = progress;
         chart.el.style.setProperty("--progress", progress);
-
-        // Counters (data-count-to="2.87") finish at half the scroll range, easing out
-        // so the value races up early and settles on the final figure.
-        if (chart.countTo !== null) {
-            const eased = 1 - Math.pow(1 - Math.min(1, progresses[i] * 1), 3);
-            chart.el.textContent = "$" + (eased * chart.countTo).toFixed(2);
-        }
     });
 };
 
@@ -140,7 +129,7 @@ let pendingReveals = reduceMotion ? [] : Array.from(document.querySelectorAll("[
 
 const updateReveals = () => {
     const vh = window.innerHeight;
-    const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    const atPageEnd = vh + window.scrollY >=document.documentElement.scrollHeight - 2;
     // Subtract the hidden-state offset to get where each element really sits.
     // All reads happen before any class changes, so there's no forced layout per element.
     const due = pendingReveals.map((el) => atPageEnd || el.getBoundingClientRect().top - el.offsetHeight < vh * 0.75);
@@ -199,7 +188,7 @@ if (scrollCharts.length || pendingReveals.length) {
     window.addEventListener("resize", onScroll);
 }
 
-// Index/work/about hero: full screen at the top, shrinks (.hero-shrink in styles.css) as soon as
+// Every page's hero: full screen at the top, shrinks (.hero-shrink in styles.css) as soon as
 // the page scrolls at all, so the next section comes up quickly; grows back at the top.
 // Off under reduced motion, where it just stays full height.
 const heroShrink = document.querySelector(".hero-shrink");
@@ -237,16 +226,17 @@ if (heroShrink && !reduceMotion) {
 // Work page: continuously scrolling email marquee. Position is tracked in JS
 // (rAF) rather than a CSS animation so pausing can never desync it or cause
 // it to snap/restart - it's just a boolean that stops the offset advancing.
+// Under reduced motion it never starts, so the strip is just a static row.
 const marquee = document.querySelector(".marquee");
-const marqueeTrack = marquee ? marquee.querySelector(".marquee-track") : null;
 
-if (marqueeTrack) {
+if (marquee && !reduceMotion) {
+    const marqueeTrack = marquee.querySelector(".marquee-track");
     const speed = 40; // pixels per second
     // Only mouse-like pointers (canHover, above) pause the marquee on
     // contact. Touch has no real "hover," so pausing on touch just meant the
     // strip stopped every time someone tried to scroll a tall card - on
     // mobile it now keeps scrolling underneath instead, uninterrupted.
-    let paused = reduceMotion;
+    let paused = false;
     let offset = 0;
     let lastTime = null;
     let loopWidth = 0;
@@ -261,8 +251,7 @@ if (marqueeTrack) {
 
     if (canHover) {
         marquee.addEventListener("pointerenter", () => { paused = true; });
-        marquee.addEventListener("pointerleave", () => { paused = reduceMotion; });
-        marquee.addEventListener("pointercancel", () => { paused = reduceMotion; });
+        marquee.addEventListener("pointerleave", () => { paused = false; });
     }
 
     let frame = null;
@@ -289,15 +278,13 @@ if (marqueeTrack) {
 
     // Only run the loop while the strip is on screen. It picks up from the same
     // offset when it comes back (lastTime is reset so the gap isn't counted).
-    if (!reduceMotion) {
-        new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting && frame === null) {
-                lastTime = null;
-                frame = requestAnimationFrame(step);
-            } else if (!entry.isIntersecting && frame !== null) {
-                cancelAnimationFrame(frame);
-                frame = null;
-            }
-        }).observe(marquee);
-    }
+    new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && frame === null) {
+            lastTime = null;
+            frame = requestAnimationFrame(step);
+        } else if (!entry.isIntersecting && frame !== null) {
+            cancelAnimationFrame(frame);
+            frame = null;
+        }
+    }).observe(marquee);
 }
