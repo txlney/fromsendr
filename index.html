@@ -3,64 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="images/favicon-v2.png">
-  <title>FromSendr | Browsers into buyers</title>
+  <link rel="icon" href="images/favicon-v3.png">
+  <title>FromSendr</title>
 
-  <!-- The hero background is set in tailwind.css, so the browser only finds it after that loads: preload it so it starts downloading straight away -->
-  <link rel="preload" as="image" href="images/index-hero-bg.webp" fetchpriority="high">
+  <!-- The hero background is set in styles.css (.hero-bg), so the browser only finds it after that loads: preload it so it starts downloading straight away -->
+  <link rel="preload" as="image" href="images/hero-bg.png" fetchpriority="high">
 
   <!-- Fonts: a serif display paired with a clean sans for body/UI -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Built from tailwind.input.css + tailwind.config.js (see CLAUDE.md); must stay after styles.css -->
   <link rel="stylesheet" href="tailwind.css">
 </head>
 
-<body class="bg-paper text-ink font-sans antialiased">
+<body class="bg-platinum text-ink font-sans antialiased">
 
-  <!-- Header + hero together fill the first screen; the hero takes the remaining height -->
-  <div class="min-h-svh flex flex-col">
+  <!-- Header + hero together fill the first screen (the hero takes the remaining height), then shrink as soon as the page scrolls (.hero-shrink, see styles.css/script.js) -->
+  <div class="hero-shrink flex flex-col">
   <!-- ========== NAV ========== -->
   <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
   <a href="index.html" class="site-logo" aria-label="FromSendr home">
-    <img src="images/modern-logo-2.png" alt="" class="w-10 md:w-16">
+    <!-- The full wordmark, clipped to just the icon until the nav opens (see .site-logo-mark in styles.css) -->
+    <span class="site-logo-mark"><img src="images/wordmark-platinum-nav.png" alt=""></span>
   </a>
-  <nav id="site-nav" class="site-nav flex flex-col items-end gap-10 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-4 lg:gap-x-32 text-mint text-sm font-bold uppercase" aria-label="Main navigation">
+  <nav id="site-nav" class="site-nav flex flex-col items-end gap-10 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-4 lg:gap-x-32 text-sm font-bold uppercase" aria-label="Main navigation">
+    <a href="index.html" class="nav-link-selected">Home</a>
     <a href="services.html" class="nav-link">Services</a>
     <a href="work.html" class="nav-link">Work</a>
     <a href="about.html" class="nav-link">About</a>
     <a href="contact.html" class="nav-link">Contact</a>
   </nav>
 
-  <!-- ========== HERO ========== -->
-  <section class="flex-1 flex flex-col justify-center relative w-full mx-auto text-center px-6 md:px-10 pt-16 pb-28 md:pt-24 md:pb-36 bg-[url('images/index-hero-bg.webp')] bg-cover bg-center">
-    <div class="w-full max-w-5xl py-8 md:py-12 mx-auto bg-paper bg-opacity-10 backdrop-blur-md">
-      <h1 class="font-display text-paper text-2xl sm:text-4xl md:text-6xl leading-[1.0] md:leading-[1.2] max-w-80 sm:max-w-lg md:max-w-2xl mx-auto">
-        We create email strategies that convert
-      </h1>
-      <h1 class="font-display text-paper text-2xl sm:text-4xl md:text-6xl leading-[1.1] max-w-3xl mx-auto">
-        <span id="typewriter" class="text-mint"></span><span class="inline-block w-[2px] h-[0.9em] bg-mint align-middle animate-pulse ml-0.5"></span>
-      </h1>
-      <p class="text-xs md:text-md mt-6 md:mt-12 text-mint">
-        Founded and based in the United Kingdom.
+  <!-- ========== HERO ==========
+    A crisp paper card over the faded email collage (.hero-bg): eyebrow pill, headline with the
+    typewriter line, one supporting line, then the booking button and a quieter "See our work" link.
+  -->
+  <section class="flex-1 flex flex-col justify-center relative overflow-hidden w-full mx-auto text-center px-6 md:px-10 pt-24 pb-28 md:pb-36">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="relative max-w-4xl w-full mx-auto px-5 py-10 sm:px-10 md:px-16 md:py-16 bg-paper/85 backdrop-blur-md rounded-[2rem] shadow-2xl">
+      <p class="inline-flex items-center gap-2 bg-platinum rounded-full px-4 py-2 text-[0.65rem] sm:text-xs font-semibold uppercase tracking-[0.2em] text-navy">
+        <span class="h-2 w-2 shrink-0 rounded-full bg-orange"></span>E-commerce email marketing
       </p>
-    </div>
-    <div class="flex justify-center hidden">
-      <a href="contact.html" class="btn btn-hero border-none w-full max-w-lg mt-24 md:mt-20 py-5 px-8 md:px-10">
-        Book a call with us
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
-          <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
+      <h1 class="mt-6 md:mt-8 text-ink text-3xl sm:text-4xl md:text-6xl leading-[1.2]">
+        <span class="block max-w-80 sm:max-w-lg md:max-w-3xl mx-auto">We create email strategies that</span>
+        <!-- Grid: script.js stacks an invisible copy of every phrase in the same cell as the typed line, so the box is always as tall as the longest phrase and doesn't resize while typing. It also alternates the line between blue and orange per phrase (the cursor follows via bg-current) -->
+        <span class="grid font-bold max-w-3xl pt-1 px-2 mx-auto">
+          <span class="col-start-1 row-start-1 text-blue"><span id="typewriter"></span><span class="inline-block w-[2px] md:w-[3px] h-[0.9em] bg-current align-middle animate-pulse ml-0.5"></span></span>
+        </span>
+      </h1>
+      <p class="mt-6 md:mt-8 text-ink/70 text-sm md:text-lg max-w-xl mx-auto">
+        Flows, campaigns and deliverability, handled end to end, so your email channel earns what it should.
+      </p>
+      <div class="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8">
+        <a href="contact.html" class="btn w-full sm:w-auto max-w-sm">
+          Book a free call
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
+            <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="work.html" class="group inline-flex items-center gap-2 text-sm md:text-base font-semibold text-navy">
+          See our work
+          <span class="text-orange transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
     </div>
     <!-- Scroll cue: sits at the bottom of the first screen -->
-    <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-mint" aria-hidden="true">
-      <span class="text-xs uppercase tracking-[0.2em]">Scroll</span>
+    <div class="hero-cue absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
+      <span class="text-xs uppercase tracking-[0.2em]">See the numbers</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
-        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
   </section>
@@ -68,129 +83,205 @@
 
   <!-- ========== STATISTICS ========== -->
   <!-- Headline gets its own full screen, like the hero; each line slides up once when it scrolls into view (data-reveal, see styles.css/script.js) -->
-  <section class="min-h-svh flex flex-col justify-center relative px-6 md:px-10 py-24 text-center border-t border-ink/10">
-    <div class="flex flex-col gap-24 md:gap-16">
-      <div>
-        <h2 data-reveal class="font-display text-5xl md:text-8xl text-stone">Email isn't just an inbox</h2>
-        <h3 data-reveal class="font-display text-6xl md:text-9xl mt-8">It's a revenue stream</h3>
-      </div>
-      <a href="services.html" class="btn flex mx-auto w-full max-w-xs md:max-w-lg md:my-16 gap-0 md:gap-32">
-        Find out more
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
-          <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-    <p class="text-stone text-sm md:text-lg max-w-5xl mx-auto hidden">
-      When email is treated as a system rather than a series of sends, it can become one of the most measurable and efficient channels in your marketing mix.
-    </p>
-    <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-deepgreen" aria-hidden="true">
-      <span class="text-xs uppercase tracking-[0.2em]">Scroll</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
-        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+  <section id="statistics" class="flex flex-col justify-center relative px-6 md:px-10 mt-16 md:mt-24 text-center">
+    <div class="flex flex-col gap-2 sm:gap-4 md:gap-6 lg:gap-8">
+      <h2 data-reveal class="text-2xl sm:text-4xl md:text-5xl lg:text-5xl text-stone">Email isn't just an inbox</h2>
+      <h3 data-reveal class="text-3xl sm:text-5xl md:text-6xl lg:text-6xl">It's a revenue stream</h3>
     </div>
   </section>
 
-  <!-- ========== STATISTICS: ROI ========== -->
-  <section class="mx-auto px-6 md:px-10 pb-16 pt-24 md:py-24">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="flex flex-col items-center justify-between gap-6 lg:flex-row lg:gap-20">
-        <div class="text-center md:mt-12">
-          <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone text-center">Average return on email investment</p>
-          <div class="flex flex-col items-center justify-center gap-4">
-            <span class="font-display text-[clamp(8rem,22vw,18rem)] leading-[.75]">$36</span>
-            <span class="mb-2 font-display text-xl leading-tight text-ink md:mb-5 md:text-3xl md:mt-4">returned for every $1 spent</span>
+  <!-- ========== STATISTICS: CHARTS ========== -->
+  <section class="mx-auto px-12 sm:px-10 py-12 md:py-24 max-w-7xl 2xl:max-w-full">
+    <div class="mx-auto flex flex-col gap-8 sm:gap-16 lg:gap-8 xl:gap-16 lg:flex-row lg:justify-center md:px-16 lg:px-4">
+
+      <div data-reveal class="flex flex-col items-center justify-between gap-6 p-12 lg:p-8 2xl:p-12 bg-paper rounded-[2rem] shadow-xl">
+        <div class="text-center">
+          <div class="flex flex-col items-center justify-center">
+            <span class="font-bold text-[4rem] sm:text-[8rem] lg:text-[5rem] 2xl:text-[8rem] leading-[1.0]">$36</span>
+            <span class="mb-2 text-lg smtext-xl leading-tight text-ink md:mb-5 md:text-2xl lg:text-xl xl:text-2xl">returned for every $1 spent</span>
           </div>
         </div>
-        <div class="h-0 lg:h-1 w-full bg-stone/20"></div>
         <div class="flex flex-col gap-6">
-          <div data-scroll-chart class="return-donut flex h-64 w-64 shrink-0 items-center justify-center rounded-full md:h-80 md:w-80" aria-label="36 dollar return for every 1 dollar invested">
+          <div data-scroll-chart class="return-donut flex h-48 w-48 shrink-0 items-center justify-center rounded-full sm:h-64 sm:w-64 lg:h-48 lg:w-48 xl:h-64 xl:w-64" aria-label="36 dollar return for every 1 dollar invested">
             <div class="flex h-[68%] w-[68%] flex-col items-center justify-center rounded-full bg-paper text-center">
-              <span class="font-display text-5xl">36x</span>
-              <span class="mt-1 max-w-28 text-xs uppercase tracking-widest text-stone">return on investment</span>
+              <span class="text-3xl sm:text-5xl">36x</span>
+              <span class="mt-1 max-w-20 sm:max-w-28 text-[0.5rem] sm:text-xs uppercase tracking-widest text-stone">return on investment</span>
             </div>
           </div>
           <a href="https://www.omnisend.com/blog/email-marketing-roi/" target="_blank" rel="noopener noreferrer" class="text-center text-xs text-stone/30 hover:underline cursor-pointer">[Omnisend, 2025]</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ========== STATISTICS: SHARE OF SALES ========== -->
-  <section class="bg-paperdark px-6 md:px-10 py-16 md:py-32">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="text-center md:text-left">
-        <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone">Where the revenue comes from</p>
-        <div class="flex flex-col items-center gap-4 md:flex-row md:items-end md:gap-6">
-          <span class="font-display text-[clamp(8rem,22vw,18rem)] leading-[.75]">2%</span>
-          <span class="max-w-xs font-display text-xl leading-tight text-ink md:mb-5 md:max-w-sm md:text-3xl">of sends drive 37% of email-driven sales</span>
+      <div data-reveal class="flex flex-col items-center justify-between gap-6 p-12 lg:p-8 2xl:p-12 bg-paper rounded-[2rem] shadow-xl">
+        <div class="flex w-full flex-col items-center justify-between gap-12">
+          <div class="text-center">
+            <div class="flex flex-col items-center justify-center">
+              <span data-scroll-chart class="font-bold text-[4rem] sm:text-[8rem] lg:text-[5rem] 2xl:text-[8rem] leading-[1]">$2.87</span>
+              <span class="mb-2 text-lg sm:text-xl leading-tight text-ink md:mb-5 md:text-2xl lg:text-xl xl:text-2xl">average revenue per automated email</span>
+            </div>
+          </div>
+          <div data-scroll-chart class="mt-16 w-full space-y-8" role="img" aria-label="2 percent of email sends account for 37 percent of email-driven sales">
+            <div>
+              <div class="mb-3 flex justify-between text-xs uppercase tracking-[0.2em] text-stone">
+                <span>Scheduled emails</span>
+                <span class="text-stone">$0.18</span>
+              </div>
+              <div class="h-12 overflow-hidden bg-platinum md:h-20 lg:h-12">
+                <div class="share-bar-fill h-full bg-stone" style="--target: 6%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="mb-3 flex justify-between text-xs uppercase tracking-[0.2em] text-stone">
+                <span>Automated emails</span>
+                <span class="text-stone">$2.87</span>
+              </div>
+              <div class="h-12 overflow-hidden bg-platinum md:h-20 lg:h-12">
+                <div class="share-bar-fill h-full bg-blue" style="--target: 100%"></div>
+              </div>
+            </div>
+          </div>
         </div>
+        <a href="https://saasgoodies.com/email-automation-statistics/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center pt-4 text-center text-xs text-stone/30 hover:underline cursor-pointer">[SaasGoodies, 2026]</a>
       </div>
 
-      <div data-scroll-chart class="mt-16 space-y-8 md:mt-24" role="img" aria-label="2 percent of email sends account for 37 percent of email-driven sales">
-        <div>
-          <div class="mb-3 flex justify-between text-sm uppercase tracking-[0.2em] text-stone">
-            <span>Share of sends</span>
-            <span class="text-stone">2%</span>
-          </div>
-          <div class="h-12 overflow-hidden bg-mint/60 md:h-20">
-            <div class="share-bar-fill h-full bg-deepgreen" style="--target: 4%"></div>
+      <div data-reveal class="flex flex-col items-center justify-between gap-6 p-12 lg:p-8 2xl:p-12 bg-paper rounded-[2rem] shadow-xl">
+        <div class="text-center md:text-left">
+          <div class="flex flex-col items-center justify-center md:items-start">
+            <span class="font-bold text-[4rem] sm:text-[8rem] lg:text-[5rem] 2xl:text-[8rem] leading-[1]">2%</span>
+            <span class="max-w-xs text-lg sm:text-xl leading-tight text-ink md:mb-5 md:max-w-sm md:text-2xl lg:text-xl xl:text-2xl">of sends account for 37% of email-driven sales</span>
           </div>
         </div>
-        <div>
-          <div class="mb-3 flex justify-between text-sm uppercase tracking-[0.2em] text-stone">
-            <span>Share of email-driven sales</span>
-            <span class="text-stone">37%</span>
+        <div data-scroll-chart class="mt-16 w-full space-y-8" role="img" aria-label="2 percent of email sends account for 37 percent of email-driven sales">
+          <div>
+            <div class="mb-3 flex justify-between text-xs uppercase tracking-[0.2em] text-stone">
+              <span>Share of sends</span>
+              <span class="text-stone">2%</span>
+            </div>
+            <div class="h-12 overflow-hidden bg-platinum md:h-20 lg:h-12">
+              <div class="share-bar-fill h-full bg-stone" style="--target: 6%"></div>
+            </div>
           </div>
-          <div class="h-12 overflow-hidden bg-mint/60 md:h-20">
-            <div class="share-bar-fill h-full bg-deepgreen" style="--target: 74%"></div>
+          <div>
+            <div class="mb-3 flex justify-between text-xs uppercase tracking-[0.2em] text-stone gap-16">
+              <span>Share of email-driven sales</span>
+              <span class="text-stone">37%</span>
+            </div>
+            <div class="h-12 overflow-hidden bg-platinum md:h-20 lg:h-12">
+              <div class="share-bar-fill h-full bg-blue" style="--target: 74%"></div>
+            </div>
           </div>
-        </div>
-        <a href="https://www.omnisend.com/2025-ecommerce-marketing-report/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center text-center text-xs text-stone/30 hover:underline cursor-pointer">[Omnisend, 2025]</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== STATISTICS: FLOW REVENUES ========== -->
-  <section class="mx-auto px-6 md:px-10 py-16 md:py-32">
-    <div class="mx-auto max-w-7xl px-6">
-      <p class="mb-2 text-sm uppercase tracking-[0.2em] text-stone text-center">Revenue per type of email</p>
-      <div class="flex flex-col items-center justify-between gap-12 xl:flex-row xl:gap-20">
-        <div class="text-center md:mt-12">
-          <div class="flex flex-col items-center justify-center gap-4">
-            <span class="font-display text-stone text-[clamp(8rem,22vw,16rem)] leading-[.75]">$0.18</span>
-            <span class="mb-2 font-display text-xl leading-tight text-stone md:mb-5 md:text-3xl md:mt-4">revenue per scheduled email</span>
-          </div>
-        </div>
-        <div class="text-center md:mt-12">
-          <div class="flex flex-col items-center justify-center gap-4">
-            <span data-scroll-chart data-count-to="2.87" class="font-display tabular-nums text-[clamp(8rem,22vw,16rem)] leading-[.75]">$2.87</span>
-            <span class="mb-2 font-display text-xl leading-tight text-ink md:mb-5 md:text-3xl md:mt-4">revenue per automated email</span>
-          </div>
+          <a href="https://www.omnisend.com/2025-ecommerce-marketing-report/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center text-center text-xs text-stone/30 hover:underline cursor-pointer">[Omnisend, 2025]</a>
         </div>
       </div>
-      <a href="https://saasgoodies.com/email-automation-statistics/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center pt-4 text-center text-xs text-stone/30 hover:underline cursor-pointer">[SaasGoodies, 2026]</a>
     </div>
   </section>
 
   <!-- ========== STATISTICS: SUMMARY ========== -->
-  <section class="bg-paperdark px-6 md:px-10 py-20 md:py-32">
-    <div class="flex flex-col justify-center align-center gap-16 mx-auto max-w-6xl px-6 font-display text-center">
-      <div class="text-5xl">
-        <h2 data-reveal class="flex flex-col items-center justify-center gap-2 text-4xl sm:text-5xl md:flex-row md:gap-[0.3em] md:whitespace-nowrap md:text-[min(5.5vw,5rem)]">
+  <section class="bg-paper px-6 md:px-10 py-20 md:py-32">
+    <div class="flex flex-col justify-center align-center gap-8 md:gap-16 mx-auto max-w-6xl px-6 text-center">
+      <div class="flex flex-col gap-16 md:flex-row md:gap-0 justify-between">
+        <h2 data-reveal class="flex flex-col items-center justify-center text-4xl sm:text-5xl lg:text-7xl">
           <span>More emails</span>
-          <span class="text-4xl font-bold md:text-[0.75em]">≠</span>
+          <span class="text-4xl sm:text-5xl lg:text-7xl md:text-[0.75em]">≠</span>
           <span>More results</span>
         </h2>
+        <div data-reveal class="flex flex-col md:justify-end md:items-end max-w-4xl text-left md:text-right text-stone">
+          <h3 class="text-xl md:text-3xl text-blue">Timing matters.</h3>
+          <h3 class="text-xl md:text-3xl max-w-xl">We build the email systems that generate 40% of your revenue.</h3>
+        </div>
       </div>
-      <div data-reveal class="flex flex-col justify-center align-center gap-5 max-w-4xl mx-auto text-stone">
-        <h3 class="text-2xl md:text-4xl">Timing matters.</h3>
-        <h3 class="text-2xl md:text-4xl">We build the email systems that respond to what your customers <span class="italic">actually</span> do.</h3>
+      <div class="h-[1px] md:h-[2px] bg-silver/40"></div>
+      <p class="text-left text-stone text-sm md:text-lg">
+        There's no better place to have your brand's voice heard than in your customers' inboxes, countless listeners who already know and trust you.
+        Yet, many brands don't know how to build this email audience, and those that do often don't know how to capitalize on it.
+      </p>
+
+      <!-- The three common mistakes, as cards in the services.html style: a coloured panel with a small decorative illustration (built from divs), then the copy. 1 column on mobile, 3 at md -->
+      <div class="text-left">
+        <p data-reveal class="mb-6 text-sm uppercase tracking-[0.2em] text-stone">The mistakes we see most</p>
+        <div class="grid gap-6 md:grid-cols-3">
+
+          <article data-reveal class="flex flex-col bg-paper rounded-[2rem] shadow-xl overflow-hidden">
+            <div class="relative flex items-center justify-center min-h-56 p-8 bg-navy overflow-hidden" aria-hidden="true">
+              <div class="relative flex flex-col items-center text-xs font-semibold">
+                <span class="bg-paper/60 text-navy rounded-full px-4 py-1.5">Welcome email</span>
+                <span class="h-4 w-0.5 bg-paper/20"></span>
+                <span class="border-2 border-dashed border-paper/30 text-paper/50 rounded-full px-4 py-1">Wait 30 days</span>
+                <span class="h-4 w-0.5 bg-paper/20"></span>
+                <span class="bg-paper/30 text-paper/60 rounded-full px-4 py-1.5 line-through">Summer Sale 2022</span>
+              </div>
+              <span class="absolute right-5 top-6 bg-orange text-paper text-[0.65rem] font-semibold rounded-full px-3 py-1.5 shadow-xl rotate-[6deg]">Last edited 3 years ago</span>
+            </div>
+            <div class="flex flex-col gap-3 p-8">
+              <h3 class="text-xl md:text-2xl text-ink">Outdated flows</h3>
+              <p class="text-stone text-sm md:text-base leading-relaxed">Automations set up once and forgotten, still sending last year's offers to this year's customers.</p>
+            </div>
+          </article>
+
+          <article data-reveal class="flex flex-col bg-paper rounded-[2rem] shadow-xl overflow-hidden">
+            <div class="relative flex items-center justify-center min-h-56 p-8 bg-orange overflow-hidden" aria-hidden="true">
+              <div class="relative w-full max-w-[12rem] bg-paper rounded-xl shadow-2xl p-3 rotate-[-2deg]">
+                <div class="mb-2 h-2 w-16 rounded-full bg-silver"></div>
+                <div class="grid grid-cols-7 gap-1">
+                  <span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span>
+                  <span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-navy"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span>
+                  <span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span>
+                  <span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span>
+                </div>
+              </div>
+              <span class="absolute right-5 top-6 bg-navy text-paper text-[0.65rem] font-semibold rounded-full px-3 py-1.5 shadow-xl rotate-[6deg]">1 send this month</span>
+            </div>
+            <div class="flex flex-col gap-3 p-8">
+              <h3 class="text-xl md:text-2xl text-ink">One-off campaigns</h3>
+              <p class="text-stone text-sm md:text-base leading-relaxed">A send here and there, with long silences in between, so your list forgets who you are.</p>
+            </div>
+          </article>
+
+          <article data-reveal class="flex flex-col bg-paper rounded-[2rem] shadow-xl overflow-hidden">
+            <div class="relative flex items-center justify-center min-h-56 p-8 bg-blue overflow-hidden" aria-hidden="true">
+              <div class="relative w-full max-w-[12rem]">
+                <div class="absolute inset-0 bg-paper/50 rounded-xl rotate-[-8deg] -translate-y-3"></div>
+                <div class="absolute inset-0 bg-paper/70 rounded-xl rotate-[-4deg] -translate-y-1.5"></div>
+                <div class="relative bg-paper rounded-xl shadow-2xl p-3">
+                  <div class="flex items-center justify-between">
+                    <span class="h-2 w-16 rounded-full bg-ink/70"></span>
+                    <span class="text-[0.6rem] font-bold text-orange">SALE!!</span>
+                  </div>
+                  <div class="mt-2 h-1.5 w-full rounded-full bg-silver"></div>
+                  <div class="mt-3 flex items-center justify-between">
+                    <span class="h-2 w-12 rounded-full bg-ink/70"></span>
+                    <span class="text-[0.6rem] font-bold text-orange">SALE!!</span>
+                  </div>
+                  <div class="mt-2 h-1.5 w-full rounded-full bg-silver"></div>
+                  <div class="mt-3 flex items-center justify-between">
+                    <span class="h-2 w-20 rounded-full bg-ink/70"></span>
+                    <span class="text-[0.6rem] font-bold text-orange">SALE!!</span>
+                  </div>
+                  <div class="mt-2 h-1.5 w-full rounded-full bg-silver"></div>
+                </div>
+              </div>
+              <span class="absolute right-5 bottom-6 bg-orange text-paper text-[0.65rem] font-semibold rounded-full px-3 py-1.5 shadow-xl rotate-[-6deg]">Unsubscribed</span>
+            </div>
+            <div class="flex flex-col gap-3 p-8">
+              <h3 class="text-xl md:text-2xl text-ink">Sending with no plan</h3>
+              <p class="text-stone text-sm md:text-base leading-relaxed">Too many random campaigns with no clear strategy, training your customers to tune out.</p>
+            </div>
+          </article>
+
+        </div>
       </div>
-      <a href="contact.html" class="btn mx-auto w-full max-w-lg my-8 md:my-16">
-        <span class="hidden md:flex">Let's maximize your revenue</span>
-        <span class="md:hidden">Let's get your strategy</span>
+
+      <div data-reveal class="flex flex-col gap-4 text-left text-stone text-sm md:text-lg">
+        <p class="text-xl md:text-3xl text-ink">
+          The result? A stagnant list, poor deliverability, and <span class="text-orange">money left on the table.</span>
+        </p>
+        <p>
+          When set up correctly, email should be the most profitable marketing channel in your mix.
+          That's why we help clients build the systems that generate 40% of their total revenue, and average a 36x return on investment.
+        </p>
+      </div>
+      <a href="services.html" class="btn mx-auto w-full max-w-lg my-4 md:my-8">
+        How we do it
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
           <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -199,14 +290,48 @@
   </section>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="mx-auto px-6 md:px-10 py-8 text-sm bg-ink border-t-2 border-mint text-stone flex justify-between">
-    <span>© 2026 FromSendr</span>
-    <div class="flex gap-6">
-      <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="nav-link" id="Instagram" aria-label="FromSendr on Instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="fill-stone" viewBox="0 0 16 16">
-          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-        </svg>
-      </a>
+  <footer class="mx-auto px-6 md:px-10 py-8 text-sm bg-ink border-t-2 border-blue text-stone flex flex-col gap-12">
+    <div class="flex justify-between">
+      <div class="flex flex-col justify-start gap-8">
+        <img src="images/wordmark-platinum.png" alt="FromSendr" class="w-24 sm:w-32 md:w-48">
+        <img src="images/klaviyo-partner.png" alt="Klaviyo Partner" class="w-14 sm:w-20 md:w-28">
+      </div>
+      <div class="flex justify-end gap-20">
+        <div class="flex flex-col gap-4 text-xs text-right md:text-left md:text-sm">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="services.html" class="footer-link">Services</a>
+          <a href="work.html" class="footer-link">Work</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="hidden md:flex flex-col gap-4 text-xs md:text-sm">
+          <a href="services.html#faq" class="footer-link">Frequently Asked Questions</a>
+          <a href="index.html#statistics" class="footer-link">Email Statistics</a>
+          <a href="services.html#process" class="footer-link">Our Process</a>
+          <a href="contact.html#booking" class="footer-link">Book a Call</a>
+        </div>
+        <div class="hidden lg:flex flex-col gap-4 text-xs md:text-sm">
+          <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>
+          <a href="https://www.fiverr.com/fromsendr" target="_blank" rel="noopener noreferrer" class="footer-link">Fiverr</a>
+        </div>
+      </div>
+    </div>
+    <div class="h-[1px] bg-silver/20"></div>
+    <div class="flex justify-between">
+      <span>© 2026 FromSendr</span>
+      <div class="flex gap-6">
+        <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link" title="Instagram" aria-label="FromSendr on Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="fill-stone" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+          </svg>
+        </a>
+        <a href="https://www.fiverr.com/fromsendr" target="_blank" rel="noopener noreferrer" class="footer-link" title="Fiverr" aria-label="FromSendr on Fiverr">
+          <svg width="21" height="21" fill="currentColor" class="fill-stone" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h192v192H0z" style="fill:none"/>
+            <path d="M121.1 170h34.75V67.04H90.21v-7.72s0-9.01 9.01-9.01h21.88V22H99.22s-43.76 0-43.76 37.32v7.72h-19.3v28.31h19.3v74.64h34.75V95.36h30.89V170Z"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </footer>
 

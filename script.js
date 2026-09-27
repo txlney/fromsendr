@@ -37,11 +37,10 @@ document.addEventListener("keydown", (event) => {
 });
 
 const phrases = [
-    "browsers into buyers.",
-    "leads into customers.",
-    "buyers into loyalists.",
-    "clicks into conversions.",
-    "inboxes into income.",
+    "maximize your ROI",
+    "retain your customers",
+    "increase your revenue",
+    "grow your business",
 ];
 
 const typewriter = document.getElementById("typewriter");
@@ -70,12 +69,29 @@ function tick() {
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % phrases.length;
         delay = pausedAfterDeleted;
+        // Alternate the typed line (and its cursor, bg-current) between the two accent colours
+        typewriter.parentElement.classList.toggle("text-blue", phraseIndex % 2 === 0);
+        typewriter.parentElement.classList.toggle("text-orange", phraseIndex % 2 === 1);
     }
 
     setTimeout(tick, delay);
 }
 
-if (typewriter) tick();
+if (typewriter) {
+    // Invisible copies of every phrase share the typed line's grid cell (see index.html),
+    // so the heading is always as tall as the longest phrase at the current width and
+    // doesn't grow and shrink as a phrase wraps onto a second line mid-typing.
+    // The trailing no-break space leaves room for the cursor.
+    const typedLine = typewriter.parentElement;
+    phrases.forEach((phrase) => {
+        const ghost = document.createElement("span");
+        ghost.className = "invisible col-start-1 row-start-1";
+        ghost.setAttribute("aria-hidden", "true");
+        ghost.textContent = phrase + " ";
+        typedLine.before(ghost);
+    });
+    tick();
+}
 
 // Scroll-linked charts: each [data-scroll-chart] gets a --progress value (0 to 1)
 // that runs from 0 when its top enters the bottom of the viewport to 1 when its
@@ -93,7 +109,7 @@ const updateScrollCharts = () => {
     // layout per chart
     const progresses = scrollCharts.map(({ el }) => {
         const rect = el.getBoundingClientRect();
-        const end = vh * 0.4 - rect.height / 2;
+        const end = vh * 0.6 - rect.height / 2;
         return reduceMotion ? 1 : Math.min(1, Math.max(0, (vh - rect.top) / (vh - end)));
     });
 
@@ -107,7 +123,7 @@ const updateScrollCharts = () => {
         // Counters (data-count-to="2.87") finish at half the scroll range, easing out
         // so the value races up early and settles on the final figure.
         if (chart.countTo !== null) {
-            const eased = 1 - Math.pow(1 - Math.min(1, progresses[i] * 1.5), 3);
+            const eased = 1 - Math.pow(1 - Math.min(1, progresses[i] * 1), 3);
             chart.el.textContent = "$" + (eased * chart.countTo).toFixed(2);
         }
     });
@@ -183,6 +199,41 @@ if (scrollCharts.length || pendingReveals.length) {
     window.addEventListener("resize", onScroll);
 }
 
+// Index/work/about hero: full screen at the top, shrinks (.hero-shrink in styles.css) as soon as
+// the page scrolls at all, so the next section comes up quickly; grows back at the top.
+// Off under reduced motion, where it just stays full height.
+const heroShrink = document.querySelector(".hero-shrink");
+
+if (heroShrink && !reduceMotion) {
+    const updateHero = () => heroShrink.classList.toggle("is-collapsed", window.scrollY > 0);
+    updateHero();
+    window.addEventListener("scroll", updateHero, { passive: true });
+    // The shrink moves the page without a scroll event, so re-check the reveals after it
+    heroShrink.addEventListener("transitionend", (e) => {
+        if (e.target === heroShrink) onScroll();
+    });
+
+    // In-page links inside the hero (the jump chips, contact's "Pick a time"): collapse the hero
+    // instantly before scrolling, otherwise the target moves up by the shrink mid-scroll and lands
+    // off screen. The target's position comes from offsetTop, which ignores transforms, because a
+    // not-yet-revealed [data-reveal] target is still translated down by its own height.
+    heroShrink.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (e) => {
+            const target = document.querySelector(link.getAttribute("href"));
+            if (!target) return;
+            e.preventDefault();
+            heroShrink.style.transition = "none";
+            heroShrink.classList.add("is-collapsed");
+            heroShrink.offsetHeight; // apply the collapsed height before the transition comes back
+            heroShrink.style.transition = "";
+            let top = 0;
+            for (let el = target; el; el = el.offsetParent) top += el.offsetTop;
+            top -= parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+            window.scrollTo({ top, behavior: "smooth" });
+        });
+    });
+}
+
 // Work page: continuously scrolling email marquee. Position is tracked in JS
 // (rAF) rather than a CSS animation so pausing can never desync it or cause
 // it to snap/restart - it's just a boolean that stops the offset advancing.
@@ -250,7 +301,3 @@ if (marqueeTrack) {
         }).observe(marquee);
     }
 }
-
-// About page: slow the background video down slightly
-const aboutVideo = document.getElementById("about-video");
-if (aboutVideo) aboutVideo.playbackRate = 0.8;
