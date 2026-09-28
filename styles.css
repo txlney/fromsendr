@@ -437,6 +437,30 @@ html:has(.hero-shrink) {
     }
 }
 
+/* Services FAQ: the open answer tucks up 0.5rem into the summary's bottom padding. It's
+   done here rather than with -mt-2 on the answer, which the overflow clip below would cut off. */
+#faq details[open]::details-content {
+    margin-top: -0.5rem;
+}
+
+/* Answers slide open/closed instead of snapping. Animating to height:auto needs
+   interpolate-size (Chrome/Edge only for now); other browsers just snap as before. */
+@media (prefers-reduced-motion: no-preference) {
+    #faq details {
+        interpolate-size: allow-keywords;
+    }
+
+    #faq details::details-content {
+        block-size: 0;
+        overflow: hidden;
+        transition: block-size 0.3s ease, margin-top 0.3s ease, content-visibility 0.3s allow-discrete;
+    }
+
+    #faq details[open]::details-content {
+        block-size: auto;
+    }
+}
+
 /* Work page: cropped email preview with a fade-out, so long emails stay card-sized */
 .email-preview {
     position: relative;

@@ -23,8 +23,8 @@ Only classes that appear in the files listed in `tailwind.config.js`'s `content`
 
 ## Assets (keep them small)
 
-Pages only reference optimised assets. The large originals are source files and must not be linked directly: `images/work/<name>-full.png` (7-29 MB email screenshots), `images/hero-bg.png` (4 MB), `images/wordmark-platinum.png` (3689px wide).
-- Email screenshots: `images/work/<name>-full-thumb.webp` (800px wide; work-page previews, hero collage and marquee) and `images/work/<name>-full.webp` (1200px; the modal's `data-full`).
+Pages only reference optimised assets. The large originals are source files and must not be linked directly: `images/work/png-backups/<name>-full.png` (5-29 MB email screenshots), `images/hero-bg.png` (4 MB), `images/wordmark-platinum.png` (3689px wide).
+- Email screenshots: the user keeps the original PNGs in `images/work/png-backups/` and asks Claude to convert them whenever one is added or updated. Each PNG becomes two webps in `images/work/` (resized with LANCZOS, `quality=80`, `method=6`): `<name>-full-thumb.webp` (800px wide; work-page previews, hero collage and marquee) and `<name>-full.webp` (1200px; the modal's `data-full`). Always regenerate both.
 - Index hero: `images/hero-bg.webp` (2560px, q80). It's referenced from `styles.css` (`.hero-bg`), so `index.html` preloads it; otherwise the browser would only find it after that stylesheet loads.
 - Footer wordmark: `images/wordmark-platinum-footer.webp` (400px). The nav uses `images/wordmark-platinum-nav.png` (614x128, see Site nav).
 - To make a new optimised copy, Pillow works (`python -m pip install pillow`, then save as WEBP with `method=6`).
