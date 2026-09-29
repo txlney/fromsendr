@@ -190,7 +190,8 @@ if (scrollCharts.length || pendingReveals.length) {
 
 // Every page's hero: full screen at the top, shrinks (.hero-shrink in styles.css) as soon as
 // the page scrolls at all, so the next section comes up quickly; grows back at the top.
-// Off under reduced motion, where it just stays full height.
+// Off under reduced motion, where it just stays full height. Below md the CSS ignores
+// .is-collapsed (apart from fading the scroll cue), so phones never shrink.
 const heroShrink = document.querySelector(".hero-shrink");
 
 if (heroShrink && !reduceMotion) {

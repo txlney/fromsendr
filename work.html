@@ -46,16 +46,16 @@
     section ids below; script.js collapses the hero before scrolling (see .hero-shrink).
   -->
   <section class="flex-1 flex items-center relative w-full mx-auto max-w-6xl px-6 md:px-10 pt-24 pb-28 md:pb-36">
-    <div class="w-full grid gap-14 lg:grid-cols-2 lg:gap-10 items-center">
+    <div class="w-full grid md:gap-14 lg:grid-cols-2 lg:gap-10 items-center">
       <div>
-        <p class="inline-flex items-center gap-2 bg-paper rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-navy shadow">
-          <span class="h-2 w-2 rounded-full bg-orange"></span>Our work
+        <p class="inline-flex items-center gap-2 bg-paper rounded-full px-4 py-2 text-[0.55rem] md:text-xs font-semibold uppercase tracking-[0.2em] text-navy shadow">
+          <span class="h-1 w-1 md:h-2 md:w-2 rounded-full bg-orange"></span>Our work
         </p>
         <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-navy">Email revenue waiting to be <span class="text-blue font-bold italic">earned</span></h1>
-        <p class="mt-6 text-ink/70 text-sm md:text-lg max-w-xl">
+        <p class="hidden md:flex mt-6 text-ink/70 text-sm md:text-lg max-w-xl">
           A look at some example campaigns and flows. Tap any email to read it in full.
         </p>
-        <nav class="mt-8 flex flex-wrap gap-2 text-platinum" aria-label="Jump to a section">
+        <nav class="mt-8 hidden md:flex flex-wrap gap-2 text-platinum" aria-label="Jump to a section">
           <a href="#featured" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-orange"></span>Featured flow</a>
           <a href="#selected-work" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-blue"></span>Selected work</a>
           <a href="#archive" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-blue/40"></span>From the archive</a>
@@ -64,16 +64,16 @@
 
       <!-- Collage: square box, pieces positioned in % so it scales with the column. Later pieces paint on top.
            The thumbnails are the same files the grid uses, so they're already cached further down -->
-      <div class="relative w-full max-w-md sm:max-w-lg mx-auto aspect-square" aria-hidden="true">
+      <div class="hidden md:block relative w-full max-w-md sm:max-w-lg mx-auto aspect-square" aria-hidden="true">
         <div class="absolute left-[10%] right-[10%] top-[16%] bottom-[8%] bg-blue rounded-[2rem] shadow-2xl rotate-[4deg]"></div>
         <div class="absolute left-[2%] top-[16%] w-[42%] aspect-[3/5] bg-paper p-1.5 rounded-2xl shadow-2xl overflow-hidden rotate-[-10deg]">
           <img src="images/work/bucs-full-thumb.webp" alt="" decoding="async" class="w-full h-full object-cover object-top rounded-xl">
         </div>
         <div class="absolute right-[2%] top-[16%] w-[42%] aspect-[3/5] bg-paper p-1.5 rounded-2xl shadow-2xl overflow-hidden rotate-[10deg]">
-          <img src="images/work/fromsendr-full-thumb.webp" alt="" decoding="async" class="w-full h-full object-cover object-top rounded-xl">
+          <img src="images/work/moonjuice-full-thumb.webp" alt="" decoding="async" class="w-full h-full object-cover object-top rounded-xl">
         </div>
         <div class="absolute left-[29%] top-[4%] w-[42%] aspect-[3/5] bg-paper p-1.5 rounded-2xl shadow-2xl overflow-hidden rotate-[-2deg]">
-          <img src="images/work/cstheory-2-full-thumb.webp" alt="" decoding="async" class="w-full h-full object-cover object-top rounded-xl">
+          <img src="images/work/wild-full-thumb.webp" alt="" decoding="async" class="w-full h-full object-cover object-top rounded-xl">
         </div>
         <!-- Stickers -->
         <span class="absolute left-[4%] bottom-[16%] bg-orange text-paper text-[0.55rem] sm:text-xs font-semibold uppercase tracking-wider rounded-full px-3 py-1.5 shadow-xl rotate-[-8deg]">Welcome series</span>
@@ -83,17 +83,19 @@
     </div>
 
     <!-- Scroll cue: sits at the bottom of the first screen -->
-    <div class="hero-cue absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
-      <span class="text-xs uppercase tracking-[0.2em]">Our work</span>
+    <div class="hero-cue hidden absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 md:flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
+      <span class="text-[0.6rem] uppercase tracking-[0.2em]">Our work</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
-        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
   </section>
   </div>
 
   <!-- ========== PROJECTS ==========
-    A featured project (full width) followed by a grid of cards: 1 column on mobile, 2 from sm, 3 from lg.
+    A featured project (full width) followed by a grid of cards: 2 columns (3 from lg).
+    Below sm the cards shrink to just the preview: the name, type label, description and colour key are hidden
+    (the modal still shows data-title), and styles.css shortens .email-preview and its button.
     Keep the number of grid cards a multiple of 6 (including the "your brand" card) so both layouts end on a full row.
     Every project is an <article data-work-item> containing a <button data-open-email> (work.js opens the modal).
     - Preview: <img src="images/work/name-full-thumb.webp" loading="lazy" ...> (the whole email; the
@@ -105,22 +107,22 @@
   -->
   <section id="selected-work" class="scroll-mt-8 mx-auto max-w-6xl px-6 md:px-10 pt-16 md:pt-24 pb-20 md:pb-28">
     <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between border-b border-ink/10 pb-6 mb-10 md:mb-14">
-      <h2 class="font-sans text-3xl md:text-5xl">Selected work</h2>
+      <h2 class="font-sans text-2xl md:text-5xl">Selected work</h2>
       <!-- Colour key for the card labels below: flows navy, campaigns blue, welcome series orange -->
-      <p class="flex flex-wrap gap-x-5 gap-y-2 text-xs md:text-sm uppercase tracking-[0.2em] text-stone">
+      <p class="hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-xs md:text-sm uppercase tracking-[0.2em] text-stone">
         <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-navy"></span>Flows</span>
         <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-blue"></span>Campaigns</span>
         <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-orange"></span>Welcome series</span>
       </p>
     </div>
 
-    <div class="grid gap-x-8 gap-y-20 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-2 gap-x-4 gap-y-6 sm:gap-x-8 sm:gap-y-20 lg:grid-cols-3">
 
       <!-- Featured project: spans the whole row; preview left, write-up right on desktop -->
-      <article id="featured" data-work-item data-title="Campaign: CS Theory" data-full="images/work/cstheory-2-full.webp" class="scroll-mt-8 sm:col-span-2 lg:col-span-3 grid md:grid-cols-2 gap-y-4 bg-navy rounded-[1.7rem] 2xl:rounded-[2rem] text-platinum shadow-2xl">
+      <article id="featured" data-work-item data-title="Campaign: CS Theory" data-full="images/work/cstheory-2-full.webp" class="scroll-mt-8 col-span-2 lg:col-span-3 grid md:grid-cols-2 gap-y-4 bg-navy rounded-[1rem] text-platinum shadow-2xl">
         <div class="p-4 md:p-10">
-          <button type="button" data-open-email class="email-preview w-full h-[24rem] md:h-[34rem] bg-blue/60 rounded-2xl text-left" aria-label="View full email: CS Theory, clay vs. powder">
-            <img src="images/work/cstheory-2-full-thumb.webp" alt="Preview of the full email: CS Theory, clay vs. powder" loading="lazy" decoding="async">
+          <button type="button" data-open-email class="email-preview w-full h-[24rem] md:h-[34rem] bg-blue/60 rounded-[0.4rem] text-left" aria-label="View full email: CS Theory, clay vs. powder">
+            <img src="images/work/cstheory-2-full-thumb.webp" alt="Preview of the full email: CS Theory, clay vs. powder" class="rounded-[0.3rem]" loading="lazy" decoding="async">
             <span class="email-preview-cta">View full email</span>
           </button>
         </div>
@@ -157,11 +159,11 @@
           <img src="images/work/fromsendr-full-thumb.webp" alt="Preview of the full email: FromSendr" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
         </button>
-        <div class="mt-5 flex items-center justify-between gap-4">
+        <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
           <h3 class="font-sans text-2xl">FromSendr</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-blue/10 text-blue">Campaign</p>
         </div>
-        <p class="mt-2 text-sm text-stone/80">A step-by-step guide to our email strategy, built to showcase our work and drive calls. *</p>
+        <p class="mt-2 hidden sm:block text-sm text-stone/80">A step-by-step guide to our email strategy, built to showcase our work and drive calls. *</p>
       </article>
 
       <article data-work-item data-title="Welcome Series: Tampa Bay Buccaneers" data-full="images/work/bucs-full.webp" data-reveal>
@@ -169,23 +171,23 @@
           <img src="images/work/bucs-full-thumb.webp" alt="Preview of the full email: Tampa Bay Buccaneers" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
         </button>
-        <div class="mt-5 flex items-center justify-between gap-4">
+        <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
           <h3 class="font-sans text-2xl">Buccaneers</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-orange/10 text-orange">Welcome series</p>
         </div>
-        <p class="mt-2 text-sm text-stone/80">A welcome to "the Krewe" for new subscribers, pairing a first-order offer with member perks. *</p>
+        <p class="mt-2 hidden sm:block text-sm text-stone/80">A welcome to "the Krewe" for new subscribers, pairing a first-order offer with member perks. *</p>
       </article>
 
-      <article data-work-item data-title="Abandoned Cart: CS Theory" data-full="images/work/cstheory-full.webp" data-reveal>
-        <button type="button" data-open-email class="email-preview w-full text-left" aria-label="View full email: CS Theory">
-          <img src="images/work/cstheory-full-thumb.webp" alt="Preview of the full email: CS Theory" loading="lazy" decoding="async">
+      <article data-work-item data-title="Campaign: Wild" data-full="images/work/wild-full.webp" data-reveal>
+        <button type="button" data-open-email class="email-preview w-full text-left" aria-label="View full email: Wild">
+          <img src="images/work/wild-full-thumb.webp" alt="Preview of the full email: Wild" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
         </button>
-        <div class="mt-5 flex items-center justify-between gap-4">
-          <h3 class="font-sans text-2xl">CS Theory</h3>
-          <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-navy/10 text-navy">Abandoned Cart</p>
+        <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
+          <h3 class="font-sans text-2xl">Wild</h3>
+          <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-blue/10 text-blue">Campaign</p>
         </div>
-        <p class="mt-2 text-sm text-stone/80">The first email of an abandoned cart flow, designed to re-engage customers with a gentle reminder and previous reviews. *</p>
+        <p class="mt-2 hidden sm:block text-sm text-stone/80">A summer scents launch that walks readers through the refill system, nudging them toward subscribe and save. *</p>
       </article>
 
       <article data-work-item data-title="Win-back: Nut &amp; Noggin" data-full="images/work/nutandnoggin-full.webp" data-reveal>
@@ -193,11 +195,11 @@
           <img src="images/work/nutandnoggin-full-thumb.webp" alt="Preview of the full email: Nut &amp; Noggin" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
         </button>
-        <div class="mt-5 flex items-center justify-between gap-4">
+        <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
           <h3 class="font-sans text-2xl">Nut &amp; Noggin</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-navy/10 text-navy">Win-back</p>
         </div>
-        <p class="mt-2 text-sm text-stone/80">"We miss you": 20% off to bring lapsed subscribers back, with a P.S. for the new shampoo and conditioner bundle. *</p>
+        <p class="mt-2 hidden sm:block text-sm text-stone/80">"We miss you": 20% off to bring lapsed subscribers back, with a P.S. for the new shampoo and conditioner bundle. *</p>
       </article>
 
       <article data-work-item data-title="Post-purchase: Moon Juice" data-full="images/work/moonjuice-full.webp" data-reveal>
@@ -205,21 +207,21 @@
           <img src="images/work/moonjuice-full-thumb.webp" alt="Preview of the full email: Moon Juice" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
         </button>
-        <div class="mt-5 flex items-center justify-between gap-4">
+        <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
           <h3 class="font-sans text-2xl">Moon Juice</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-navy/10 text-navy">Post-purchase</p>
         </div>
-        <p class="mt-2 text-sm text-stone/80">A shipping update that turns order tracking into social proof, with five-star reviews from across the range. *</p>
+        <p class="mt-2 hidden sm:block text-sm text-stone/80">A shipping update that turns order tracking into social proof, with five-star reviews from across the range. *</p>
       </article>
 
       <!-- Closing card: fills the last slot and points to the contact page -->
-      <a href="contact.html" data-reveal class="group relative overflow-hidden flex flex-col justify-between h-[28rem] p-8 bg-navy rounded-[1.2rem] text-paper">
+      <a href="contact.html" data-reveal class="group relative overflow-hidden flex flex-col justify-between min-h-[18rem] sm:h-[28rem] p-4 sm:p-8 bg-navy rounded-[1rem] text-paper">
         <span class="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-blue/40 blur-3xl" aria-hidden="true"></span>
         <p class="relative text-xs uppercase tracking-[0.2em] text-orange">Next up</p>
         <div class="relative">
-          <p class="font-sans text-4xl leading-tight">Your brand could be next.</p>
-          <p class="mt-4 text-sm text-paper/60">Book a free strategy call and we'll show you what we'd build.</p>
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="mt-8 text-orange transition-transform duration-300 group-hover:translate-x-2">
+          <p class="font-sans text-xl sm:text-4xl leading-tight">Your brand could be next.</p>
+          <p class="mt-2 sm:mt-4 text-xs sm:text-sm text-paper/60">Book a free strategy call and we'll show you what we'd build.</p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="mt-4 sm:mt-8 text-orange transition-transform duration-300 group-hover:translate-x-2">
             <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
@@ -245,6 +247,7 @@
         <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/cstheory-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="CS Theory abandoned cart email"></div></div>
         <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/nutandnoggin-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Nut &amp; Noggin win-back email"></div></div>
         <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/moonjuice-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Moon Juice shipping update email"></div></div>
+        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/wild-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Wild summer scents campaign"></div></div>
         <!-- Set B (duplicate of Set A, for a seamless loop) -->
         <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/bucs-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
         <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><div class="email-skeleton email-skeleton-orange"></div></div></div>
@@ -255,17 +258,16 @@
         <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/cstheory-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
         <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/nutandnoggin-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
         <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/moonjuice-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
+        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/wild-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
       </div>
     </div>
   </section>
 
   <!-- ========== CTA ========== -->
   <section class="px-6 md:px-10 py-16 md:py-28">
-    <div data-reveal class="relative mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-16 bg-navy rounded-[2rem] shadow-xl overflow-hidden">
-      <span class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-blue/40 blur-3xl" aria-hidden="true"></span>
-      <span class="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-orange/30 blur-3xl" aria-hidden="true"></span>
+    <div data-reveal class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-16 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
       <div class="relative flex flex-col items-center md:items-start text-center md:text-left">
-        <h2 class="text-3xl md:text-5xl text-paper">Want emails like these for your brand?</h2>
+        <h2 class="text-2xl md:text-3xl lg:text-5xl text-paper">Want emails like these for your brand?</h2>
         <p class="text-sm md:text-lg text-paper/70 mt-4 md:mt-6 max-w-xl">Let's discuss how we can help you achieve your email marketing goals.</p>
         <a href="contact.html" class="btn w-full max-w-md mt-10 md:mt-12 gap-4 md:gap-12">
           Book a strategy call
@@ -274,7 +276,7 @@
           </svg>
         </a>
       </div>
-      <div class="relative w-full max-w-[13rem] md:max-w-xs mx-auto" aria-hidden="true">
+      <div class="hidden md:block relative w-full max-w-[13rem] md:max-w-xs mx-auto" aria-hidden="true">
         <div class="bg-paper rounded-xl shadow-2xl p-3 md:p-5 rotate-[3deg]">
           <div class="flex items-center gap-3">
             <span class="flex flex-col items-center justify-center h-11 w-11 rounded-lg bg-blue text-paper leading-none">
@@ -298,8 +300,8 @@
   </section>
 
   <!-- ========== FULL EMAIL MODAL ========== -->
-  <dialog id="email-modal" class="m-auto w-[min(86vw,38rem)] max-h-[90vh] p-0 bg-paper rounded-[1.5rem] shadow-2xl backdrop:bg-navy/60">
-    <div class="sticky top-0 z-10 flex items-center justify-between bg-navy px-6 py-3 text-paper/60">
+  <dialog id="email-modal" class="m-auto w-[min(86vw,38rem)] max-h-[90vh] p-0 bg-paper rounded-[1rem] shadow-2xl backdrop:bg-navy/60">
+    <div class="sticky top-0 z-10 flex items-center justify-between bg-navy px-6 py-3 text-platinum">
       <span id="email-modal-title" class="font-sans text-lg"></span>
       <button type="button" id="email-modal-close" class="text-xl leading-none md:hover:rotate-90 md:duration-200" aria-label="Close">&#x2715;</button>
     </div>

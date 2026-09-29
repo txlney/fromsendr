@@ -47,13 +47,13 @@
     collapses the hero before scrolling so the target doesn't shift (see .hero-shrink).
   -->
   <section class="flex-1 flex items-center relative w-full mx-auto max-w-6xl px-6 md:px-10 pt-24 pb-28 md:pb-36">
-    <div class="w-full grid gap-14 lg:grid-cols-2 lg:gap-10 items-center">
+    <div class="w-full grid md:gap-14 lg:grid-cols-2 lg:gap-10 items-center">
       <div>
-        <p class="inline-flex items-center gap-2 bg-platinum rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-navy shadow">
-          <span class="h-2 w-2 rounded-full bg-orange"></span>Our services
+        <p class="inline-flex items-center gap-2 bg-platinum rounded-full px-4 py-2 text-[0.55rem] md:text-xs font-semibold uppercase tracking-[0.2em] text-navy shadow">
+          <span class="h-1 w-1 md:h-2 md:w-2 rounded-full bg-orange"></span>Our services
         </p>
         <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-navy">How we create the strategies that <span class="text-blue italic font-bold">convert</span></h1>
-        <p class="mt-6 text-ink/70 text-sm md:text-lg max-w-xl">
+        <p class="hidden md:flex mt-6 text-ink/70 text-sm md:text-lg max-w-xl">
           We follow our own carefully crafted process to ensure every email sent is on-brand, on-message, and on-time.
         </p>
         <nav class="mt-8 hidden md:flex flex-wrap gap-2 text-silver" aria-label="Jump to a service">
@@ -66,7 +66,7 @@
       </div>
 
       <!-- Collage: square box, pieces positioned in % so it scales with the column. Later pieces paint on top -->
-      <div class="relative w-full max-w-md sm:max-w-lg mx-auto aspect-square" aria-hidden="true">
+      <div class="hidden md:block relative w-full max-w-md sm:max-w-lg mx-auto aspect-square scale-[0.7] md:scale-100" aria-hidden="true">
         <!-- Flows (navy) -->
         <div class="absolute right-[2%] top-[2%] w-[46%] aspect-square flex items-center justify-center bg-navy rounded-[1.75rem] shadow-2xl rotate-[5deg]">
           <div class="flex flex-col items-center text-[0.55rem] sm:text-xs font-semibold">
@@ -122,19 +122,19 @@
     </div>
 
     <!-- Scroll cue: sits at the bottom of the first screen -->
-    <div class="hero-cue absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
-      <span class="text-xs uppercase tracking-[0.2em]">What we do</span>
+    <div class="hero-cue hidden absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 md:flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
+      <span class="text-[0.6rem] uppercase tracking-[0.2em]">What we do</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
-        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
   </section>
   </div>
 
   <!-- ========== APPROACH ========== -->
-  <section data-reveal class="bg-paper px-6 md:px-10 py-16 md:py-24 text-left">
-    <div class="mx-auto md:max-w-6xl flex flex-col gap-8 md:flex-row md:gap-16 md:items-end md:justify-between">
-      <h2 class="text-3xl md:text-5xl max-w-md">One partner for the whole channel</h2>
+  <section class="bg-paper px-6 md:px-10 py-16 md:py-24 text-left">
+    <div class="mx-auto md:max-w-6xl flex flex-col gap-4 md:flex-row md:gap-16 md:items-end md:justify-between">
+      <h2 class="text-2xl md:text-5xl max-w-md">One partner for the whole channel</h2>
       <p class="text-stone text-sm md:text-lg leading-relaxed max-w-2xl">
         Most brands end up juggling a designer, a copywriter and someone who "does the Klaviyo stuff". Things fall through the gaps between them.
         We handle every part of your email marketing ourselves, so the creative, the tech and the strategy all pull in the same direction.
@@ -150,13 +150,14 @@
     Panel colours cycle blue / navy / orange; the number chip matches its panel.
   -->
   <section class="px-6 md:px-10 py-16 md:py-28">
-    <div class="mx-auto max-w-6xl flex flex-col gap-10 md:gap-16">
+    <h2 data-reveal class="mb-8 md:mb-16 text-sm md:text-md lg:text-lg uppercase tracking-[0.2em] text-stone text-center">Our approach</h2>
+    <div class="mx-auto max-w-6xl grid grid-cols-2 gap-4 md:flex md:flex-col md:gap-16">
 
       <!-- 01: copy and design -->
-      <article id="copy-design" data-reveal class="scroll-mt-8 grid md:grid-cols-2 bg-paper rounded-[2rem] shadow-xl overflow-hidden">
-        <div class="relative flex items-center justify-center min-h-72 p-10 md:p-12 bg-blue overflow-hidden md:order-last" aria-hidden="true">
-          <span class="absolute -bottom-6 right-4 font-display text-[8rem] md:text-[12rem] leading-none text-paper/10">01</span>
-          <div class="relative w-full max-w-[15rem]">
+      <article id="copy-design" data-reveal class="scroll-mt-8 flex flex-col md:grid md:grid-cols-2 bg-paper rounded-[1rem] shadow-lg md:shadow-xl overflow-hidden">
+        <div class="relative flex items-center justify-center h-16 md:h-auto md:min-h-72 md:p-12 bg-blue overflow-hidden md:order-last" aria-hidden="true">
+          <span class="absolute -bottom-3 right-2 md:-bottom-6 md:right-4 font-display text-[4.5rem] md:text-[12rem] leading-none text-paper/25 md:text-paper/10">01</span>
+          <div class="relative hidden md:block w-full max-w-[15rem]">
             <div class="bg-paper rounded-xl shadow-2xl p-3 rotate-[-3deg]">
               <div class="flex gap-1.5 mb-3">
                 <span class="h-2 w-2 rounded-full bg-silver"></span>
@@ -177,13 +178,16 @@
             </span>
           </div>
         </div>
-        <div class="flex flex-col gap-6 p-8 md:p-12">
-          <span class="flex items-center justify-center h-10 w-10 rounded-full bg-blue text-paper font-display">01</span>
-          <h2 class="text-2xl md:text-4xl">Copy <span class="text-blue">and</span> design</h2>
-          <p class="text-stone text-sm md:text-base leading-relaxed">
+        <div class="flex flex-col gap-2 md:gap-6 p-4 md:p-12">
+          <div class="flex flex-row gap-6">
+            <span class="hidden md:flex items-center justify-center h-10 w-10 rounded-full bg-blue text-paper font-display">01</span>
+            <h2 class="text-lg leading-tight md:text-2xl lg:text-4xl md:leading-normal">Copy <span class="text-blue">and</span> design</h2>
+          </div>
+          <p class="md:hidden text-stone text-xs leading-relaxed">On-brand copy and mobile-first design, written and built to work together.</p>
+          <p class="hidden md:block text-stone text-base leading-relaxed">
             A visually stunning email is nothing without a clear message. We write compelling copy in your brand's voice and design the layout to work in sync, so every email is worth opening and easy to act on.
           </p>
-          <ul class="hidden md:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
+          <ul class="hidden lg:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
             <li class="bg-platinum rounded-full px-4 py-2">Subject lines &amp; preview text</li>
             <li class="bg-platinum rounded-full px-4 py-2">On-brand copy</li>
             <li class="bg-platinum rounded-full px-4 py-2">Mobile-first layouts</li>
@@ -193,10 +197,10 @@
       </article>
 
       <!-- 02: flows and automation -->
-      <article id="flows" data-reveal class="scroll-mt-8 grid md:grid-cols-2 bg-paper rounded-[2rem] shadow-xl overflow-hidden">
-        <div class="relative flex items-center justify-center min-h-72 p-10 md:p-12 bg-navy overflow-hidden" aria-hidden="true">
-          <span class="absolute -bottom-6 right-4 font-display text-[8rem] md:text-[12rem] leading-none text-paper/10">02</span>
-          <div class="relative flex flex-col items-center text-xs md:text-sm font-semibold">
+      <article id="flows" data-reveal class="scroll-mt-8 flex flex-col md:grid md:grid-cols-2 bg-paper rounded-[1rem] shadow-lg md:shadow-xl overflow-hidden">
+        <div class="relative flex items-center justify-center h-16 md:h-auto md:min-h-72 md:p-12 bg-navy overflow-hidden" aria-hidden="true">
+          <span class="absolute -bottom-3 right-2 md:-bottom-6 md:right-4 font-display text-[4.5rem] md:text-[12rem] leading-none text-paper/25 md:text-paper/10">02</span>
+          <div class="relative hidden md:flex flex-col items-center text-xs md:text-sm font-semibold">
             <span class="bg-paper text-navy rounded-full px-5 py-2 shadow-lg">Joins your list</span>
             <span class="h-5 w-0.5 bg-paper/30"></span>
             <span class="bg-blue text-paper rounded-full px-5 py-2 shadow-lg">Welcome email</span>
@@ -208,14 +212,17 @@
             <span class="bg-orange text-paper rounded-full px-5 py-2 shadow-lg">First order &check;</span>
           </div>
         </div>
-        <div class="flex flex-col gap-6 p-8 md:p-12">
-          <span class="flex items-center justify-center h-10 w-10 rounded-full bg-navy text-paper font-display">02</span>
-          <h2 class="text-2xl md:text-4xl">Flows &amp; automation</h2>
-          <p class="text-stone text-sm md:text-base leading-relaxed">
+        <div class="flex flex-col gap-2 md:gap-6 p-4 md:p-12">
+          <div class="flex flex-row gap-6">
+            <span class="hidden md:flex items-center justify-center h-10 w-10 rounded-full bg-navy text-paper font-display">02</span>
+            <h2 class="text-lg leading-tight md:text-2xl lg:text-4xl md:leading-normal">Flows &amp; automation</h2>
+          </div>
+          <p class="md:hidden text-stone text-xs leading-relaxed">Automated emails that turn sign-ups into customers, around the clock.</p>
+          <p class="hidden md:block text-stone text-base leading-relaxed">
             Automated emails do the heavy lifting: they reach people at the moment they're most likely to buy, around the clock.
             We plan, build and importantly maintain the flows that turn sign-ups into customers and customers into regulars.
           </p>
-          <ul class="hidden md:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
+          <ul class="hidden lg:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
             <li class="bg-platinum rounded-full px-4 py-2">Welcome series</li>
             <li class="bg-platinum rounded-full px-4 py-2">Abandoned cart &amp; browse</li>
             <li class="bg-platinum rounded-full px-4 py-2">Post-purchase</li>
@@ -225,10 +232,10 @@
       </article>
 
       <!-- 03: campaign strategy (a month calendar with a few planned sends) -->
-      <article id="campaigns" data-reveal class="scroll-mt-8 grid md:grid-cols-2 bg-paper rounded-[2rem] shadow-xl overflow-hidden">
-        <div class="relative flex items-center justify-center min-h-72 p-10 md:p-12 bg-orange overflow-hidden md:order-last" aria-hidden="true">
-          <span class="absolute -bottom-6 right-4 font-display text-[8rem] md:text-[12rem] leading-none text-paper/15">03</span>
-          <div class="relative w-full max-w-[16rem] bg-paper rounded-xl shadow-2xl p-4 rotate-[2deg]">
+      <article id="campaigns" data-reveal class="scroll-mt-8 flex flex-col md:grid md:grid-cols-2 bg-paper rounded-[1rem] shadow-lg md:shadow-xl overflow-hidden">
+        <div class="relative flex items-center justify-center h-16 md:h-auto md:min-h-72 md:p-12 bg-orange overflow-hidden md:order-last" aria-hidden="true">
+          <span class="absolute -bottom-3 right-2 md:-bottom-6 md:right-4 font-display text-[4.5rem] md:text-[12rem] leading-none text-paper/30 md:text-paper/15">03</span>
+          <div class="relative hidden md:block w-full max-w-[16rem] bg-paper rounded-xl shadow-2xl p-4 rotate-[2deg]">
             <div class="flex items-center justify-between mb-3">
               <span class="font-display text-lg text-ink">November</span>
               <span class="h-2 w-10 rounded-full bg-silver"></span>
@@ -246,14 +253,17 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col gap-6 p-8 md:p-12">
-          <span class="flex items-center justify-center h-10 w-10 rounded-full bg-orange text-paper font-display">03</span>
-          <h2 class="text-2xl md:text-4xl">Campaign strategy</h2>
-          <p class="text-stone text-sm md:text-base leading-relaxed">
+        <div class="flex flex-col gap-2 md:gap-6 p-4 md:p-12">
+          <div class="flex flex-row gap-6">
+            <span class="hidden md:flex items-center justify-center h-10 w-10 rounded-full bg-orange text-paper font-display">03</span>
+            <h2 class="text-lg leading-tight md:text-2xl lg:text-4xl md:leading-normal">Campaign strategy</h2>
+          </div>
+          <p class="md:hidden text-stone text-xs leading-relaxed">Campaigns planned around your launches, seasons and stock.</p>
+          <p class="hidden md:block text-stone text-base leading-relaxed">
             More emails doesn't mean more results.
             We plan your campaigns around your launches, seasons and stock, so every email has a clear reason to be sent, and your list hears from you often enough without getting tired of you.
           </p>
-          <ul class="hidden md:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
+          <ul class="hidden lg:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
             <li class="bg-platinum rounded-full px-4 py-2">Campaign management</li>
             <li class="bg-platinum rounded-full px-4 py-2">Launches &amp; promotions</li>
             <li class="bg-platinum rounded-full px-4 py-2">Seasonal planning</li>
@@ -263,10 +273,10 @@
       </article>
 
       <!-- 04: deliverability and segmentation (an inbox, each row tagged with its segment) -->
-      <article id="deliverability" data-reveal class="scroll-mt-8 grid md:grid-cols-2 bg-paper rounded-[2rem] shadow-xl overflow-hidden">
-        <div class="relative flex items-center justify-center min-h-72 p-10 md:p-12 bg-navy overflow-hidden" aria-hidden="true">
-          <span class="absolute -bottom-6 right-4 font-display text-[8rem] md:text-[12rem] leading-none text-paper/10">04</span>
-          <div class="relative w-full max-w-[16rem]">
+      <article id="deliverability" data-reveal class="scroll-mt-8 flex flex-col md:grid md:grid-cols-2 bg-paper rounded-[1rem] shadow-lg md:shadow-xl overflow-hidden">
+        <div class="relative flex items-center justify-center h-16 md:h-auto md:min-h-72 md:p-12 bg-navy overflow-hidden" aria-hidden="true">
+          <span class="absolute -bottom-3 right-2 md:-bottom-6 md:right-4 font-display text-[4.5rem] md:text-[12rem] leading-none text-paper/25 md:text-paper/10">04</span>
+          <div class="relative hidden md:block w-full max-w-[16rem]">
             <div class="bg-paper rounded-xl shadow-2xl p-4">
               <div class="flex items-center justify-between mb-3">
                 <span class="font-display text-lg text-ink">Inbox</span>
@@ -293,13 +303,16 @@
             <span class="absolute -right-5 -top-4 bg-orange text-paper text-[0.65rem] font-semibold rounded-full px-3 py-1.5 shadow-xl rotate-[6deg]">SPF &middot; DKIM &middot; DMARC &check;</span>
           </div>
         </div>
-        <div class="flex flex-col gap-6 p-8 md:p-12">
-          <span class="flex items-center justify-center h-10 w-10 rounded-full bg-navy text-paper font-display">04</span>
-          <h2 class="text-2xl md:text-4xl">Deliverability &amp; segmentation</h2>
-          <p class="text-stone text-sm md:text-base leading-relaxed">
+        <div class="flex flex-col gap-2 md:gap-6 p-4 md:p-12">
+          <div class="flex flex-row gap-6">
+            <span class="hidden md:flex items-center justify-center h-10 w-10 rounded-full bg-navy text-paper font-display">04</span>
+            <h2 class="text-lg leading-tight md:text-2xl lg:text-4xl md:leading-normal">Deliverability</h2>
+          </div>
+          <p class="md:hidden text-stone text-xs leading-relaxed">A healthy sender reputation and segments that keep you out of spam.</p>
+          <p class="hidden md:block text-stone text-base leading-relaxed">
             Even the best email in the world is worthless in a spam folder. We keep your sender reputation healthy, your list clean, and segment your audience so each group only gets the emails that are actually relevant to them.
           </p>
-          <ul class="hidden md:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
+          <ul class="hidden lg:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
             <li class="bg-platinum rounded-full px-4 py-2">Domain authentication</li>
             <li class="bg-platinum rounded-full px-4 py-2">List hygiene</li>
             <li class="bg-platinum rounded-full px-4 py-2">Engagement-based sending</li>
@@ -309,10 +322,10 @@
       </article>
 
       <!-- 05: A/B testing. The bars grow with scroll (data-scroll-chart + .share-bar-fill, like index.html) -->
-      <article id="ab-testing" data-reveal class="scroll-mt-8 grid md:grid-cols-2 bg-paper rounded-[2rem] shadow-xl overflow-hidden">
-        <div class="relative flex items-center justify-center min-h-72 p-10 md:p-12 bg-blue overflow-hidden md:order-last" aria-hidden="true">
-          <span class="absolute -bottom-6 right-4 font-display text-[8rem] md:text-[12rem] leading-none text-paper/10">05</span>
-          <div data-scroll-chart class="relative w-full max-w-[16rem] flex flex-col gap-3">
+      <article id="ab-testing" data-reveal class="scroll-mt-8 flex flex-col md:grid md:grid-cols-2 bg-paper rounded-[1rem] shadow-lg md:shadow-xl overflow-hidden">
+        <div class="relative flex items-center justify-center h-16 md:h-auto md:min-h-72 md:p-12 bg-blue overflow-hidden md:order-last" aria-hidden="true">
+          <span class="absolute -bottom-3 right-2 md:-bottom-6 md:right-4 font-display text-[4.5rem] md:text-[12rem] leading-none text-paper/25 md:text-paper/10">05</span>
+          <div data-scroll-chart class="relative hidden md:flex w-full max-w-[16rem] flex-col gap-3">
             <div class="bg-paper rounded-xl shadow-xl p-4">
               <div class="flex items-center gap-2 mb-3">
                 <span class="flex items-center justify-center h-6 w-6 rounded-md bg-platinum text-stone text-xs font-bold">A</span>
@@ -330,13 +343,16 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col gap-6 p-8 md:p-12">
-          <span class="flex items-center justify-center h-10 w-10 rounded-full bg-blue text-paper font-display">05</span>
-          <h2 class="text-2xl md:text-4xl">Continuous A/B testing</h2>
-          <p class="text-stone text-sm md:text-base leading-relaxed">
+        <div class="flex flex-col gap-2 md:gap-6 p-4 md:p-12">
+          <div class="flex flex-row gap-6">
+            <span class="hidden md:flex items-center justify-center h-10 w-10 rounded-full bg-blue text-paper font-display">05</span>
+            <h2 class="text-lg leading-tight md:text-2xl lg:text-4xl md:leading-normal">Constant A/B testing</h2>
+          </div>
+          <p class="md:hidden text-stone text-xs leading-relaxed">We test subject lines, layouts and send times to find what really works.</p>
+          <p class="hidden md:block text-stone text-base leading-relaxed">
             If you try and guess what works, you'll likely be wrong. We test everything, from subject lines and layouts to send times and offers, so we know what actually works for your audience.
           </p>
-          <ul class="hidden md:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
+          <ul class="hidden lg:flex flex-wrap gap-2 text-xs md:text-sm text-ink">
             <li class="bg-platinum rounded-full px-4 py-2">Subject lines</li>
             <li class="bg-platinum rounded-full px-4 py-2">Send times</li>
             <li class="bg-platinum rounded-full px-4 py-2">Layouts &amp; offers</li>
@@ -344,6 +360,19 @@
           </ul>
         </div>
       </article>
+
+      <!-- 06: mobile only, fills the last cell of the 2-column grid -->
+      <a href="contact.html" data-reveal class="group md:hidden flex flex-col justify-between gap-4 p-4 bg-navy text-paper rounded-[1rem] shadow-lg">
+        <span class="flex items-center justify-center h-9 w-9 rounded-full bg-orange text-paper font-display text-sm">+</span>
+        <span>
+          <span class="block text-lg leading-tight">Want the lot?</span>
+          <span class="block mt-2 text-xs leading-relaxed text-paper/70">Most brands need all five. We'll show you where to start.</span>
+        </span>
+        <span class="flex items-center gap-2 text-sm font-semibold">
+          Book a call
+          <span class="text-orange transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+        </span>
+      </a>
 
     </div>
   </section>
@@ -354,33 +383,32 @@
   -->
   <section id="process" class="bg-paper px-6 md:px-10 py-16 md:py-28">
     <div class="mx-auto max-w-6xl">
-      <div class="text-center mb-12 md:mb-20">
-        <p data-reveal class="mb-5 text-sm uppercase tracking-[0.2em] text-stone">How we work</p>
-        <h2 data-reveal class="text-3xl md:text-6xl">Built around your brand</h2>
+      <div class="text-center mb-8 md:mb-20">
+        <h2 data-reveal class="text-2xl md:text-4xl lg:text-6xl">Built around your brand</h2>
       </div>
-      <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <li data-reveal class="relative bg-platinum p-8 rounded-2xl shadow-xl">
+      <ol class="grid gap-x-3 gap-y-6 md:gap-6 grid-cols-2 lg:grid-cols-4">
+        <li data-reveal class="relative bg-platinum p-4 md:p-8 rounded-[1rem] shadow-xl">
           <span class="hidden lg:block absolute top-14 left-full w-6 border-t-2 border-dashed border-silver" aria-hidden="true"></span>
-          <span class="flex items-center justify-center h-12 w-12 rounded-full bg-blue text-paper font-display text-xl shadow-lg">1</span>
-          <h3 class="text-xl md:text-2xl mt-6 mb-3">Audit</h3>
-          <p class="text-stone text-sm md:text-base leading-relaxed">We explore your current emails, flows, list and numbers to see what's working and what's being missed.</p>
+          <span class="flex items-center justify-center h-8 w-8 md:h-12 md:w-12 rounded-full bg-blue text-paper font-display text-lg md:text-xl shadow-lg">1</span>
+          <h3 class="text-lg md:text-2xl mt-4 md:mt-6 mb-3">Audit</h3>
+          <p class="text-stone text-xs md:text-base leading-relaxed">We explore your current emails, flows, list and numbers to see what's working and what's being missed.</p>
         </li>
-        <li data-reveal class="relative bg-platinum p-8 rounded-2xl shadow-xl">
+        <li data-reveal class="relative bg-platinum p-4 md:p-8 rounded-[1rem] shadow-xl">
           <span class="hidden lg:block absolute top-14 left-full w-6 border-t-2 border-dashed border-silver" aria-hidden="true"></span>
-          <span class="flex items-center justify-center h-12 w-12 rounded-full bg-navy text-paper font-display text-xl shadow-lg">2</span>
-          <h3 class="text-xl md:text-2xl mt-6 mb-3">Plan</h3>
-          <p class="text-stone text-sm md:text-base leading-relaxed">You get a plan tailored to your brand, from a one-off flow build to fully managed email.</p>
+          <span class="flex items-center justify-center h-8 w-8 md:h-12 md:w-12 rounded-full bg-navy text-paper font-display text-lg md:text-xl shadow-lg">2</span>
+          <h3 class="text-lg md:text-2xl mt-4 md:mt-6 mb-3">Plan</h3>
+          <p class="text-stone text-xs md:text-base leading-relaxed">You get a plan tailored to your brand, from a one-off flow build to fully managed email.</p>
         </li>
-        <li data-reveal class="relative bg-platinum p-8 rounded-2xl shadow-xl">
+        <li data-reveal class="relative bg-platinum p-4 md:p-8 rounded-[1rem] shadow-xl">
           <span class="hidden lg:block absolute top-14 left-full w-6 border-t-2 border-dashed border-silver" aria-hidden="true"></span>
-          <span class="flex items-center justify-center h-12 w-12 rounded-full bg-orange text-paper font-display text-xl shadow-lg">3</span>
-          <h3 class="text-xl md:text-2xl mt-6 mb-3">Build</h3>
-          <p class="text-stone text-sm md:text-base leading-relaxed">We write, design and set everything up, all you need to do is sign off on anything before it goes out.</p>
+          <span class="flex items-center justify-center h-8 w-8 md:h-12 md:w-12 rounded-full bg-orange text-paper font-display text-lg md:text-xl shadow-lg">3</span>
+          <h3 class="text-lg md:text-2xl mt-4 md:mt-6 mb-3">Build</h3>
+          <p class="text-stone text-xs md:text-base leading-relaxed">We write, design and set everything up, all you need to do is sign off on anything before it goes out.</p>
         </li>
-        <li data-reveal class="relative bg-platinum p-8 rounded-2xl shadow-xl">
-          <span class="flex items-center justify-center h-12 w-12 rounded-full bg-blue text-paper font-display text-xl shadow-lg">4</span>
-          <h3 class="text-xl md:text-2xl mt-6 mb-3">Optimize</h3>
-          <p class="text-stone text-sm md:text-base leading-relaxed">Then we keep testing, documenting, and refining, so your email channel keeps earning more over time.</p>
+        <li data-reveal class="relative bg-platinum p-4 md:p-8 rounded-[1rem] shadow-xl">
+          <span class="flex items-center justify-center h-8 w-8 md:h-12 md:w-12 rounded-full bg-blue text-paper font-display text-lg md:text-xl shadow-lg">4</span>
+          <h3 class="text-lg md:text-2xl mt-4 md:mt-6 mb-3">Optimize</h3>
+          <p class="text-stone text-xs md:text-base leading-relaxed">Then we keep testing, documenting, and refining, so your email channel keeps earning more over time.</p>
         </li>
       </ol>
     </div>
@@ -407,9 +435,9 @@
       </div>
 
       <div class="flex flex-col gap-4">
-        <details data-reveal class="group bg-paper rounded-2xl shadow-xl">
-          <summary class="flex items-center justify-between gap-6 p-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-lg md:text-xl text-ink">How much does it cost?</span>
+        <details data-reveal class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-md md:text-xl text-ink">How much does it cost?</span>
             <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-blue text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
           </summary>
           <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
@@ -417,9 +445,9 @@
           </div>
         </details>
 
-        <details data-reveal class="group bg-paper rounded-2xl shadow-xl">
-          <summary class="flex items-center justify-between gap-6 p-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-lg md:text-xl text-ink">Which email platforms do you work with?</span>
+        <details data-reveal class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-md md:text-xl text-ink">Which email platforms do you work with?</span>
             <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-navy text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
           </summary>
           <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
@@ -427,9 +455,9 @@
           </div>
         </details>
 
-        <details data-reveal class="group bg-paper rounded-2xl shadow-xl">
-          <summary class="flex items-center justify-between gap-6 p-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-lg md:text-xl text-ink">Do I have to sign up for the long term?</span>
+        <details data-reveal class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-md md:text-xl text-ink">Do I have to sign up for the long term?</span>
             <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-orange text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
           </summary>
           <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
@@ -437,9 +465,9 @@
           </div>
         </details>
 
-        <details data-reveal class="group bg-paper rounded-2xl shadow-xl">
-          <summary class="flex items-center justify-between gap-6 p-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-lg md:text-xl text-ink">How involved do we need to be?</span>
+        <details data-reveal class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-md md:text-xl text-ink">How involved do we need to be?</span>
             <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-blue text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
           </summary>
           <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
@@ -447,9 +475,9 @@
           </div>
         </details>
 
-        <details data-reveal class="group bg-paper rounded-2xl shadow-xl">
-          <summary class="flex items-center justify-between gap-6 p-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-lg md:text-xl text-ink">How soon will we see results?</span>
+        <details data-reveal class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-md md:text-xl text-ink">How soon will we see results?</span>
             <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-navy text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
           </summary>
           <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
@@ -464,14 +492,12 @@
   <!-- ========== CTA ==========
     Navy card (shared by work.html, about.html and services.html; keep in sync apart from the copy):
     text + button on one side, a decorative "booking" card on the other (stacked on mobile).
-    The two soft glows are blurred spans clipped by the card's overflow-hidden.
+    The two soft glows are the card's .cta-glow background (styles.css).
   -->
   <section class="px-6 md:px-10 pb-32">
-    <div data-reveal class="relative mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-16 bg-navy rounded-[2rem] shadow-xl overflow-hidden">
-      <span class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-blue/40 blur-3xl" aria-hidden="true"></span>
-      <span class="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-orange/30 blur-3xl" aria-hidden="true"></span>
+    <div data-reveal class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-16 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
       <div class="relative flex flex-col items-center md:items-start text-center md:text-left">
-        <h2 class="text-3xl md:text-5xl text-paper">Not sure what you need?</h2>
+        <h2 class="text-2xl md:text-3xl lg:text-5xl text-paper">Not sure what you need?</h2>
         <p class="text-sm md:text-lg text-paper/70 mt-4 md:mt-6 max-w-xl">Book a free call and we'll tell you where your email is leaving money on the table.</p>
         <a href="contact.html" class="btn w-full max-w-md mt-10 md:mt-12 gap-4 md:gap-12">
           Book a strategy call
@@ -480,7 +506,7 @@
           </svg>
         </a>
       </div>
-      <div class="relative w-full max-w-[13rem] md:max-w-xs mx-auto" aria-hidden="true">
+      <div class="hidden md:block relative w-full max-w-[13rem] md:max-w-xs mx-auto" aria-hidden="true">
         <div class="bg-paper rounded-xl shadow-2xl p-3 md:p-5 rotate-[3deg]">
           <div class="flex items-center gap-3">
             <span class="flex flex-col items-center justify-center h-11 w-11 rounded-lg bg-blue text-paper leading-none">

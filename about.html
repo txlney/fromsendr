@@ -46,16 +46,16 @@
     ids below; script.js collapses the hero before scrolling (see .hero-shrink).
   -->
   <section class="flex-1 flex items-center relative w-full mx-auto max-w-6xl px-6 md:px-10 pt-24 pb-28 md:pb-36">
-    <div class="w-full grid gap-14 lg:grid-cols-2 lg:gap-10 items-center">
+    <div class="w-full grid md:gap-14 lg:grid-cols-2 lg:gap-10 items-center">
       <div>
-        <p class="inline-flex items-center gap-2 bg-paper rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-navy shadow">
-          <span class="h-2 w-2 rounded-full bg-orange"></span>About us
+        <p class="inline-flex items-center gap-2 bg-paper rounded-full px-4 py-2 text-[0.55rem] md:text-xs font-semibold uppercase tracking-[0.2em] text-navy shadow">
+          <span class="h-1 w-1 md:h-2 md:w-2 rounded-full bg-orange"></span>About us
         </p>
         <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-navy">The team to take your brand to the <span class="text-blue font-bold italic">next level</span></h1>
-        <p class="mt-6 text-ink/70 text-sm md:text-lg max-w-xl">
+        <p class="hidden md:flex mt-6 text-ink/70 text-sm md:text-lg max-w-xl">
           More about who we are, what we do, and why we do it.
         </p>
-        <nav class="mt-8 flex flex-wrap gap-2 text-platinum" aria-label="Jump to a section">
+        <nav class="mt-8 hidden md:flex flex-wrap gap-2 text-platinum" aria-label="Jump to a section">
           <a href="#who-we-are" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-blue"></span>Who we are</a>
           <a href="#what-we-do" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-blue/40"></span>What we do</a>
           <a href="#different" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-orange"></span>How we're different</a>
@@ -63,7 +63,7 @@
       </div>
 
       <!-- Collage: square box, pieces positioned in % so it scales with the column. Later pieces paint on top -->
-      <div class="relative w-full max-w-md sm:max-w-lg mx-auto aspect-square" aria-hidden="true">
+      <div class="hidden md:block relative w-full max-w-md sm:max-w-lg mx-auto aspect-square" aria-hidden="true">
         <!-- Technical: navy tile with rising revenue bars -->
         <div class="absolute right-[2%] top-[4%] w-[46%] aspect-square flex flex-col justify-end gap-3 p-[7%] bg-navy rounded-[1.75rem] shadow-2xl rotate-[5deg]">
           <span class="text-[0.55rem] sm:text-xs font-semibold uppercase tracking-wider text-paper/60">Revenue &uarr;</span>
@@ -111,19 +111,19 @@
     </div>
 
     <!-- Scroll cue: sits at the bottom of the first screen -->
-    <div class="hero-cue absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
-      <span class="text-xs uppercase tracking-[0.2em]">About us</span>
+    <div class="hero-cue hidden absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 md:flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
+      <span class="text-[0.6rem] uppercase tracking-[0.2em]">About us</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
-        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
   </section>
   </div>
 
   <!-- ========== Who we are ========== -->
-  <section id="who-we-are" data-reveal class="bg-paper px-6 md:px-10 py-16 md:py-24 text-left">
-    <div class="mx-auto md:max-w-6xl">
-      <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone">Who we are</p>
+  <section id="who-we-are" class="bg-paper px-6 md:px-10 py-16 md:py-24 text-left">
+    <div class="mx-auto md:max-w-6xl flex flex-col gap-4 md:gap-8">
+      <p class="text-2xl md:text-5xl">Who we are</p>
       <div class="flex flex-col gap-4 text-stone text-sm md:text-lg leading-relaxed">
         <p>
           We are a small team of email marketing specialists, passionate about converting email channels into revenue streams for e-commerce brands.
@@ -135,9 +135,6 @@
         <p>
           Having worked with e-commerce brands for years before turning to email marketing, we understand how successful the email channel can become.
           There is nothing worse than seeing a brand with a great product and a great story, but no real email strategy to back it up.
-        </p>
-        <p>
-          That's why we want to help brands like yours, to become clients like ours, and unlock the full potential of your email marketing channels.
         </p>
       </div>
     </div>
@@ -151,8 +148,8 @@
   -->
   <section class="px-6 md:px-10 py-16 md:py-28">
     <div class="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:gap-16">
-      <div id="what-we-do" data-reveal class="scroll-mt-8 min-w-0 relative flex flex-col bg-paper rounded-2xl shadow-xl">
-        <div class="relative flex items-center justify-center min-h-64 p-6 sm:p-10 bg-navy rounded-t-2xl overflow-hidden" aria-hidden="true">
+      <div id="what-we-do" data-reveal class="scroll-mt-8 min-w-0 relative flex flex-col bg-paper rounded-[1rem] shadow-xl">
+        <div class="relative flex items-center justify-center min-h-64 p-6 sm:p-10 bg-navy rounded-t-[1rem] overflow-hidden" aria-hidden="true">
           <div class="relative w-full max-w-[15rem]">
             <div class="bg-paper rounded-xl shadow-2xl p-4 rotate-[-2deg]">
               <div class="flex items-center justify-between mb-2">
@@ -176,8 +173,8 @@
           </div>
         </div>
         <div class="p-8 md:p-10">
-          <h2 class="text-2xl md:text-4xl mb-4">What we do</h2>
-          <p class="text-stone text-sm md:text-base leading-relaxed">
+          <h2 class="text-xl md:text-4xl mb-4">What we do</h2>
+          <p class="text-stone text-xs md:text-base leading-relaxed">
             Before anything, we take the time to really understand your brand, and your current email situation.
             If we think you could benefit from a partnership, we will create a plan tailored to your brand and budget, whether that's a one-off flow set-up, or a long-term partnership to manage your email systems.
             From there, you leave it with us to make you money.
@@ -185,8 +182,8 @@
         </div>
         <img src="images/stickers/verified-sticker.png" alt="" loading="lazy" decoding="async" class="sticker">
       </div>
-      <div id="different" data-reveal class="scroll-mt-8 min-w-0 relative flex flex-col bg-paper rounded-2xl shadow-xl">
-        <div class="relative flex items-center justify-center min-h-64 p-6 sm:p-10 bg-blue rounded-t-2xl overflow-hidden" aria-hidden="true">
+      <div id="different" data-reveal class="scroll-mt-8 min-w-0 relative flex flex-col bg-paper rounded-[1rem] shadow-xl">
+        <div class="relative flex items-center justify-center min-h-64 p-6 sm:p-10 bg-blue rounded-t-[1rem] overflow-hidden" aria-hidden="true">
           <div class="relative flex items-center gap-2 sm:gap-3">
             <div class="w-24 sm:w-28 bg-paper rounded-xl shadow-2xl p-3 rotate-[-6deg]">
               <div class="h-10 rounded-md bg-gradient-to-br from-blue/40 to-orange/40"></div>
@@ -217,8 +214,8 @@
           </div>
         </div>
         <div class="p-8 md:p-10">
-          <h2 class="text-2xl md:text-4xl mb-4">How we're different</h2>
-          <p class="text-stone text-sm md:text-base leading-relaxed">
+          <h2 class="text-xl md:text-4xl mb-4">How we're different</h2>
+          <p class="text-stone text-xs md:text-base leading-relaxed">
             Many agencies focus on either the creative side of email marketing, or the technical side. We are passionate about both, and work to ensure your marketing is both visually stunning and technically sound.
             We don't want to treat you like a client, we want to work with your brand and become a valued partner, with the goal of growing your brand as if it were our own.
           </p>
@@ -234,37 +231,37 @@
   <!-- ========== CORE CONCEPTS ========== -->
   <section id="core-concepts" class="bg-paper px-6 md:px-10 py-16 md:py-28">
     <div class="mx-auto max-w-6xl">
-      <div class="text-center mb-12 md:mb-20">
-        <h2 data-reveal class="text-3xl md:text-6xl">Our Core Concepts</h2>
+      <div class="text-center mb-8 md:mb-20">
+        <h2 data-reveal class="text-2xl md:text-4xl lg:text-6xl">Our Core Concepts</h2>
       </div>
-      <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <li data-reveal class="relative bg-blue text-platinum p-6 sm:p-8 rounded-2xl shadow-xl">
-          <div class="flex justify-between mb-2 sm:mb-3">
-            <h3 class="text-xl md:text-2xl mb-3 font-bold">Excellence</h3>
-            <div class="bg-platinum h-3 w-3 rounded-full mt-1 sm:mt-2"></div>
+      <ol class="grid gap-y-6 gap-x-3 md:gap-6 grid-cols-2 lg:grid-cols-4">
+        <li data-reveal class="relative bg-blue text-platinum p-4 sm:p-8 rounded-[1rem] shadow-xl">
+          <div class="flex justify-between sm:mb-3">
+            <h3 class="text-lg md:text-2xl mb-3 font-bold">Excellence</h3>
+            <div class="bg-platinum h-2 w-2 md:h-3 md:w-3 rounded-full mt-1 sm:mt-2"></div>
           </div>
-          <p class="text-sm md:text-base leading-relaxed">We strive for the highest quality in everything we do, and settle for nothing less.</p>
+          <p class="text-xs md:text-base leading-relaxed">We strive for the highest quality in everything we do, and settle for nothing less than our very best.</p>
         </li>
-        <li data-reveal class="relative bg-platinum p-6 sm:p-8 rounded-2xl shadow-xl">
-          <div class="flex justify-between mb-2 sm:mb-3">
-            <h3 class="text-xl md:text-2xl mb-3 font-bold">Teamwork</h3>
-            <div class="bg-orange h-3 w-3 rounded-full mt-1 sm:mt-2"></div>
+        <li data-reveal class="relative bg-platinum p-4 sm:p-8 rounded-[1rem] shadow-xl">
+          <div class="flex justify-between sm:mb-3">
+            <h3 class="text-lg md:text-2xl mb-3 font-bold">Teamwork</h3>
+            <div class="bg-orange h-2 w-2 md:h-3 md:w-3 rounded-full mt-1 sm:mt-2"></div>
           </div>
-          <p class="text-stone text-sm md:text-base leading-relaxed">Collaboration is key to success, and we believe that the best results are only achievable through teamwork.</p>
+          <p class="text-stone text-xs md:text-base leading-relaxed">Collaboration is key to success, and we believe that the best results are only achievable through teamwork.</p>
         </li>
-        <li data-reveal class="relative bg-navy text-platinum p-6 sm:p-8 rounded-2xl shadow-xl">
-          <div class="flex justify-between mb-2 sm:mb-3">
-            <h3 class="text-xl md:text-2xl mb-3 font-bold">Discussion</h3>
-            <div class="bg-platinum h-3 w-3 rounded-full mt-1 sm:mt-2"></div>
+        <li data-reveal class="relative bg-navy text-platinum p-4 sm:p-8 rounded-[1rem] shadow-xl">
+          <div class="flex justify-between sm:mb-3">
+            <h3 class="text-lg md:text-2xl mb-3 font-bold">Discussion</h3>
+            <div class="bg-platinum h-2 w-2 md:h-3 md:w-3 rounded-full mt-1 sm:mt-2"></div>
           </div>
-          <p class="text-sm md:text-base leading-relaxed">We engage in regular, open communication with our clients to ensure we're always aligned and on the same page.</p>
+          <p class="text-xs md:text-base leading-relaxed">We engage in regular, open communication with our clients to ensure we're always aligned and on the same page.</p>
         </li>
-        <li data-reveal class="relative bg-blue/40 text-navy p-6 sm:p-8 rounded-2xl shadow-xl">
-          <div class="flex justify-between mb-2 sm:mb-3">
-            <h3 class="text-xl md:text-2xl mb-3 font-bold">Partnership</h3>
-            <div class="bg-navy h-3 w-3 rounded-full mt-1 sm:mt-2"></div>
+        <li data-reveal class="relative bg-blue/40 text-navy p-4 sm:p-8 rounded-[1rem] shadow-xl">
+          <div class="flex justify-between sm:mb-3">
+            <h3 class="text-lg md:text-2xl mb-3 font-bold">Partnership</h3>
+            <div class="bg-navy h-2 w-2 md:h-3 md:w-3 rounded-full mt-1 sm:mt-2"></div>
           </div>
-          <p class="text-sm md:text-base leading-relaxed">We work closely with our clients to build meaningful relationships, rather than just doing business.</p>
+          <p class="text-xs md:text-base leading-relaxed">We work closely with our clients to build meaningful relationships, rather than just doing business.</p>
         </li>
       </ol>
     </div>
@@ -273,14 +270,12 @@
   <!-- ========== CTA ==========
     Navy card (shared by work.html, about.html and services.html; keep in sync apart from the copy):
     text + button on one side, a decorative "booking" card on the other (stacked on mobile).
-    The two soft glows are blurred spans clipped by the card's overflow-hidden.
+    The two soft glows are the card's .cta-glow background (styles.css).
   -->
   <section class="px-6 md:px-10 py-16 md:py-28">
-    <div data-reveal class="relative mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-16 bg-navy rounded-[2rem] shadow-xl overflow-hidden">
-      <span class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-blue/40 blur-3xl" aria-hidden="true"></span>
-      <span class="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-orange/30 blur-3xl" aria-hidden="true"></span>
+    <div data-reveal class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-16 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
       <div class="relative flex flex-col items-center md:items-start text-center md:text-left">
-        <h2 class="text-3xl md:text-5xl text-paper">Like the sound of how we work?</h2>
+        <h2 class="text-2xl md:text-3xl lg:text-5xl text-paper">Like the sound of how we work?</h2>
         <p class="text-sm md:text-lg text-paper/70 mt-4 md:mt-6 max-w-xl">Let's talk about what email could do for your brand.</p>
         <a href="contact.html" class="btn w-full max-w-md mt-10 md:mt-12 gap-4 md:gap-12">
           Book a strategy call
@@ -289,7 +284,7 @@
           </svg>
         </a>
       </div>
-      <div class="relative w-full max-w-[13rem] md:max-w-xs mx-auto" aria-hidden="true">
+      <div class="hidden md:block relative w-full max-w-[13rem] md:max-w-xs mx-auto" aria-hidden="true">
         <div class="bg-paper rounded-xl shadow-2xl p-3 md:p-5 rotate-[3deg]">
           <div class="flex items-center gap-3">
             <span class="flex flex-col items-center justify-center h-11 w-11 rounded-lg bg-blue text-paper leading-none">

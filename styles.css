@@ -227,7 +227,7 @@ html body :where(.btn) {
     gap: 3rem;
     padding: 1rem 1.5rem;
     border: 2px solid var(--btn-border);
-    border-radius: 1rem;
+    border-radius: 0.6rem;
     background-color: var(--btn-bg);
     color: var(--btn-color);
     /* Tailwind's shadow-xl */
@@ -246,7 +246,7 @@ html body :where(.btn)::before {
     inset: 0;
     z-index: -1;
     background-color: var(--btn-fill);
-    border-radius: 0.85rem;
+    border-radius: 0.5rem;
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.3s ease;
@@ -284,7 +284,7 @@ html body :where(.btn:focus-visible)::before {
 @media (min-width: 768px) {
     html body :where(.btn) {
         padding: 1rem 2rem;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         line-height: 2rem;
     }
 
@@ -294,34 +294,45 @@ html body :where(.btn:focus-visible)::before {
     }
 }
 
+@media (min-width: 1024px) {
+    html body :where(.btn) {
+        font-size: 1.5rem;
+    }
+}
+
 /* Every page's hero: fills the first screen, then shrinks as soon as the page is scrolled
    at all (script.js adds .is-collapsed), pulling the next section up. min-height rather
-   than height so the content still fits on short phones. */
-.hero-shrink {
-    min-height: 100vh;
-    min-height: 100svh;
-    transition: min-height 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-}
+   than height so the content still fits on short screens. Desktop-only (md+): on phones the
+   hero is just as tall as its content and padding, because anything tied to the viewport
+   height jumps when the browser's toolbars slide away on scroll (script.js still toggles
+   .is-collapsed there, which only fades the scroll cue). */
+@media (min-width: 768px) {
+    .hero-shrink {
+        min-height: 100vh;
+        min-height: 100svh;
+        transition: min-height 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-.hero-shrink.is-collapsed {
-    min-height: 80vh;
-    min-height: 80svh;
-}
+    /* Contact page: the hero only needs to introduce the booking widget, so it starts shorter */
+    .hero-short {
+        min-height: 75vh;
+        min-height: 75svh;
+    }
 
-/* Contact page: the hero only needs to introduce the booking widget, so it starts shorter */
-.hero-short {
-    min-height: 75vh;
-    min-height: 75svh;
-}
+    .hero-shrink.is-collapsed {
+        min-height: 80vh;
+        min-height: 80svh;
+    }
 
-.hero-short.is-collapsed {
-    min-height: 60vh;
-    min-height: 60svh;
-}
+    .hero-short.is-collapsed {
+        min-height: 60vh;
+        min-height: 60svh;
+    }
 
-/* Browser scroll anchoring would "correct" the shrink by scrolling back up, cancelling it */
-html:has(.hero-shrink) {
-    overflow-anchor: none;
+    /* Browser scroll anchoring would "correct" the shrink by scrolling back up, cancelling it */
+    html:has(.hero-shrink) {
+        overflow-anchor: none;
+    }
 }
 
 .hero-cue {
@@ -345,6 +356,18 @@ html:has(.hero-shrink) {
     height: 100svh;
     min-height: calc(100% + 2px);
     translate: 0 -50%;
+}
+
+/* Phones: no shrink (see .hero-shrink), so the background just fills the hero and doesn't
+   depend on the viewport height, which changes as the browser's toolbars show and hide */
+@media (max-width: 767px) {
+    .hero-bg,
+    .hero-shrink > .aurora {
+        inset: 0;
+        height: auto;
+        min-height: 0;
+        translate: none;
+    }
 }
 
 /* Index hero photo, washed out towards white so its colours don't compete with the text.
@@ -437,6 +460,26 @@ html:has(.hero-shrink) {
     }
 }
 
+/* White text on a painted blue brush stroke (index "Timing matters."). The SVG
+   stretches to the text's box, so padding sets how far the paint runs past the
+   words. */
+.brush-stroke {
+    width: fit-content;
+    padding: 0.4em 1.2em;
+    color: #fff;
+    background: url(images/brush-stroke.svg) center / 100% 100% no-repeat;
+}
+
+/* Navy CTA card: soft blue glow top-left, orange bottom-right. Gradients rather than
+   blurred spans, because iOS Safari clips a blurred child to the card before blurring,
+   which left the top of the card plain navy. Only background-image, so bg-navy still
+   sets the colour underneath. */
+.cta-glow {
+    background-image:
+        radial-gradient(14rem circle at 3rem 3rem, rgb(45 125 210 / 0.4) 25%, transparent),
+        radial-gradient(14rem circle at calc(100% - 3rem) calc(100% - 3rem), rgb(235 69 17 / 0.3) 25%, transparent);
+}
+
 /* Services FAQ: the open answer tucks up 0.5rem into the summary's bottom padding. It's
    done here rather than with -mt-2 on the answer, which the overflow clip below would cut off. */
 #faq details[open]::details-content {
@@ -467,7 +510,7 @@ html:has(.hero-shrink) {
     display: block;
     height: 28rem;
     background-color: var(--color-silver);
-    border-radius: 1.2rem;
+    border-radius: 1rem;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -510,6 +553,26 @@ html:has(.hero-shrink) {
 
 .email-preview-cta:hover {
     background: var(--color-blue);
+}
+
+/* Below sm the work grid is 2 narrow columns: shorter previews and a smaller button.
+   The featured card keeps its own height (Tailwind h-[...] wins) and full-size button. */
+@media (max-width: 639px) {
+    .email-preview {
+        height: 18rem;
+        padding: 4px;
+        border-radius: 0.75rem;
+    }
+
+    .email-preview img {
+        border-radius: 0.55rem;
+    }
+
+    [data-work-item]:not(#featured) .email-preview-cta {
+        bottom: 0.75rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.7rem;
+    }
 }
 
 /* Placeholder email until real screenshots exist: header bar, hero block, text lines.
