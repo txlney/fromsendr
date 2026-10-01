@@ -82,7 +82,7 @@
     z-index: 40;
     /* Top padding clears the logo, so the links sit centred just below it */
     padding: 6.5rem 1.5rem 2rem;
-    background-color: var(--color-navy);
+    background-color: var(--color-ink);
     transform: translateY(-100%);
     visibility: hidden;
     /* Closing waits briefly, so a slightly slow move off the logo doesn't drop it */
@@ -509,12 +509,11 @@ html body :where(.btn:focus-visible)::before {
     position: relative;
     display: block;
     height: 28rem;
-    background-color: var(--color-silver);
     border-radius: 1rem;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s ease;
-    padding: 8px;
+    padding: 0px;
 }
 
 .email-preview:hover {
@@ -523,7 +522,7 @@ html body :where(.btn:focus-visible)::before {
 
 .email-preview img {
     width: 100%;
-    border-radius: 0.7rem;
+    border-radius: 1rem;
     display: block;
 }
 
