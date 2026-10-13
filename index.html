@@ -4,16 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="images/favicon-v4.png">
-  <title>FromSendr</title>
+  <title>FromSendr | Email marketing for e-commerce brands</title>
+  <meta name="description" content="We design, write and run email marketing for e-commerce brands on Klaviyo: flows, campaigns, deliverability and testing. Book a free strategy call.">
 
-  <!-- The hero background is set in styles.css (.hero-bg), so the browser only finds it after that loads: preload it so it starts downloading straight away -->
-  <link rel="preload" as="image" href="images/hero-bg.webp" fetchpriority="high">
+  <!-- Open Graph: the title, description and image shown when a link to this page is shared (Slack, iMessage, LinkedIn...). og:url/og:image must be absolute URLs -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FromSendr">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="FromSendr | Email marketing for e-commerce brands">
+  <meta property="og:description" content="We design, write and run email marketing for e-commerce brands on Klaviyo: flows, campaigns, deliverability and testing. Book a free strategy call.">
+  <meta property="og:url" content="https://fromsendr.com/">
+  <meta property="og:image" content="https://fromsendr.com/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FromSendr: email marketing for e-commerce brands">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Fonts: a serif display paired with a clean sans for body/UI -->
+
+  <!-- Fonts: Poppins for body/UI, Space Grotesk for headlines (font-display) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Poppins:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..600&family=Poppins:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
 
   <!-- Built from tailwind.input.css + tailwind.config.js (see CLAUDE.md); must stay after styles.css -->
   <link rel="stylesheet" href="tailwind.css">
@@ -21,8 +33,8 @@
 
 <body class="bg-platinum text-ink font-sans antialiased">
 
-  <!-- Header + hero together fill the first screen (the hero takes the remaining height), then shrink as soon as the page scrolls (.hero-shrink, see styles.css/script.js) -->
-  <div class="hero-shrink flex flex-col">
+  <!-- Header + hero together fill the first screen on md+ (.hero-full, see styles.css) -->
+  <div class="hero-full flex flex-col">
   <!-- ========== NAV ========== -->
   <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
   <a href="index.html" class="site-logo" aria-label="FromSendr home">
@@ -35,36 +47,33 @@
     <a href="work.html" class="nav-link">Work</a>
     <a href="about.html" class="nav-link">About</a>
     <a href="contact.html" class="nav-link">Contact</a>
+    <!-- Phones: a booking button at the bottom of the drawer (the fixed .site-cta below is md+ only) -->
+    <a href="contact.html" class="btn btn-sm md:hidden mt-auto w-full justify-center font-normal normal-case">Book a call</a>
   </nav>
+  <!-- Always-visible booking button, top-right on md+ (not on contact.html). Sits above the nav panel, see .site-cta -->
+  <a href="contact.html" class="btn btn-sm site-cta hidden md:inline-flex font-semibold">Book a call</a>
 
   <!-- ========== HERO ==========
-    Straight on the faded email collage (.hero-bg): eyebrow pill and headline with the typewriter
-    line, over a soft blurred white glow so they stay readable. Below, a paper card holds one
-    supporting line, then the booking button and a quieter "See our work" link.
+    Light split: copy on the left (display-font headline with the typewriter line, CTA), and on lg+ two
+    staggered columns of real emails on the right, straight and at full strength, fading out at the
+    bottom. Below lg the emails become a short row under the copy. Images are small top-only crops
+    (images/work/tops/).
   -->
-  <section class="flex-1 flex flex-col justify-center relative overflow-hidden w-full mx-auto text-center px-6 md:px-10 pt-24 pb-28 md:pb-36">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="relative max-w-4xl w-full mx-auto">
-      <!-- The white glow: a blurred paper blob behind the text (not a box, so the collage still shows around it) -->
-      <div class="absolute -inset-x-6 -inset-y-6 md:-inset-x-12 md:-inset-y-10 bg-paper/75 blur-2xl rounded-full" aria-hidden="true"></div>
-      <p class="relative inline-flex items-center gap-2 bg-paper rounded-full px-4 py-2 text-[0.5rem] sm:text-xs font-semibold uppercase tracking-[0.2em] text-navy">
-        <span class="h-2 w-2 shrink-0 rounded-full bg-orange"></span>E-commerce email marketing
-      </p>
-      <h1 class="relative mt-6 md:mt-8 text-ink text-3xl sm:text-4xl md:text-6xl leading-[1.2]">
-        <span class="block max-w-80 sm:max-w-lg md:max-w-3xl mx-auto">We create email strategies that</span>
-        <!-- Grid: script.js stacks an invisible copy of every phrase in the same cell as the typed line, so the box is always as tall as the longest phrase and doesn't resize while typing. It also alternates the line between blue and orange per phrase (the cursor follows via bg-current) -->
-        <span class="grid font-bold max-w-3xl pt-1 px-2 mx-auto">
-          <span class="col-start-1 row-start-1 text-blue"><span id="typewriter"></span><span class="inline-block w-[2px] md:w-[3px] h-[0.9em] bg-current align-middle animate-pulse ml-0.5"></span></span>
+  <section class="flex-1 flex items-center w-full mx-auto max-w-6xl px-6 md:px-10 pt-28 md:pt-32 pb-16 md:pb-20">
+    <div class="w-full grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-12 items-center">
+      <div class="text-center lg:text-left">
+        <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Email marketing for e-commerce brands</p>
+        <h1 class="mt-5 md:mt-6 font-display text-4xl sm:text-5xl lg:text-[2.5rem] xl:text-[2.875rem] leading-[1.08] text-navy">
+          <span class="block">We build emails that</span>
+          <!-- Grid: script.js stacks an invisible copy of every phrase in this cell, so the heading never changes height while typing. Phrases come from data-phrases, and the line alternates between blue and orange -->
+        <span class="grid font-semibold max-w-4xl mx-auto lg:mx-0">
+          <span class="col-start-1 row-start-1 text-blue"><span id="typewriter" data-phrases="recover abandoned carts|turn buyers into regulars|win back lapsed customers|make every send count"></span><span class="inline-block w-[2px] md:w-[3px] h-[0.9em] bg-current align-middle animate-pulse ml-1"></span></span>
         </span>
-      </h1>
-    </div>
-    <div class="relative max-w-3xl w-full mx-auto mt-10 md:mt-14 px-5 py-8 sm:px-10 md:px-16 md:py-12 bg-paper/85 backdrop-blur-md rounded-[1rem] shadow-2xl">
-      <p class="justify-center mb-8 md:mb-10 text-ink/70 text-sm md:text-lg max-w-xl mx-auto">
-        Book a <span class="text-ink font-semibold">free strategy call</span> with us and we'll pinpoint your missed opportunities and show you how we can turn your emails into money-making machines.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8">
-        <a href="contact.html" class="btn w-full sm:w-auto max-w-md">
-          Identify your lost revenue
+        </h1>
+        <p class="mt-6 md:mt-8 text-stone text-sm md:text-lg max-w-xl mx-auto lg:mx-0">Book a free strategy call and we'll go through your email setup with you, show you where revenue is slipping away, and what we'd fix first.</p>
+        <div class="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 sm:gap-8">
+          <a href="contact.html" class="btn w-full sm:w-auto max-w-md">
+          Book a call with us
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow hidden">
             <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -73,203 +82,161 @@
           See our work
           <span class="text-orange transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
         </a>
+        </div>
+        <p class="mt-5 text-xs text-stone">Free &middot; 30 minutes &middot; No obligation</p>
       </div>
-    </div>
-    <!-- Scroll cue: sits at the bottom of the first screen -->
-    <div class="hidden hero-cue absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 md:flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
-      <span class="text-[0.6rem] uppercase tracking-[0.2em]">The numbers</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
-        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+
+      <div class="hidden lg:grid grid-cols-2 gap-5 h-[36rem] overflow-hidden [mask-image:linear-gradient(to_bottom,#000_75%,transparent)]" aria-hidden="true">
+        <div class="flex flex-col gap-5">
+          <img src="images/work/tops/wild-top.webp" alt="" width="600" height="960" decoding="async" class="w-full aspect-[5/8] object-cover object-top rounded-xl shadow-xl">
+          <img src="images/work/tops/replab-1-top.webp" alt="" width="600" height="960" decoding="async" class="w-full aspect-[5/8] object-cover object-top rounded-xl shadow-xl">
+        </div>
+        <div class="flex flex-col gap-5 pt-20">
+          <img src="images/work/tops/moonjuice-top.webp" alt="" width="600" height="960" decoding="async" class="w-full aspect-[5/8] object-cover object-top rounded-xl shadow-xl">
+          <img src="images/work/tops/nutandnoggin-top.webp" alt="" width="600" height="960" decoding="async" class="w-full aspect-[5/8] object-cover object-top rounded-xl shadow-xl">
+        </div>
+      </div>
+      <div class="lg:hidden grid grid-cols-3 gap-3 h-52 sm:h-72 overflow-hidden [mask-image:linear-gradient(to_bottom,#000_70%,transparent)]" aria-hidden="true">
+        <img src="images/work/tops/wild-top.webp" alt="" width="600" height="960" decoding="async" class="w-full aspect-[5/8] object-cover object-top rounded-xl shadow-xl">
+        <img src="images/work/tops/moonjuice-top.webp" alt="" width="600" height="960" decoding="async" class="w-full aspect-[5/8] object-cover object-top rounded-xl shadow-xl mt-8">
+        <img src="images/work/tops/replab-1-top.webp" alt="" width="600" height="960" decoding="async" class="w-full aspect-[5/8] object-cover object-top rounded-xl shadow-xl mt-3">
+      </div>
     </div>
   </section>
   </div>
 
-  <!-- ========== STATISTICS ========== -->
-  <!-- Headline gets its own full screen, like the hero; each line slides up once when it scrolls into view (data-reveal, see styles.css/script.js) -->
-  <section id="statistics" class="flex flex-col justify-center relative px-6 md:px-10 mt-16 md:mt-24 text-center">
-    <div class="flex flex-col gap-2 sm:gap-4 md:gap-6">
-      <h2 data-reveal class="text-2xl sm:text-4xl md:text-4xl text-stone">Email isn't just an inbox...</h2>
-      <h3 data-reveal class="text-3xl sm:text-5xl md:text-5xl">It's a revenue stream</h3>
+  <!-- ========== STATISTICS ==========
+    Intro line, then three equal stat cards (one row from md): number, one-line description, a small
+    chart pushed to the bottom of the card (mt-auto, so the charts line up), and the source.
+  -->
+  <section id="statistics" class="mx-auto max-w-6xl px-6 md:px-10 py-16 md:py-24">
+    <div class="text-center">
+      <h2 class="font-display text-lg md:text-2xl text-stone">Your customers already said yes to hearing from you.</h2>
+      <p class="mt-2 font-display text-2xl md:text-3xl">Here's what that's <span class="font-semibold text-blue">worth</span>.</p>
     </div>
-  </section>
 
-  <!-- ========== STATISTICS: CHARTS ========== -->
-  <section class="mx-auto px-6 sm:px-10 py-12 md:py-24 max-w-7xl">
-    <div class="mx-auto flex flex-col gap-8 sm:gap-16 lg:gap-4 lg:grid lg:grid-cols-3 md:px-16 lg:px-0">
+    <div class="mt-10 md:mt-14 grid gap-4 md:gap-5 md:grid-cols-3">
 
-      <div data-reveal class="flex flex-col items-center justify-between gap-6 p-12 lg:p-8 2xl:p-12 bg-paper rounded-[1rem] lg:rounded-r-none">
-        <div class="text-center">
-          <div class="flex flex-col items-center justify-center">
-            <span class="font-bold text-[4rem] sm:text-[8rem] lg:text-[5rem] leading-[1.0]">$36</span>
-            <span class="mb-2 text-lg sm:text-xl leading-tight text-ink md:mb-5 md:text-2xl lg:text-xl">returned for every $1 spent</span>
-          </div>
-        </div>
-        <div class="flex flex-col gap-6">
-          <div data-scroll-chart class="return-donut flex h-48 w-48 shrink-0 items-center justify-center rounded-full sm:h-64 sm:w-64 lg:h-48 lg:w-48 xl:h-64 xl:w-64" aria-label="36 dollar return for every 1 dollar invested">
-            <div class="flex h-[68%] w-[68%] flex-col items-center justify-center rounded-full bg-paper text-center">
-              <span class="text-3xl md:text-4xl">36x</span>
-              <span class="mt-1 max-w-20 sm:max-w-28 text-[0.5rem] sm:text-xs uppercase tracking-widest text-stone">return on investment</span>
+      <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
+        <span class="font-display font-semibold text-4xl leading-none">$36</span>
+        <span class="mt-2 text-sm md:text-base leading-snug text-stone">returned for every $1 spent</span>
+        <div class="mt-auto pt-8 flex justify-center">
+          <div class="return-donut flex h-36 w-36 shrink-0 items-center justify-center rounded-full" role="img" aria-label="36 dollar return for every 1 dollar invested">
+            <div class="flex h-[70%] w-[70%] flex-col items-center justify-center rounded-full bg-paper text-center">
+              <span class="font-display text-2xl">36x</span>
+              <span class="mt-0.5 text-[0.55rem] uppercase tracking-widest text-stone">ROI</span>
             </div>
           </div>
-          <a href="https://www.omnisend.com/blog/email-marketing-roi/" target="_blank" rel="noopener noreferrer" class="text-center text-xs text-stone/30 hover:underline">[Omnisend, 2025]</a>
         </div>
+        <a href="https://www.omnisend.com/blog/email-marketing-roi/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">Omnisend, 2025</a>
       </div>
 
-      <div data-reveal class="flex flex-col items-center justify-between gap-6 p-12 lg:p-8 2xl:p-12 bg-paper lg:bg-ink/10 rounded-[1rem] lg:rounded-none">
-        <div class="text-center">
-          <div class="flex flex-col items-center justify-center">
-            <span class="font-bold text-[4rem] sm:text-[8rem] lg:text-[5rem] leading-[1]">$2.87</span>
-            <span class="mb-2 text-lg sm:text-xl leading-tight md:mb-5 md:text-2xl lg:text-xl">average revenue per automated email</span>
-          </div>
-        </div>
-        <div data-scroll-chart class="mt-16 w-full space-y-8" role="img" aria-label="Automated emails average 2.87 dollars of revenue each, against 18 cents for scheduled emails">
+      <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
+        <span class="font-display font-semibold text-4xl leading-none">$2.87</span>
+        <span class="mt-2 text-sm md:text-base leading-snug text-stone">average revenue per automated email</span>
+        <div class="mt-auto pt-8 space-y-4" role="img" aria-label="Automated emails average 2.87 dollars of revenue each, against 18 cents for scheduled emails">
           <div>
-            <div class="mb-3 flex justify-between text-xs uppercase tracking-[0.2em]">
-              <span>Scheduled emails</span>
+            <div class="mb-2 flex justify-between text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">
+              <span>Scheduled</span>
               <span>$0.18</span>
             </div>
-            <div class="h-12 overflow-hidden bg-platinum lg:bg-stone/20 md:h-20 lg:h-12">
+            <div class="h-5 overflow-hidden rounded-sm bg-platinum">
               <div class="share-bar-fill h-full bg-stone" style="--target: 6%"></div>
             </div>
           </div>
           <div>
-            <div class="mb-3 flex justify-between text-xs uppercase tracking-[0.2em]">
-              <span>Automated emails</span>
+            <div class="mb-2 flex justify-between text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">
+              <span>Automated</span>
               <span>$2.87</span>
             </div>
-            <div class="h-12 overflow-hidden bg-platinum lg:bg-stone/20 md:h-20 lg:h-12">
+            <div class="h-5 overflow-hidden rounded-sm bg-platinum">
               <div class="share-bar-fill h-full bg-blue" style="--target: 100%"></div>
             </div>
           </div>
-          <a href="https://saasgoodies.com/email-automation-statistics/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center text-center text-xs text-stone/30 hover:underline">[SaasGoodies, 2026]</a>
         </div>
+        <a href="https://saasgoodies.com/email-automation-statistics/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">SaasGoodies, 2026</a>
       </div>
 
-      <div data-reveal class="flex flex-col items-center justify-between gap-6 p-12 lg:p-8 2xl:p-12 bg-paper rounded-[1rem] lg:rounded-l-none">
-        <div class="text-center md:text-left">
-          <div class="flex flex-col items-center justify-center md:items-start">
-            <span class="font-bold text-[4rem] sm:text-[8rem] lg:text-[5rem] leading-[1]">2%</span>
-            <span class="max-w-xs text-lg sm:text-xl leading-tight text-ink md:mb-5 md:max-w-sm md:text-2xl lg:text-xl">of sends account for 37% of email-driven sales</span>
-          </div>
-        </div>
-        <div data-scroll-chart class="mt-16 w-full space-y-8" role="img" aria-label="2 percent of email sends account for 37 percent of email-driven sales">
+      <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
+        <span class="font-display font-semibold text-4xl leading-none">2%</span>
+        <span class="mt-2 text-sm md:text-base leading-snug text-stone">of sends account for 37% of email-driven sales</span>
+        <!-- Waffle charts: each grid is 100 squares, so the filled squares read directly as a percentage -->
+        <div class="mt-auto pt-8 grid grid-cols-2 gap-5" role="img" aria-label="Of every 100 emails sent, 2 bring in 37 of every 100 dollars of email-driven sales">
           <div>
-            <div class="mb-3 flex justify-between text-xs uppercase tracking-[0.2em] text-stone">
-              <span>Share of sends</span>
-              <span class="text-stone">2%</span>
-            </div>
-            <div class="h-12 overflow-hidden bg-platinum md:h-20 lg:h-12">
-              <div class="share-bar-fill h-full bg-stone" style="--target: 6%"></div>
-            </div>
+            <div class="grid grid-cols-10 gap-[3px]"><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span></div>
+            <p class="mt-3 text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">Sends</p>
+            <p class="font-display text-lg leading-tight">2 <span class="font-sans text-xs text-stone">in 100</span></p>
           </div>
           <div>
-            <div class="mb-3 flex justify-between text-xs uppercase tracking-[0.2em] text-stone gap-4">
-              <span>Share of email-driven sales</span>
-              <span class="text-stone">37%</span>
-            </div>
-            <div class="h-12 overflow-hidden bg-platinum md:h-20 lg:h-12">
-              <div class="share-bar-fill h-full bg-blue" style="--target: 74%"></div>
-            </div>
+            <div class="grid grid-cols-10 gap-[3px]"><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span></div>
+            <p class="mt-3 text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">Sales</p>
+            <p class="font-display text-lg leading-tight">37 <span class="font-sans text-xs text-stone">in 100</span></p>
           </div>
-          <a href="https://www.omnisend.com/2025-ecommerce-marketing-report/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center text-center text-xs text-stone/30 hover:underline">[Omnisend, 2025]</a>
         </div>
+        <a href="https://www.omnisend.com/2025-ecommerce-marketing-report/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">Omnisend, 2025</a>
       </div>
     </div>
   </section>
 
   <!-- ========== STATISTICS: SUMMARY ========== -->
-  <section class="bg-paper flex flex-col gap-20 md:gap-32 px-6 md:px-10 py-20 md:py-32">
-    <div class="flex flex-col justify-center mx-auto gap-12 md:gap-16 max-w-6xl px-3 text-center">
-      <!-- Summary heading & description -->
-      <div class="flex flex-col gap-8 md:gap-12">
-        <div class="flex flex-col gap-16 md:flex-row md:gap-0 justify-between">
-          <h2 data-reveal class="flex flex-col items-center justify-center text-4xl sm:text-5xl">
+  <section class="bg-paper flex flex-col gap-16 md:gap-24 px-6 md:px-10 py-16 md:py-24">
+    <div class="flex flex-col mx-auto gap-12 md:gap-16 max-w-6xl w-full">
+      <!-- Summary: the comparison headline stacked on the left (the focus), with a smaller "Timing matters."
+           (brush stroke) + 40% block on the right (below it on phones), then the intro -->
+      <div class="flex flex-col gap-6 md:gap-8">
+        <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <h2 class="flex flex-col items-center mx-auto sm:mx-0 self-start font-display text-3xl md:text-4xl leading-[1.05]">
             <span>More emails</span>
-            <span class="text-4xl sm:text-5xl">≠</span>
-            <span>More results</span>
+            <span class="text-blue">&ne;</span>
+            <span>more results</span>
           </h2>
-          <div data-reveal class="flex flex-col md:justify-end md:items-end max-w-4xl text-left md:text-right text-stone">
-            <h3 class="brush-stroke text-xl md:text-3xl">Timing matters.</h3>
-            <h3 class="text-xl md:text-3xl max-w-xl">We build the email systems that generate 40% of your revenue.</h3>
+          <div class="flex flex-col items-start md:items-end mt-4 sm:mt-0 gap-2 md:text-right text-stone text-base md:text-lg">
+            <p class="brush-stroke">Timing matters.</p>
+            <p class="max-w-xs">We build the email systems that generate 40% of your revenue.</p>
           </div>
         </div>
-        <p data-reveal class="text-left text-stone text-sm md:text-lg">
-          There's no better place to have your brand's voice heard than in your customers' inboxes, countless listeners who already know and trust you.
-          Yet, many brands don't know how to build this email audience, and those that do often don't know how to capitalize on it.
+        <p class="max-w-3xl text-stone text-sm md:text-base leading-relaxed">
+          The inbox is one of the few places you can reach your customers without paying for every view.
+          But most brands either struggle to grow their list, or never get the most out of the one they already have.
         </p>
-        <div class="h-[1px] md:h-[2px] bg-silver/40"></div>
+        <div class="mt-2 h-px bg-silver/40"></div>
       </div>
 
       <!-- The three common mistakes -->
       <div class="text-left">
-        <p data-reveal class="mb-6 text-sm uppercase tracking-[0.2em] text-stone">The mistakes we see most</p>
+        <p class="mb-5 text-xs md:text-sm uppercase tracking-[0.2em] text-stone">The mistakes we see most</p>
         <div class="grid gap-6 md:grid-cols-3">
 
-          <article data-reveal class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
-            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-40 md:min-h-56 p-4 md:p-8 bg-navy overflow-hidden" aria-hidden="true">
-              <div class="relative flex flex-col items-center text-xs font-semibold whitespace-nowrap scale-[0.6] sm:scale-[0.8] md:scale-100">
-                <span class="bg-paper/60 text-navy rounded-full px-4 py-1.5">Welcome email</span>
-                <span class="h-4 w-0.5 bg-paper/20"></span>
-                <span class="border-2 border-dashed border-paper/30 text-paper/50 rounded-full px-4 py-1">Wait 30 days</span>
-                <span class="h-4 w-0.5 bg-paper/20"></span>
-                <span class="bg-paper/30 text-paper/60 rounded-full px-4 py-1.5 line-through">Summer Sale 2022</span>
-              </div>
-              <span class="hidden absolute right-2 top-7 sm:right-5 sm:top-6 bg-orange text-paper text-[0.5rem] sm:text-[0.65rem] font-semibold rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-xl rotate-[6deg]">Last edited 3 years ago</span>
+          <article class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
+            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-36 md:min-h-48 p-4 md:p-6 bg-ink overflow-hidden" aria-hidden="true">
+              <!-- Phosphor "calendar-x-light" (images/svgs/index-page/calendar-x-light.svg), inlined so the colour classes apply -->
+              <svg viewBox="0 0 256 256" class="absolute -right-6 -bottom-3 w-40 sm:w-48 md:-right-8 md:-bottom-16 md:w-64 lg:w-72 h-auto text-stone/30" fill="currentColor"><path d="M208,34H182V24a6,6,0,0,0-12,0V34H86V24a6,6,0,0,0-12,0V34H48A14,14,0,0,0,34,48V208a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V48A14,14,0,0,0,208,34ZM48,46H74V56a6,6,0,0,0,12,0V46h84V56a6,6,0,0,0,12,0V46h26a2,2,0,0,1,2,2V82H46V48A2,2,0,0,1,48,46ZM208,210H48a2,2,0,0,1-2-2V94H210V208A2,2,0,0,1,208,210Zm-51.76-77.76L136.48,152l19.76,19.76a6,6,0,1,1-8.48,8.48L128,160.48l-19.76,19.76a6,6,0,0,1-8.48-8.48L119.52,152,99.76,132.24a6,6,0,1,1,8.48-8.48L128,143.52l19.76-19.76a6,6,0,1,1,8.48,8.48Z"/></svg>
             </div>
-            <div class="flex flex-col justify-center gap-2 md:gap-3 p-5 sm:p-8">
-              <h3 class="text-md sm:text-xl lg:text-2xl text-ink">Outdated flows</h3>
-              <p class="text-stone text-xs sm:text-sm lg:text-md leading-relaxed">Automations set up once and forgotten, still sending last year's offers to this year's customers.</p>
+            <div class="flex flex-col justify-center gap-2 p-5 sm:p-6">
+              <h3 class="text-base sm:text-lg lg:text-xl text-ink">Outdated flows</h3>
+              <p class="text-stone text-xs sm:text-sm leading-relaxed">Automations set up once and forgotten, still sending last year's offers to this year's customers.</p>
             </div>
           </article>
 
-          <article data-reveal class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
-            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-40 md:min-h-56 p-4 md:p-8 bg-silver overflow-hidden" aria-hidden="true">
-              <div class="relative w-48 shrink-0 md:w-full md:max-w-[12rem] scale-[0.6] sm:scale-100 bg-paper rounded-xl shadow-2xl p-3 rotate-[-2deg]">
-                <div class="mb-2 h-2 w-16 rounded-full bg-silver"></div>
-                <div class="grid grid-cols-7 gap-1">
-                  <span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span>
-                  <span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-navy"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span>
-                  <span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span>
-                  <span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span><span class="aspect-square rounded bg-platinum"></span>
-                </div>
-              </div>
-              <span class="hidden absolute right-2 top-7 sm:top-3 md:top-6 sm:right-5 sm:top-6 bg-orange text-paper text-[0.5rem] sm:text-[0.65rem] font-semibold rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-xl rotate-[6deg]">1 send this month</span>
+          <article class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
+            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-36 md:min-h-48 p-4 md:p-6 bg-ink overflow-hidden" aria-hidden="true">
+              <!-- Phosphor "envelope-simple-open-light" (images/svgs/index-page/envelope-simple-open-light.svg), inlined so the colour classes apply -->
+              <svg viewBox="0 0 256 256" class="absolute -right-6 -bottom-3 w-40 sm:w-48 md:-right-8 md:-bottom-16 md:w-64 lg:w-72 h-auto text-stone/30" fill="currentColor"><path d="M227.33,91l-96-64a6,6,0,0,0-6.66,0l-96,64A6,6,0,0,0,26,96V200a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V96A6,6,0,0,0,227.33,91ZM128,39.21l85.43,57L143.53,146H112.47L42.57,96.17ZM216,202H40a2,2,0,0,1-2-2V107.65l69.06,49.24a6.06,6.06,0,0,0,3.49,1.11h34.9a6.06,6.06,0,0,0,3.49-1.11L218,107.65V200A2,2,0,0,1,216,202Z"/></svg>
             </div>
-            <div class="flex flex-col justify-center gap-2 md:gap-3 p-5 sm:p-8">
-              <h3 class="text-md sm:text-xl lg:text-2xl text-ink">One-off campaigns</h3>
-              <p class="text-stone text-xs sm:text-sm lg:text-md leading-relaxed">A send here and there, with long silences in between, so your list forgets who you are.</p>
+            <div class="flex flex-col justify-center gap-2 p-5 sm:p-6">
+              <h3 class="text-base sm:text-lg lg:text-xl text-ink">One-off campaigns</h3>
+              <p class="text-stone text-xs sm:text-sm leading-relaxed">A send here and there, with long silences in between, so your list forgets who you are.</p>
             </div>
           </article>
 
-          <article data-reveal class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
-            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-40 md:min-h-56 p-4 md:p-8 bg-blue overflow-hidden" aria-hidden="true">
-              <div class="relative w-48 shrink-0 md:w-full md:max-w-[12rem] scale-[0.5] sm:scale-100">
-                <div class="absolute inset-0 bg-paper/50 rounded-xl rotate-[-8deg] -translate-y-3"></div>
-                <div class="absolute inset-0 bg-paper/70 rounded-xl rotate-[-4deg] -translate-y-1.5"></div>
-                <div class="relative bg-paper rounded-xl shadow-2xl p-3">
-                  <div class="flex items-center justify-between">
-                    <span class="h-2 w-16 rounded-full bg-ink/70"></span>
-                    <span class="text-[0.6rem] font-bold text-orange">SALE!!</span>
-                  </div>
-                  <div class="mt-2 h-1.5 w-full rounded-full bg-silver"></div>
-                  <div class="mt-3 flex items-center justify-between">
-                    <span class="h-2 w-12 rounded-full bg-ink/70"></span>
-                    <span class="text-[0.6rem] font-bold text-orange">SALE!!</span>
-                  </div>
-                  <div class="mt-2 h-1.5 w-full rounded-full bg-silver"></div>
-                  <div class="mt-3 flex items-center justify-between">
-                    <span class="h-2 w-20 rounded-full bg-ink/70"></span>
-                    <span class="text-[0.6rem] font-bold text-orange">SALE!!</span>
-                  </div>
-                  <div class="mt-2 h-1.5 w-full rounded-full bg-silver"></div>
-                </div>
-              </div>
-              <span class="hidden absolute right-2 bottom-10 sm:bottom-3 md:bottom-6 sm:right-5 sm:bottom-6 bg-orange text-paper text-[0.5rem] sm:text-[0.65rem] font-semibold rounded-full px-2 py-1 sm:px-3 sm:py-1.5 shadow-xl rotate-[-6deg]">Unsubscribed</span>
+          <article class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
+            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-36 md:min-h-48 p-4 md:p-6 bg-ink overflow-hidden" aria-hidden="true">
+              <!-- Phosphor "strategy-light" (images/svgs/index-page/strategy-light.svg), inlined so the colour classes apply -->
+              <svg viewBox="0 0 256 256" class="absolute -right-6 -bottom-3 w-40 sm:w-48 md:-right-8 md:-bottom-16 md:w-64 lg:w-72 h-auto text-stone/30" fill="currentColor"><path d="M76,154a34,34,0,1,0,34,34A34,34,0,0,0,76,154Zm0,56a22,22,0,1,1,22-22A22,22,0,0,1,76,210ZM43.76,107.76,59.52,92,43.76,76.24a6,6,0,0,1,8.48-8.48L68,83.52,83.76,67.76a6,6,0,0,1,8.48,8.48L76.48,92l15.76,15.76a6,6,0,1,1-8.48,8.48L68,100.48,52.24,116.24a6,6,0,0,1-8.48-8.48Zm184.48,96a6,6,0,1,1-8.48,8.48L204,196.48l-15.76,15.76a6,6,0,0,1-8.48-8.48L195.52,188l-15.76-15.76a6,6,0,0,1,8.48-8.48L204,179.52l15.76-15.76a6,6,0,0,1,8.48,8.48L212.48,188ZM182.55,112.3c-6,21.66-24.55,40.38-45.09,45.52A6.14,6.14,0,0,1,136,158a6,6,0,0,1-1.46-11.82c16.29-4.07,31.62-19.67,36.44-37.09,3.33-12,3.39-30.24-15.22-48.85L150,54.48V80a6,6,0,0,1-12,0V40a6,6,0,0,1,6-6h40a6,6,0,0,1,0,12H158.48l5.76,5.76C182,69.47,188.45,91,182.55,112.3Z"/></svg>
             </div>
-            <div class="flex flex-col justify-center gap-2 md:gap-3 p-5 sm:p-8">
-              <h3 class="text-md sm:text-xl lg:text-2xl text-ink">Sending with no plan</h3>
-              <p class="text-stone text-xs sm:text-sm lg:text-md leading-relaxed">Too many random campaigns with no clear strategy, training your customers to tune out.</p>
+            <div class="flex flex-col justify-center gap-2 p-5 sm:p-6">
+              <h3 class="text-base sm:text-lg lg:text-xl text-ink">Sending with no plan</h3>
+              <p class="text-stone text-xs sm:text-sm leading-relaxed">Too many random campaigns with no clear strategy, training your customers to tune out.</p>
             </div>
           </article>
 
@@ -277,47 +244,55 @@
       </div>
 
       <!-- Result -->
-      <div data-reveal class="flex flex-col gap-4 text-left text-stone text-sm md:text-lg">
-        <p class="text-xl md:text-3xl text-ink">
+      <div class="flex flex-col gap-3 text-stone text-sm md:text-base text-center mx-auto">
+        <p class="font-display text-lg md:text-2xl text-ink">
           The result? A stagnant list, poor deliverability, and <span class="text-orange">money left on the table.</span>
         </p>
-        <p class="hidden md:flex">
+        <p class="hidden md:flex max-w-3xl">
           When set up correctly, email should be the most profitable marketing channel in your mix.
           That's why we help clients build the systems that generate 40% of their total revenue, and average a 36x return on investment.
         </p>
       </div>
     </div>
-    <!-- Call to action -->
-    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-16 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
+    <!-- Call to action ==========
+      Navy card: heading, one line and the button on the left; on md+ a "who you'll talk to" card on the
+      right (both founders as overlapping avatars, what the call covers, length/cost). On phones the
+      avatars + "You'll speak to Jake or Tom (or both!)" sit above the button instead. Avatars are 160px square
+      crops (images/people/*-avatar.webp), greyscale to match the about page.
+    -->
+    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-12 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
         <div class="relative flex flex-col items-center md:items-start text-center md:text-left">
-          <h2 class="text-2xl md:text-3xl lg:text-5xl text-paper">Want to build a successful email platform?</h2>
-          <p class="text-sm md:text-lg text-paper/70 mt-4 md:mt-6 max-w-xl">Let's discuss how we can turn your emails into a money-making machine.</p>
-          <a href="contact.html" class="btn w-full max-w-md mt-10 md:mt-12 gap-4 md:gap-12">
+          <h2 class="font-display text-2xl md:text-3xl text-paper">See what your emails could be earning</h2>
+          <p class="text-sm md:text-lg text-paper/70 mt-4 max-w-xl">
+            <span class="hidden sm:flex">Book a free 30-minute call with one of the founders, and we'll tell you honestly what we'd change first.</span>
+            <span class="flex sm:hidden">Book a free 30m call with us, and we'll tell you what we'd change.</span>
+          </p>
+          <div class="md:hidden mt-6 flex items-center gap-3">
+            <span class="flex -space-x-3"><img src="images/people/tom-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"><img src="images/people/jake-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"></span>
+            <span class="text-sm text-paper/80 text-left">You'll speak to Jake or Tom <span class="whitespace-nowrap">(or both!)</span></span>
+          </div>
+          <a href="contact.html" class="btn w-full max-w-md mt-8 md:mt-10 gap-4 md:gap-12">
             Book a strategy call
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
               <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
         </div>
-        <div class="hidden md:block relative w-full max-w-[13rem] md:max-w-xs mx-auto" aria-hidden="true">
-          <div class="bg-paper rounded-xl shadow-2xl p-3 md:p-5 rotate-[3deg]">
-            <div class="flex items-center gap-3">
-              <span class="flex flex-col items-center justify-center h-11 w-11 rounded-lg bg-blue text-paper leading-none">
-                <span class="font-display text-lg">30</span>
-                <span class="text-[0.55rem] uppercase">min</span>
-              </span>
-              <span>
-                <span class="block font-display text-lg text-ink">Strategy call</span>
-                <span class="block text-xs text-stone">with FromSendr</span>
-              </span>
-            </div>
-            <div class="grid grid-cols-3 gap-2 mt-5 text-[0.65rem] font-semibold text-center">
-              <span class="rounded-md border border-silver text-stone py-1.5">10:00</span>
-              <span class="rounded-md bg-blue text-paper py-1.5">11:30</span>
-              <span class="rounded-md border border-silver text-stone py-1.5">14:00</span>
-            </div>
+        <div class="hidden md:block relative w-full max-w-sm mx-auto bg-paper rounded-xl shadow-2xl p-6">
+          <div class="flex items-center gap-4">
+            <span class="flex shrink-0 -space-x-3"><img src="images/people/tom-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-14 w-14 rounded-full object-cover grayscale ring-2 ring-paper"><img src="images/people/jake-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-14 w-14 rounded-full object-cover grayscale ring-2 ring-paper"></span>
+            <span>
+              <span class="block text-[0.65rem] uppercase tracking-[0.2em] text-stone">You'll speak to</span>
+              <span class="block mt-1 font-display text-lg leading-tight text-ink">Jake or Tom (or both!)</span>
+              <span class="block mt-0.5 text-xs text-stone">Co-founders, FromSendr</span>
+            </span>
           </div>
-          <span class="absolute -right-3 -top-3 md:-right-4 md:-top-4 bg-orange text-paper text-[0.6rem] md:text-xs font-semibold uppercase tracking-wider rounded-full px-2.5 md:px-3 py-1 md:py-1.5 shadow-xl rotate-[8deg]">Free</span>
+          <ul class="mt-5 pt-5 border-t border-platinum space-y-3 text-sm text-stone">
+              <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A look through your flows, campaigns and list</span></li>
+              <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The first changes we'd make, in priority order</span></li>
+              <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Honest advice, with no obligation to work with us</span></li>
+          </ul>
+          <p class="mt-5 text-xs font-semibold uppercase tracking-[0.15em] text-navy">30 min &middot; Free</p>
         </div>
     </div>
   </section>
@@ -327,7 +302,7 @@
     <div class="flex justify-between">
       <div class="flex flex-col justify-start gap-8">
         <img src="images/wordmark-platinum-footer.webp" alt="FromSendr" width="400" height="108" loading="lazy" decoding="async" class="w-24 sm:w-32 md:w-48">
-        <img src="images/klaviyo-partner.png" alt="Klaviyo Partner" width="800" height="337" loading="lazy" decoding="async" class="w-14 sm:w-20 md:w-28">
+        <img src="images/klaviyo-partner.png" alt="Klaviyo Partner" width="800" height="337" loading="lazy" decoding="async" class="hidden w-14 sm:w-20 md:w-28">
       </div>
       <div class="flex justify-end gap-20">
         <div class="flex flex-col gap-4 text-xs text-right md:text-left md:text-sm">
@@ -338,14 +313,13 @@
           <a href="contact.html" class="footer-link">Contact</a>
         </div>
         <div class="hidden md:flex flex-col gap-4 text-xs md:text-sm">
-          <a href="services.html#faq" class="footer-link">Frequently Asked Questions</a>
-          <a href="index.html#statistics" class="footer-link">Email Statistics</a>
-          <a href="services.html#process" class="footer-link">Our Process</a>
-          <a href="contact.html#booking" class="footer-link">Book a Call</a>
+          <a href="services.html#faq" class="footer-link">FAQs</a>
+          <a href="index.html#statistics" class="footer-link">Email statistics</a>
+          <a href="services.html#process" class="footer-link">Our process</a>
+          <a href="contact.html#booking" class="footer-link">Book a call</a>
         </div>
         <div class="hidden lg:flex flex-col gap-4 text-xs md:text-sm">
           <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>
-          <a href="https://www.fiverr.com/fromsendr" target="_blank" rel="noopener noreferrer" class="footer-link">Fiverr</a>
         </div>
       </div>
     </div>
@@ -356,11 +330,6 @@
         <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link" title="Instagram" aria-label="FromSendr on Instagram">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
             <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-          </svg>
-        </a>
-        <a href="https://www.fiverr.com/fromsendr" target="_blank" rel="noopener noreferrer" class="footer-link" title="Fiverr" aria-label="FromSendr on Fiverr">
-          <svg width="21" height="21" fill="currentColor" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
-            <path d="M121.1 170h34.75V67.04H90.21v-7.72s0-9.01 9.01-9.01h21.88V22H99.22s-43.76 0-43.76 37.32v7.72h-19.3v28.31h19.3v74.64h34.75V95.36h30.89V170Z"/>
           </svg>
         </a>
       </div>

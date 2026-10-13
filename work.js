@@ -49,3 +49,49 @@ emailModal.addEventListener("close", () => {
     emailModalBody.replaceChildren();
     document.body.classList.remove("overflow-hidden");
 });
+
+// Archive strip: click and drag to scroll with a mouse (touch and trackpads already scroll it
+// natively). Dragging sideways moves the row; dragging up/down scrolls the email under the
+// pointer. Presses on a scrollbar (the strip's or a card's) are left to the browser.
+const archiveStrip = document.querySelector(".archive-strip");
+
+if (archiveStrip) {
+    let drag = null;
+
+    // True if the point is on el's scrollbar: client sizes exclude scrollbars
+    const onScrollbar = (el, x, y) => {
+        const r = el.getBoundingClientRect();
+        return x > r.left + el.clientLeft + el.clientWidth || y > r.top + el.clientTop + el.clientHeight;
+    };
+
+    archiveStrip.addEventListener("pointerdown", (event) => {
+        if (event.pointerType !== "mouse" || event.button !== 0) return;
+        const card = event.target.closest(".archive-card");
+        if (onScrollbar(archiveStrip, event.clientX, event.clientY) || (card && onScrollbar(card, event.clientX, event.clientY))) return;
+        drag = { x: event.clientX, y: event.clientY, left: archiveStrip.scrollLeft, card, top: card ? card.scrollTop : 0, moved: false };
+        archiveStrip.setPointerCapture(event.pointerId);
+    });
+
+    archiveStrip.addEventListener("pointermove", (event) => {
+        if (!drag) return;
+        const dx = event.clientX - drag.x;
+        const dy = event.clientY - drag.y;
+        // A few pixels of slack, so a plain click doesn't count as a drag
+        if (!drag.moved && Math.hypot(dx, dy) < 4) return;
+        if (!drag.moved) {
+            drag.moved = true;
+            archiveStrip.classList.add("is-dragging");
+        }
+        archiveStrip.scrollLeft = drag.left - dx;
+        if (drag.card) drag.card.scrollTop = drag.top - dy;
+    });
+
+    const endDrag = () => {
+        drag = null;
+        archiveStrip.classList.remove("is-dragging");
+    };
+    archiveStrip.addEventListener("pointerup", endDrag);
+    archiveStrip.addEventListener("pointercancel", endDrag);
+    // Stop the browser's own image drag (the ghost image) from taking over the gesture
+    archiveStrip.addEventListener("dragstart", (event) => event.preventDefault());
+}

@@ -10,6 +10,14 @@
     --color-orange: #EB4511;
 }
 
+/* Headlines: Tailwind's font-display sets the family (Space Grotesk); this adds its default
+   weight and slightly tighter tracking. A weight class on the element (font-semibold etc.)
+   still wins, since tailwind.css loads later. */
+.font-display {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
 /* Site nav: only the logo is visible by default, fixed top-centre. The logo is
    white and blends with `difference`, so it always renders as the inverse of
    whatever is behind it. That only works while nothing between it and <body>
@@ -227,7 +235,9 @@ html body :where(.btn) {
     gap: 3rem;
     padding: 1rem 1.5rem;
     border: 2px solid var(--btn-border);
-    border-radius: 0.6rem;
+    border-radius: 0.5rem;
+    /* Crops the ::before fill to the rounded corners (see below). The button's own shadow isn't clipped */
+    overflow: hidden;
     background-color: var(--btn-bg);
     color: var(--btn-color);
     /* Tailwind's shadow-xl */
@@ -239,14 +249,15 @@ html body :where(.btn) {
     transition: color 0.3s ease;
 }
 
-/* Fill slides in from the left on hover, then exits to the right on hover-out */
+/* Fill slides in from the left on hover, then exits to the right on hover-out. It's a plain
+   rectangle cropped by the button's overflow: hidden, so the corners keep their exact curve
+   throughout; a rounded fill would get its corners squashed by the scaleX mid-animation. */
 html body :where(.btn)::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: -1;
     background-color: var(--btn-fill);
-    border-radius: 0.5rem;
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.3s ease;
@@ -272,6 +283,27 @@ html body :where(.btn:focus-visible)::before {
         transform: scaleX(1);
         transform-origin: left;
     }
+}
+
+/* Compact button (the header's "Book a call"): no arrow, smaller type and padding. One class
+   more specific than the base rules, so it also beats their md/lg size steps. */
+html body .btn-sm {
+    gap: 0;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Header booking button: fixed top-right, vertically centred on the logo (logo centre is
+   1rem offset + 0.75rem padding + half its 2.34rem height, at md+; minus half the button's 2.5rem). Above the nav panel
+   (z-40), so it stays put and readable when the panel drops down behind it. It's a sibling
+   of .site-logo, so its z-index can't affect the logo's blend mode. */
+.site-cta {
+    position: fixed;
+    top: calc(2.92rem - 1.25rem);
+    right: 2rem;
+    z-index: 50;
 }
 
 /* The trailing arrow SVG inside a .btn */
@@ -300,164 +332,23 @@ html body :where(.btn:focus-visible)::before {
     }
 }
 
-/* Every page's hero: fills the first screen, then shrinks as soon as the page is scrolled
-   at all (script.js adds .is-collapsed), pulling the next section up. min-height rather
-   than height so the content still fits on short screens. Desktop-only (md+): on phones the
-   hero is just as tall as its content and padding, because anything tied to the viewport
-   height jumps when the browser's toolbars slide away on scroll (script.js still toggles
-   .is-collapsed there, which only fades the scroll cue). */
+/* Index hero: fills the first screen on md+. Phones get a hero as tall as its content,
+   because anything tied to the viewport height jumps as the browser toolbars show/hide. */
 @media (min-width: 768px) {
-    .hero-shrink {
+    .hero-full {
         min-height: 100vh;
         min-height: 100svh;
-        transition: min-height 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Contact page: the hero only needs to introduce the booking widget, so it starts shorter */
-    .hero-short {
-        min-height: 75vh;
-        min-height: 75svh;
-    }
-
-    .hero-shrink.is-collapsed {
-        min-height: 80vh;
-        min-height: 80svh;
-    }
-
-    .hero-short.is-collapsed {
-        min-height: 60vh;
-        min-height: 60svh;
-    }
-
-    /* Browser scroll anchoring would "correct" the shrink by scrolling back up, cancelling it */
-    html:has(.hero-shrink) {
-        overflow-anchor: none;
     }
 }
 
-.hero-cue {
-    transition: opacity 0.3s;
-}
-
-.hero-shrink.is-collapsed .hero-cue {
-    opacity: 0;
-}
-
-/* Backgrounds inside a shrinking hero (index photo, other pages' aurora): at least screen-height
-   and centred, so the hero's overflow-hidden crops them as it shrinks rather than
-   squashing them. min-height keeps them covering a hero that's taller than the screen,
-   and its +2px overhangs each edge by 1px so sub-pixel rounding of the centring can't
-   leave a hairline gap at the top. */
-.hero-bg,
-.hero-shrink > .aurora {
-    position: absolute;
-    inset: 50% 0 auto;
-    height: 100vh;
-    height: 100svh;
-    min-height: calc(100% + 2px);
-    translate: 0 -50%;
-}
-
-/* Phones: no shrink (see .hero-shrink), so the background just fills the hero and doesn't
-   depend on the viewport height, which changes as the browser's toolbars show and hide */
-@media (max-width: 767px) {
-    .hero-bg,
-    .hero-shrink > .aurora {
-        inset: 0;
-        height: auto;
-        min-height: 0;
-        translate: none;
-    }
-}
-
-/* Index hero photo, washed out towards white so its colours don't compete with the text.
-   Sizing/position is shared with the aurora, above. The WebP is preloaded in index.html. */
-.hero-bg {
-    background:
-        radial-gradient(ellipse at 15% 0%, rgb(45 125 210 / 0.3), transparent 60%),
-        radial-gradient(ellipse at 95% 100%, rgb(235 69 17 / 0.14), transparent 55%),
-        linear-gradient(rgb(232 233 237 / 0.55), rgb(232 233 237 / 0.97)),
-        url("images/hero-bg.webp") center / cover no-repeat;
-    filter: saturate(0.85);
-}
-
-/* Scroll-linked charts: --progress (0 to 1) is set per chart in script.js */
+/* Index $36 donut: 36/37 of the ring is the return; the remaining sliver is the $1 invested */
 .return-donut {
-    /* 36/37 of the ring is the return; the remaining sliver is the $1 invested */
-    background: conic-gradient(var(--color-blue) calc(var(--progress, 0) * 350.27deg), var(--color-platinum) 0);
+    background: conic-gradient(var(--color-blue) 350.27deg, var(--color-platinum) 0);
 }
 
+/* Bar charts: --target (inline style) is the fill width */
 .share-bar-fill {
-    width: calc(var(--progress, 0) * var(--target));
-}
-
-/* Slide-up reveal for [data-reveal] (triggered by script.js). The element is moved
-   down by its own height and clipped at its resting bottom edge, so it slides up out
-   of that edge without fading. The clip is in the element's own (moving) coordinates,
-   so the bottom inset shrinks in step with the translate to keep that edge fixed; it
-   ends slightly negative so shadows aren't cut off. Uses `translate` rather than
-   `transform` so it doesn't clash with hover transforms like .email-preview's.
-   The hidden state only applies once JS adds .reveal-ready, so without JS (or with
-   reduced motion) everything just shows. */
-[data-reveal].reveal-ready {
-    translate: 0 100%;
-    clip-path: inset(0 0 100% 0);
-}
-
-/* The transition lives only on the revealed state, so applying the hidden state is
-   instant (otherwise it would animate down, and script.js's transitionend cleanup
-   would fire early and undo the whole thing). */
-[data-reveal].reveal-ready.is-revealed {
-    translate: 0 0;
-    clip-path: inset(-4rem);
-    transition:
-        translate 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
-        clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
-}
-
-/* Sticker: a small image slapped over a card's top-right corner, with about a
-   third of it on the card and the rest hanging off. The card needs `relative`.
-   On mobile it's smaller and hangs off less to the side, so it stays inside the
-   page's 1.5rem gutter and can't cause horizontal scroll.
-   Inside a [data-reveal] card it stays hidden during the card's clipped slide-up
-   (the clip would cut it off) and slaps on with a bounce once script.js drops the
-   reveal classes. Uses `scale`/`rotate` rather than `transform` so the two
-   states and the hover wiggle don't overwrite each other. */
-.sticker {
-    --sticker-size: 4.5rem;
-    --sticker-rotate: 12deg;
-    position: absolute;
-    top: calc(var(--sticker-size) * -2 / 6);
-    right: -1rem;
-    width: var(--sticker-size);
-    height: var(--sticker-size);
-    rotate: var(--sticker-rotate);
-    filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.18));
-    pointer-events: none;
-    transition:
-        scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-        rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-        opacity 0.15s ease;
-}
-
-@media (min-width: 768px) {
-    .sticker {
-        --sticker-size: 7rem;
-        right: calc(var(--sticker-size) * -2 / 5);
-    }
-}
-
-[data-reveal].reveal-ready .sticker {
-    opacity: 0;
-    scale: 1.6;
-    rotate: calc(var(--sticker-rotate) - 25deg);
-}
-
-@media (hover: hover) {
-    :hover > .sticker {
-        rotate: calc(var(--sticker-rotate) + 10deg);
-        scale: 1.08;
-    }
+    width: var(--target);
 }
 
 /* White text on a painted blue brush stroke (index "Timing matters."). The SVG
@@ -470,14 +361,13 @@ html body :where(.btn:focus-visible)::before {
     background: url(images/brush-stroke.svg) center / 100% 100% no-repeat;
 }
 
-/* Navy CTA card: soft blue glow top-left, orange bottom-right. Gradients rather than
-   blurred spans, because iOS Safari clips a blurred child to the card before blurring,
-   which left the top of the card plain navy. Only background-image, so bg-navy still
-   sets the colour underneath. */
+/* Navy CTA card: soft blue glows in two corners. Gradients rather than blurred spans,
+   because iOS Safari clips a blurred child to the card before blurring. Only
+   background-image, so bg-navy still sets the colour underneath. */
 .cta-glow {
     background-image:
         radial-gradient(14rem circle at 3rem 3rem, rgb(45 125 210 / 0.4) 25%, transparent),
-        radial-gradient(14rem circle at calc(100% - 3rem) calc(100% - 3rem), rgb(235 69 17 / 0.3) 25%, transparent);
+        radial-gradient(14rem circle at calc(100% - 3rem) calc(100% - 3rem), rgb(45 125 210 / 0.2) 25%, transparent);
 }
 
 /* Services FAQ: the open answer tucks up 0.5rem into the summary's bottom padding. It's
@@ -575,7 +465,7 @@ html body :where(.btn:focus-visible)::before {
 }
 
 /* Placeholder email until real screenshots exist: header bar, hero block, text lines.
-   The -orange/-stone/-dark modifiers only swap the colour variables, for variety in the grid and marquee. */
+   The -orange/-stone/-dark modifiers only swap the colour variables, for variety. */
 .email-skeleton {
     --sk-head: #B9D3EF;
     --sk-hero: var(--color-blue);
@@ -612,27 +502,33 @@ html body :where(.btn:focus-visible)::before {
     min-height: 90rem;
 }
 
-/* Work page: continuously scrolling strip of email design thumbnails.
-   The mask fades the cards out at both screen edges instead of cutting them off. */
-.marquee {
-    width: 100%;
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-}
-
-.marquee-track {
+/* Work page archive: a row of email thumbnails that scrolls sideways (by hand: no
+   auto-scroll). Each card also scrolls vertically to read the whole email. */
+.archive-strip {
     display: flex;
     align-items: flex-start;
     gap: 0.8rem;
-    width: max-content;
-    will-change: transform;
-    /* Position driven by script.js (rAF), not a CSS animation: a JS-tracked
-       offset can be paused/resumed any number of times with no drift or
-       restart, which a CSS animation-play-state toggle can't guarantee
-       across browsers, especially under mobile's sticky-:hover-on-tap. */
+    overflow-x: auto;
+    padding-inline: 1.5rem;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-blue) transparent;
 }
 
-.marquee-card {
+/* Mouse users can also click and drag the strip (work.js). No scroll-snap: mandatory
+   snapping made scrollbar/trackpad scrolling jump one card at a time and fought the drag. */
+@media (hover: hover) and (pointer: fine) {
+    .archive-strip {
+        cursor: grab;
+    }
+}
+
+.archive-strip.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+}
+
+.archive-card {
     position: relative;
     flex: 0 0 auto;
     width: 9rem;
@@ -646,74 +542,22 @@ html body :where(.btn:focus-visible)::before {
     scrollbar-color: var(--color-blue) transparent;
 }
 
-.marquee-card::-webkit-scrollbar {
+.archive-card::-webkit-scrollbar {
     width: 4px;
 }
 
-.marquee-card::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.marquee-card::-webkit-scrollbar-thumb {
+.archive-card::-webkit-scrollbar-thumb {
     background: var(--color-blue);
 }
 
-.marquee-card-fill {
-    width: 100%;
-    border-radius: 0.7rem;
-}
-
 @media (min-width: 768px) {
-    .marquee-card {
+    .archive-strip {
+        padding-inline: 2.5rem;
+    }
+
+    .archive-card {
         width: 16rem;
         height: 30rem;
         padding: 6px;
-    }
-}
-
-/* Services/work/about/contact hero: slowly drifting "aurora" of glows in the site palette
-   (blue, orange, navy) on a platinum base. Each blob is a soft radial gradient (cheaper than
-   filter: blur) and only its transform is animated, so it stays on the compositor. Blob
-   colour/position/path/speed are per-blob variables. */
-.aurora {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    background: radial-gradient(ellipse at 50% 110%, #DCE6F2, #E8E9ED 70%);
-    pointer-events: none;
-}
-
-.aurora-blob {
-    position: absolute;
-    width: 75vmax;
-    height: 75vmax;
-    border-radius: 50%;
-    background: radial-gradient(closest-side, var(--blob-color), transparent);
-    will-change: transform;
-    animation: aurora-drift var(--blob-duration) ease-in-out var(--blob-delay) infinite alternate;
-}
-
-.aurora-blob-1 { --blob-color: rgba(45, 125, 210, 0.45); top: -35vmax; left: -25vmax;  --blob-duration: 22s; --blob-delay: -6s;  --blob-to: 30vw, 20vh;  --blob-scale: 1.15; }
-.aurora-blob-2 { --blob-color: rgba(235, 69, 17, 0.22);  top: 10vh;    right: -35vmax; --blob-duration: 27s; --blob-delay: -14s; --blob-to: -35vw, -15vh; --blob-scale: 0.9; }
-.aurora-blob-3 { --blob-color: rgba(45, 125, 210, 0.3);  bottom: -45vmax; left: 10vw;  --blob-duration: 31s; --blob-delay: -3s;  --blob-to: 20vw, -25vh; --blob-scale: 1.25; }
-.aurora-blob-4 { --blob-color: rgba(1, 22, 39, 0.12);    top: 20vh;    left: -40vmax;  --blob-duration: 25s; --blob-delay: -19s; --blob-to: 45vw, -10vh; --blob-scale: 1.1; }
-
-@keyframes aurora-drift {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(var(--blob-to)) scale(var(--blob-scale)); }
-}
-
-/* Film grain on top so the gradients don't band and the surface feels less flat */
-.aurora::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.12;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .aurora-blob {
-        animation: none;
     }
 }

@@ -17,7 +17,7 @@ module.exports = {
         orange: '#EB4511',
       },
       fontFamily: {
-        display: ['"Fraunces"', 'serif'],
+        display: ['"Space Grotesk"', 'sans-serif'],
         sans: ['"Poppins"', 'sans-serif'],
       },
     },

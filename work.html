@@ -4,12 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="images/favicon-v4.png">
-  <title>FromSendr | Case Studies</title>
+  <title>FromSendr | Work</title>
+  <meta name="description" content="Email campaigns and flows designed by FromSendr, from product launches to win-backs. Open any email to read it in full.">
+
+  <!-- Open Graph: the title, description and image shown when a link to this page is shared (Slack, iMessage, LinkedIn...). og:url/og:image must be absolute URLs -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FromSendr">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="FromSendr work">
+  <meta property="og:description" content="Email campaigns and flows designed by FromSendr, from product launches to win-backs. Open any email to read it in full.">
+  <meta property="og:url" content="https://fromsendr.com/work.html">
+  <meta property="og:image" content="https://fromsendr.com/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FromSendr: email marketing for e-commerce brands">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Poppins:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..600&family=Poppins:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
 
   <!-- Built from tailwind.input.css + tailwind.config.js (see CLAUDE.md); must stay after styles.css -->
   <link rel="stylesheet" href="tailwind.css">
@@ -17,15 +31,6 @@
 
 <body class="bg-platinum text-ink font-sans antialiased">
 
-  <!-- Header + intro together fill the first screen (the intro takes the remaining height), then shrink as soon as the page scrolls (.hero-shrink, see styles.css/script.js) -->
-  <div class="hero-shrink relative overflow-hidden flex flex-col">
-  <!-- Animated aurora background in the brand colours (pure CSS, see .aurora in styles.css). Painted first (no z-index) so the later nav/intro sit on top without creating a stacking context (see .site-logo) -->
-  <div class="aurora" aria-hidden="true">
-    <span class="aurora-blob aurora-blob-1"></span>
-    <span class="aurora-blob aurora-blob-2"></span>
-    <span class="aurora-blob aurora-blob-3"></span>
-    <span class="aurora-blob aurora-blob-4"></span>
-  </div>
   <!-- ========== NAV (same as index.html) ========== -->
   <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
   <a href="index.html" class="site-logo" aria-label="FromSendr home">
@@ -38,59 +43,31 @@
     <a href="work.html" class="nav-link-selected">Work</a>
     <a href="about.html" class="nav-link">About</a>
     <a href="contact.html" class="nav-link">Contact</a>
+    <!-- Phones: a booking button at the bottom of the drawer (the fixed .site-cta below is md+ only) -->
+    <a href="contact.html" class="btn btn-sm md:hidden mt-auto w-full justify-center font-normal normal-case">Book a call</a>
   </nav>
+  <!-- Always-visible booking button, top-right on md+ (not on contact.html). Sits above the nav panel, see .site-cta -->
+  <a href="contact.html" class="btn btn-sm site-cta hidden md:inline-flex">Book a call</a>
 
   <!-- ========== INTRO ==========
-    Split hero (same pattern as services.html): copy + jump links on the left, a static collage on
-    the right (stacked below lg) fanning out three real email thumbnails. The jump links point at
-    section ids below; script.js collapses the hero before scrolling (see .hero-shrink).
+    Navy band: centred headline, then the tops of five real emails (three on phones) rising
+    from the bottom edge, staggered, and cut off by the band. Content height, no background effects.
+    The thumbnails are the same files the grid uses, so they're already cached further down.
   -->
-  <section class="flex-1 flex items-center relative w-full mx-auto max-w-6xl px-6 md:px-10 pt-24 pb-28 md:pb-36">
-    <div class="w-full grid md:gap-14 lg:grid-cols-2 lg:gap-10 items-center">
-      <div>
-        <p class="inline-flex items-center gap-2 bg-paper rounded-full px-4 py-2 text-[0.55rem] md:text-xs font-semibold uppercase tracking-[0.2em] text-navy shadow">
-          <span class="h-1 w-1 md:h-2 md:w-2 rounded-full bg-orange"></span>Our work
-        </p>
-        <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-navy">Email revenue waiting to be <span class="text-blue font-bold italic">earned</span></h1>
-        <p class="hidden md:flex mt-6 text-ink/70 text-sm md:text-lg max-w-xl">
-          A look at some example campaigns and flows. Tap any email to read it in full.
-        </p>
-        <nav class="mt-8 hidden md:flex flex-wrap gap-2 text-platinum" aria-label="Jump to a section">
-          <a href="#featured" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-orange"></span>Featured flow</a>
-          <a href="#selected-work" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-blue"></span>Selected work</a>
-          <a href="#archive" class="flex items-center gap-2 bg-navy rounded-full px-4 py-2 shadow text-xs md:text-sm font-semibold hover:shadow-lg transition-shadow"><span class="h-2.5 w-2.5 rounded-full bg-blue/40"></span>From the archive</a>
-        </nav>
-      </div>
-
-      <!-- Collage: square box, pieces positioned in % so it scales with the column. Later pieces paint on top.
-           The thumbnails are the same files the grid uses, so they're already cached further down -->
-      <div class="hidden md:block relative w-full max-w-md sm:max-w-lg mx-auto aspect-square" aria-hidden="true">
-        <div class="absolute left-[10%] right-[10%] top-[16%] bottom-[8%] bg-blue rounded-[2rem] shadow-2xl rotate-[4deg]"></div>
-        <div class="absolute left-[2%] top-[16%] w-[42%] aspect-[3/5] bg-paper p-1.5 rounded-2xl shadow-2xl overflow-hidden rotate-[-10deg]">
-          <img src="images/work/replab-1-full-thumb.webp" alt="" decoding="async" class="w-full h-full object-cover object-top rounded-xl">
-        </div>
-        <div class="absolute right-[2%] top-[16%] w-[42%] aspect-[3/5] bg-paper p-1.5 rounded-2xl shadow-2xl overflow-hidden rotate-[10deg]">
-          <img src="images/work/moonjuice-full-thumb.webp" alt="" decoding="async" class="w-full h-full object-cover object-top rounded-xl">
-        </div>
-        <div class="absolute left-[29%] top-[4%] w-[42%] aspect-[3/5] bg-paper p-1.5 rounded-2xl shadow-2xl overflow-hidden rotate-[-2deg]">
-          <img src="images/work/wild-full-thumb.webp" alt="" decoding="async" class="w-full h-full object-cover object-top rounded-xl">
-        </div>
-        <!-- Stickers -->
-        <span class="absolute left-[4%] bottom-[16%] bg-blue text-paper text-[0.55rem] sm:text-xs font-semibold uppercase tracking-wider rounded-full px-3 py-1.5 shadow-xl rotate-[-8deg]">Welcome series</span>
-        <span class="absolute left-[40%] bottom-[20%] bg-navy text-paper text-[0.55rem] sm:text-xs font-semibold uppercase tracking-wider rounded-full px-3 py-1.5 shadow-xl rotate-[4deg]">Campaign</span>
-        <img src="images/stickers/verified-sticker.png" alt="" class="absolute right-[0%] top-[8%] w-14 sm:w-20 rotate-[12deg] drop-shadow-lg">
-      </div>
+  <header class="overflow-hidden bg-navy text-platinum">
+    <div class="mx-auto max-w-6xl px-6 md:px-10 pt-28 md:pt-32 text-center">
+      <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-silver">Our work</p>
+      <h1 class="mt-5 md:mt-6 font-display text-4xl md:text-[2.75rem] leading-[1.08]">Emails built to be <span class="font-semibold text-blue">opened</span></h1>
+      <p class="mt-6 text-silver text-sm md:text-lg max-w-xl mx-auto">Campaigns and flows we've designed for e-commerce brands. Open any email to read it in full.</p>
     </div>
-
-    <!-- Scroll cue: sits at the bottom of the first screen -->
-    <div class="hero-cue hidden absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 md:flex flex-col items-center gap-3 text-navy font-bold" aria-hidden="true">
-      <span class="text-[0.6rem] uppercase tracking-[0.2em]">Our work</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="24" viewBox="0 0 16 24" fill="none" class="w-3 h-5 motion-safe:animate-bounce">
-        <path d="M8 1V21M8 21L1 14M8 21L15 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+    <div class="mx-auto max-w-6xl px-6 md:px-10 mt-12 md:mt-16 h-40 md:h-72 overflow-hidden grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-5" aria-hidden="true">
+      <img src="images/work/wild-full-thumb.webp" alt="" decoding="async" class="w-full h-[28rem] object-cover object-top rounded-t-xl">
+      <img src="images/work/moonjuice-full-thumb.webp" alt="" decoding="async" class="w-full h-[28rem] object-cover object-top rounded-t-xl mt-8 md:mt-12">
+      <img src="images/work/bucs-full-thumb.webp" alt="" decoding="async" class="w-full h-[28rem] object-cover object-top rounded-t-xl mt-3 md:mt-4">
+      <img src="images/work/nutandnoggin-full-thumb.webp" alt="" decoding="async" class="w-full h-[28rem] object-cover object-top rounded-t-xl hidden md:block md:mt-10">
+      <img src="images/work/replab-1-full-thumb.webp" alt="" decoding="async" class="w-full h-[28rem] object-cover object-top rounded-t-xl hidden md:block md:mt-2">
     </div>
-  </section>
-  </div>
+  </header>
 
   <!-- ========== PROJECTS ==========
     A featured project (full width) followed by a grid of cards: 2 columns (3 from lg).
@@ -99,22 +76,22 @@
     Keep the number of grid cards a multiple of 6 (including the "your brand" card) so both layouts end on a full row.
     Every project is an <article data-work-item> containing a <button data-open-email> (work.js opens the modal).
     - Preview: <img src="images/work/name-full-thumb.webp" loading="lazy" ...> (the whole email; the
-      card crops it and .email-preview adds the fade-out). Thumbs are 800px-wide WebP, also used by the marquee.
+      card crops it and .email-preview adds the fade-out). Thumbs are 800px-wide WebP, also used by the archive strip.
     - Full email: set data-full to a 1200px-wide WebP (images/work/name-full.webp) or an
       exported HTML file (images/work/name.html), which loads in an iframe.
       With no data-full, a placeholder is shown (placeholder cards use <div class="email-skeleton">).
     Don't reference the original 2000px PNG screenshots directly: at 7-29 MB each they dominated load time.
   -->
   <section id="selected-work" class="scroll-mt-8 mx-auto max-w-6xl px-6 md:px-10 pt-16 md:pt-24 pb-20 md:pb-28">
-    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between border-b border-ink/10 pb-6 mb-10 md:mb-14">
-      <h2 class="font-sans text-2xl md:text-5xl">Selected work</h2>
-      <!-- Colour key for the card labels below: flows navy, campaigns blue, welcome series orange -->
+    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between border-b border-ink/10 pb-6 mb-4">
+      <h2 class="font-display text-2xl md:text-3xl">Selected work</h2>
+      <!-- Colour key for the card labels below: flows navy, campaigns blue -->
       <p class="hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-xs md:text-sm uppercase tracking-[0.2em] text-stone">
         <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-navy"></span>Flows</span>
         <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-blue"></span>Campaigns</span>
-        <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-orange"></span>Welcome series</span>
       </p>
     </div>
+    <p class="mb-10 md:mb-14 text-xs md:text-sm text-stone">Concept work: these emails were designed to show what we do, and weren't commissioned by the brands featured.</p>
 
     <div class="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-8 sm:gap-y-20 lg:grid-cols-3">
 
@@ -126,15 +103,14 @@
             <span class="email-preview-cta">View full email</span>
           </button>
         </div>
-        <div data-reveal class="flex flex-col justify-center px-6 pb-10 md:p-12 md:pl-2">
+        <div class="flex flex-col justify-center px-6 pb-10 md:p-12 md:pl-2">
           <p class="flex flex-wrap items-center gap-3 text-xs md:text-sm uppercase tracking-[0.2em] text-silver">
             <span class="bg-orange text-paper rounded-full px-3 py-1 font-semibold tracking-wider">Featured</span>
-            Product Launch
+            Product launch
           </p>
-          <h3 class="text-4xl md:text-6xl mt-3 text-platinum">Wild deodorant</h3>
+          <h3 class="font-display text-3xl md:text-4xl mt-3 text-platinum">Wild deodorant</h3>
           <p class="text-sm md:text-base text-silver mt-5 md:mt-8 leading-relaxed">
-            A product launch campaign for new summer scents, with a hero image, and a step-by-step guide to the personalization of the product.
-            Features mutliple CTAs with a push for subscribe and save.
+            A launch campaign for Wild's new summer scents: a hero image, a step-by-step guide to personalising your case, and several calls to action building towards subscribe-and-save.
           </p>
           <dl class="mt-8 md:mt-10 grid grid-cols-2 gap-4 border-t border-paper/15 pt-6">
             <div>
@@ -143,17 +119,14 @@
             </div>
             <div>
               <dt class="text-[0.65rem] md:text-xs uppercase tracking-widest text-silver">Industry</dt>
-              <dd class="text-lg md:text-2xl mt-1">Body Care</dd>
+              <dd class="text-lg md:text-2xl mt-1">Body care</dd>
             </div>
           </dl>
-          <p class="text-right mt-8 md:mt-16 text-stone text-xs md:text-sm">This email was not commissioned and is solely for example and practice purposes.</p>
         </div>
       </article>
 
-      <p class="col-span-2 sm:hidden text-xs text-center text-stone/80">These emails were not commissioned and are solely for example and practice purposes.</p>
-
       <!-- Grid card -->
-      <article data-work-item data-title="Campaign: RepLab" data-full="images/work/replab-1-full.webp" data-reveal>
+      <article data-work-item data-title="Campaign: RepLab" data-full="images/work/replab-1-full.webp">
         <button type="button" data-open-email class="email-preview w-full text-left" aria-label="View full email: RepLab">
           <img src="images/work/replab-1-full-thumb.webp" alt="Preview of the full email: RepLab" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
@@ -164,26 +137,24 @@
         </div>
         <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
           <p>An introduction to RepLab's core product, including a breakdown of its contents.</p>
-          <p>This email was not commissioned and is solely for example and practice purposes.</p>
         </div>
       </article>
 
-      <article data-work-item data-title="Welcome Series: Tampa Bay Buccaneers" data-full="images/work/bucs-full.webp" data-reveal>
+      <article data-work-item data-title="Welcome Series: Tampa Bay Buccaneers" data-full="images/work/bucs-full.webp">
         <button type="button" data-open-email class="email-preview w-full text-left" aria-label="View full email: Tampa Bay Buccaneers">
           <img src="images/work/bucs-full-thumb.webp" alt="Preview of the full email: Tampa Bay Buccaneers" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
         </button>
         <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
           <h3 class="font-sans text-2xl">Buccaneers</h3>
-          <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-orange/10 text-orange">Welcome series</p>
+          <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-navy/10 text-navy">Welcome series</p>
         </div>
         <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
           <p>A welcome to "the Krewe" for new subscribers, pairing a first-order offer with member perks.</p>
-          <p>This email was not commissioned and is solely for example and practice purposes.</p>
         </div>
       </article>
 
-      <article data-work-item data-title="Campaign: Kenco" data-full="images/work/kenco-full.webp" data-reveal>
+      <article data-work-item data-title="Campaign: Kenco" data-full="images/work/kenco-full.webp">
         <button type="button" data-open-email class="email-preview w-full text-left" aria-label="View full email: Kenco">
           <img src="images/work/kenco-full-thumb.webp" alt="Preview of the full email: Kenco" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
@@ -194,11 +165,10 @@
         </div>
         <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
           <p>An autumn flavours campaign that introduces new seasonal coffee blends.</p>
-          <p>This email was not commissioned and is solely for example and practice purposes.</p>
         </div>
       </article>
 
-      <article data-work-item data-title="Win-back: Nut &amp; Noggin" data-full="images/work/nutandnoggin-full.webp" data-reveal>
+      <article data-work-item data-title="Win-back: Nut &amp; Noggin" data-full="images/work/nutandnoggin-full.webp">
         <button type="button" data-open-email class="email-preview w-full text-left" aria-label="View full email: Nut &amp; Noggin">
           <img src="images/work/nutandnoggin-full-thumb.webp" alt="Preview of the full email: Nut &amp; Noggin" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
@@ -209,11 +179,10 @@
         </div>
         <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
           <p>"We miss you": 20% off to bring lapsed subscribers back, with a P.S. for the new shampoo and conditioner bundle.</p>
-          <p>This email was not commissioned and is solely for example and practice purposes.</p>
         </div>
       </article>
 
-      <article data-work-item data-title="Post-purchase: Moon Juice" data-full="images/work/moonjuice-full.webp" data-reveal>
+      <article data-work-item data-title="Post-purchase: Moon Juice" data-full="images/work/moonjuice-full.webp">
         <button type="button" data-open-email class="email-preview w-full text-left" aria-label="View full email: Moon Juice">
           <img src="images/work/moonjuice-full-thumb.webp" alt="Preview of the full email: Moon Juice" loading="lazy" decoding="async">
           <span class="email-preview-cta">View full email</span>
@@ -224,16 +193,15 @@
         </div>
         <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
           <p>A shipping update that turns order tracking into social proof, with five-star reviews from across the range.</p>
-          <p>This email was not commissioned and is solely for example and practice purposes.</p>
         </div>
       </article>
 
       <!-- Closing card: fills the last slot and points to the contact page -->
-      <a href="contact.html" data-reveal class="group relative overflow-hidden flex flex-col justify-between min-h-[18rem] sm:h-[28rem] p-4 sm:p-8 bg-navy rounded-[1rem] text-paper">
+      <a href="contact.html" class="group relative overflow-hidden flex flex-col justify-between min-h-[18rem] sm:h-[28rem] p-4 sm:p-8 bg-navy rounded-[1rem] text-paper">
         <span class="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-blue/40 blur-3xl" aria-hidden="true"></span>
-        <p class="relative text-xs uppercase tracking-[0.2em] text-orange">Next up</p>
+        <p class="relative text-xs uppercase tracking-[0.2em] text-silver">Next up</p>
         <div class="relative">
-          <p class="font-sans text-xl sm:text-4xl leading-tight">Your brand could be next.</p>
+          <p class="font-display text-xl md:text-2xl leading-tight">Your brand could be next.</p>
           <p class="mt-2 sm:mt-4 text-xs sm:text-sm text-paper/60">Book a free strategy call and we'll show you what we'd build.</p>
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="mt-4 sm:mt-8 text-orange transition-transform duration-300 group-hover:translate-x-2">
             <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -243,74 +211,65 @@
     </div>
   </section>
 
-  <!-- ========== ARCHIVE MARQUEE ========== -->
-  <section id="archive" class="overflow-hidden bg-navy text-paper py-16 md:py-24">
-    <div class="mx-auto max-w-6xl px-6 md:px-10 mb-10 md:mb-14 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-      <h2 class="font-sans text-3xl md:text-5xl">From the archive</h2>
-      <p class="text-xs md:text-sm text-paper/60 max-w-xs md:text-right">More designs from the studio. Scroll inside any email to read it. *</p>
+  <!-- ========== ARCHIVE ==========
+    A row of email thumbnails that scrolls sideways by hand (.archive-strip in styles.css);
+    each card also scrolls vertically to read the whole email.
+  -->
+  <section id="archive" class="bg-navy text-paper py-16 md:py-24">
+    <div class="mx-auto max-w-6xl px-6 md:px-10 mb-10 md:mb-14 flex flex-col gap-3 md:flex-row md:justify-between">
+      <h2 class="font-display text-2xl md:text-3xl">From the archive</h2>
+      <p class="text-xs md:text-sm text-paper/60 max-w-sm md:text-right">More of our designs. Drag or scroll sideways to browse, and scroll inside any email to read it.</p>
     </div>
-    <div class="marquee">
-      <div class="marquee-track">
-        <!-- Set A -->
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/bucs-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Tampa Bay Buccaneers welcome email"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/cstheory-2-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="CS Theory Clay vs Powder campaign"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/replab-2-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/fromsendr-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="FromSendr campaign"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/kenco-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Kenco campaign"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/cstheory-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="CS Theory abandoned cart email"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/replab-3-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/nutandnoggin-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Nut &amp; Noggin win-back email"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/moonjuice-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Moon Juice shipping update email"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/wild-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Wild summer scents campaign"></div></div>
-        <div class="marquee-card"><div class="marquee-card-fill"><img src="images/work/replab-1-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div></div>
-        <!-- Set B (duplicate of Set A, for a seamless loop) -->
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/bucs-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/cstheory-2-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/replab-2-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/fromsendr-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/kenco-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/cstheory-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/replab-3-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/nutandnoggin-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/moonjuice-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/wild-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-        <div class="marquee-card" aria-hidden="true"><div class="marquee-card-fill"><img src="images/work/replab-1-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt=""></div></div>
-      </div>
+    <div class="archive-strip">
+        <div class="archive-card"><img src="images/work/bucs-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Tampa Bay Buccaneers welcome email"></div>
+        <div class="archive-card"><img src="images/work/cstheory-2-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="CS Theory Clay vs Powder campaign"></div>
+        <div class="archive-card"><img src="images/work/replab-2-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div>
+        <div class="archive-card"><img src="images/work/fromsendr-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="FromSendr campaign"></div>
+        <div class="archive-card"><img src="images/work/kenco-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Kenco campaign"></div>
+        <div class="archive-card"><img src="images/work/cstheory-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="CS Theory abandoned cart email"></div>
+        <div class="archive-card"><img src="images/work/replab-3-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div>
+        <div class="archive-card"><img src="images/work/nutandnoggin-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Nut &amp; Noggin win-back email"></div>
+        <div class="archive-card"><img src="images/work/moonjuice-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Moon Juice shipping update email"></div>
+        <div class="archive-card"><img src="images/work/wild-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Wild summer scents campaign"></div>
+        <div class="archive-card"><img src="images/work/replab-1-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div>
     </div>
   </section>
 
   <!-- ========== CTA ========== -->
   <section class="px-6 md:px-10 py-16 md:py-28">
-    <div data-reveal class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-16 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
+    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-12 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
       <div class="relative flex flex-col items-center md:items-start text-center md:text-left">
-        <h2 class="text-2xl md:text-3xl lg:text-5xl text-paper">Want emails like these for your brand?</h2>
-        <p class="text-sm md:text-lg text-paper/70 mt-4 md:mt-6 max-w-xl">Let's discuss how we can help you achieve your email marketing goals.</p>
-        <a href="contact.html" class="btn w-full max-w-md mt-10 md:mt-12 gap-4 md:gap-12">
+        <h2 class="font-display text-2xl md:text-3xl text-paper">Want emails like these for your brand?</h2>
+        <p class="text-sm md:text-lg text-paper/70 mt-4 max-w-xl">
+          <span class="hidden sm:flex">Book a free call and we'll talk through what we'd design for you first.</span>
+          <span class="flex sm:hidden">Book a free call and we'll show you what we'd design.</span>
+        </p>
+        <div class="md:hidden mt-6 flex items-center gap-3">
+          <span class="flex -space-x-3"><img src="images/people/tom-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"><img src="images/people/jake-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"></span>
+          <span class="text-sm text-paper/80 text-left">You'll speak to Jake or Tom <span class="whitespace-nowrap">(or both!)</span></span>
+        </div>
+        <a href="contact.html" class="btn w-full max-w-md mt-8 md:mt-10 gap-4 md:gap-12">
           Book a strategy call
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
             <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
       </div>
-      <div class="hidden md:block relative w-full max-w-[13rem] md:max-w-xs mx-auto" aria-hidden="true">
-        <div class="bg-paper rounded-xl shadow-2xl p-3 md:p-5 rotate-[3deg]">
-          <div class="flex items-center gap-3">
-            <span class="flex flex-col items-center justify-center h-11 w-11 rounded-lg bg-blue text-paper leading-none">
-              <span class="font-display text-lg">30</span>
-              <span class="text-[0.55rem] uppercase">min</span>
-            </span>
-            <span>
-              <span class="block font-display text-lg text-ink">Strategy call</span>
-              <span class="block text-xs text-stone">with FromSendr</span>
-            </span>
-          </div>
-          <div class="grid grid-cols-3 gap-2 mt-5 text-[0.65rem] font-semibold text-center">
-            <span class="rounded-md border border-silver text-stone py-1.5">10:00</span>
-            <span class="rounded-md bg-blue text-paper py-1.5">11:30</span>
-            <span class="rounded-md border border-silver text-stone py-1.5">14:00</span>
-          </div>
+      <div class="hidden md:block relative w-full max-w-sm mx-auto bg-paper rounded-xl shadow-2xl p-6">
+        <div class="flex items-center gap-4">
+          <span class="flex shrink-0 -space-x-3"><img src="images/people/tom-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-14 w-14 rounded-full object-cover grayscale ring-2 ring-paper"><img src="images/people/jake-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-14 w-14 rounded-full object-cover grayscale ring-2 ring-paper"></span>
+          <span>
+            <span class="block text-[0.65rem] uppercase tracking-[0.2em] text-stone">You'll speak to</span>
+            <span class="block mt-1 font-display text-lg leading-tight text-ink">Jake or Tom (or both!)</span>
+            <span class="block mt-0.5 text-xs text-stone">Co-founders, FromSendr</span>
+          </span>
         </div>
-        <span class="absolute -right-3 -top-3 md:-right-4 md:-top-4 bg-orange text-paper text-[0.6rem] md:text-xs font-semibold uppercase tracking-wider rounded-full px-2.5 md:px-3 py-1 md:py-1.5 shadow-xl rotate-[8deg]">Free</span>
+        <ul class="mt-5 pt-5 border-t border-platinum space-y-3 text-sm text-stone">
+            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A look through your flows, campaigns and list</span></li>
+            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The first changes we'd make, in priority order</span></li>
+            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Honest advice, with no obligation to work with us</span></li>
+        </ul>
+        <p class="mt-5 text-xs font-semibold uppercase tracking-[0.15em] text-navy">30 min &middot; Free</p>
       </div>
     </div>
   </section>
@@ -329,7 +288,7 @@
     <div class="flex justify-between">
       <div class="flex flex-col justify-start gap-8">
         <img src="images/wordmark-platinum-footer.webp" alt="FromSendr" width="400" height="108" loading="lazy" decoding="async" class="w-24 sm:w-32 md:w-48">
-        <img src="images/klaviyo-partner.png" alt="Klaviyo Partner" width="800" height="337" loading="lazy" decoding="async" class="w-14 sm:w-20 md:w-28">
+        <img src="images/klaviyo-partner.png" alt="Klaviyo Partner" width="800" height="337" loading="lazy" decoding="async" class="hidden w-14 sm:w-20 md:w-28">
       </div>
       <div class="flex justify-end gap-20">
         <div class="flex flex-col gap-4 text-xs text-right md:text-left md:text-sm">
@@ -340,14 +299,13 @@
           <a href="contact.html" class="footer-link">Contact</a>
         </div>
         <div class="hidden md:flex flex-col gap-4 text-xs md:text-sm">
-          <a href="services.html#faq" class="footer-link">Frequently Asked Questions</a>
-          <a href="index.html#statistics" class="footer-link">Email Statistics</a>
-          <a href="services.html#process" class="footer-link">Our Process</a>
-          <a href="contact.html#booking" class="footer-link">Book a Call</a>
+          <a href="services.html#faq" class="footer-link">FAQs</a>
+          <a href="index.html#statistics" class="footer-link">Email statistics</a>
+          <a href="services.html#process" class="footer-link">Our process</a>
+          <a href="contact.html#booking" class="footer-link">Book a call</a>
         </div>
         <div class="hidden lg:flex flex-col gap-4 text-xs md:text-sm">
           <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>
-          <a href="https://www.fiverr.com/fromsendr" target="_blank" rel="noopener noreferrer" class="footer-link">Fiverr</a>
         </div>
       </div>
     </div>
@@ -360,14 +318,8 @@
             <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
           </svg>
         </a>
-        <a href="https://www.fiverr.com/fromsendr" target="_blank" rel="noopener noreferrer" class="footer-link" title="Fiverr" aria-label="FromSendr on Fiverr">
-          <svg width="21" height="21" fill="currentColor" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
-            <path d="M121.1 170h34.75V67.04H90.21v-7.72s0-9.01 9.01-9.01h21.88V22H99.22s-43.76 0-43.76 37.32v7.72h-19.3v28.31h19.3v74.64h34.75V95.36h30.89V170Z"/>
-          </svg>
-        </a>
       </div>
     </div>
-    <p class="text-xs md:text-sm md:mt-0 mt-4">* Some of the examples shown are from our portfolio, and are not in use currently. It was not commissioned by the client, and was purely for our own practice purposes and to showcase our capabilities.</p>
   </footer>
 
   <script src="script.js"></script>
