@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,7 @@
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="FromSendr | Email marketing for e-commerce brands">
   <meta property="og:description" content="We design, write and run email marketing for e-commerce brands on Klaviyo: flows, campaigns, deliverability and testing. Book a free strategy call.">
+  <link rel="canonical" href="https://fromsendr.com/">
   <meta property="og:url" content="https://fromsendr.com/">
   <meta property="og:image" content="https://fromsendr.com/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -24,17 +25,20 @@
   <!-- Fonts: Poppins for body/UI, Space Grotesk for headlines (font-display) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- The booking widget (widget.js + its iframe) comes from Calendly: open those connections early -->
+  <link rel="preconnect" href="https://assets.calendly.com">
+  <link rel="preconnect" href="https://calendly.com">
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..600&family=Poppins:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Built from tailwind.input.css + tailwind.config.js (see CLAUDE.md); must stay after styles.css -->
+  <!-- Built from tailwind.input.css + tailwind.config.js; must stay after styles.css -->
   <link rel="stylesheet" href="tailwind.css">
 </head>
 
 <body class="bg-platinum text-ink font-sans antialiased">
 
-  <!-- Header + hero together fill the first screen on md+ (.hero-full, see styles.css) -->
-  <div class="hero-full flex flex-col">
+  <a href="#main" class="skip-link">Skip to content</a>
+
   <!-- ========== NAV ========== -->
   <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
   <a href="index.html" class="site-logo" aria-label="FromSendr home">
@@ -43,47 +47,40 @@
   </a>
   <nav id="site-nav" class="site-nav flex flex-col items-end gap-10 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-4 lg:gap-x-32 text-sm font-bold uppercase" aria-label="Main navigation">
     <a href="index.html" class="nav-link-selected">Home</a>
-    <a href="services.html" class="nav-link">Services</a>
     <a href="work.html" class="nav-link">Work</a>
     <a href="about.html" class="nav-link">About</a>
-    <a href="contact.html" class="nav-link">Contact</a>
     <!-- Phones: a booking button at the bottom of the drawer (the fixed .site-cta below is md+ only) -->
-    <a href="contact.html" class="btn btn-sm md:hidden mt-auto w-full justify-center font-normal normal-case">Book a call</a>
+    <a href="#contact" class="btn btn-sm md:hidden mt-auto w-full justify-center font-normal normal-case">Book a call</a>
   </nav>
-  <!-- Always-visible booking button, top-right on md+ (not on contact.html). Sits above the nav panel, see .site-cta -->
-  <a href="contact.html" class="btn btn-sm site-cta hidden md:inline-flex font-semibold">Book a call</a>
+  <!-- Always-visible booking button, top-right on md+ (on every page). Sits above the nav panel, see .site-cta -->
+  <a href="#contact" class="btn btn-sm site-cta hidden md:inline-flex">Book a call</a>
 
-  <!-- ========== HERO ==========
-    Light split: copy on the left (display-font headline with the typewriter line, CTA), and on lg+ two
-    staggered columns of real emails on the right, straight and at full strength, fading out at the
-    bottom. Below lg the emails become a short row under the copy. Images are small top-only crops
-    (images/work/tops/).
-  -->
-  <section class="flex-1 flex items-center w-full mx-auto max-w-6xl px-6 md:px-10 pt-28 md:pt-32 pb-16 md:pb-20">
+  <main id="main">
+  <!-- The hero fills the first screen on md+ (.hero-full, see styles.css) -->
+  <div class="hero-full flex flex-col">
+  <!-- ========== HERO ========== -->
+  <section class="flex-1 flex items-center w-full mx-auto max-w-7xl px-6 md:px-10 pt-28 md:pt-32 pb-16 md:pb-20">
     <div class="w-full grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-12 items-center">
       <div class="text-center lg:text-left">
-        <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Email marketing for e-commerce brands</p>
-        <h1 class="mt-5 md:mt-6 font-display text-4xl sm:text-5xl lg:text-[2.5rem] xl:text-[2.875rem] leading-[1.08] text-navy">
-          <span class="block">We build emails that</span>
-          <!-- Grid: script.js stacks an invisible copy of every phrase in this cell, so the heading never changes height while typing. Phrases come from data-phrases, and the line alternates between blue and orange -->
-        <span class="grid font-semibold max-w-4xl mx-auto lg:mx-0">
-          <span class="col-start-1 row-start-1 text-blue"><span id="typewriter" data-phrases="recover abandoned carts|turn buyers into regulars|win back lapsed customers|make every send count"></span><span class="inline-block w-[2px] md:w-[3px] h-[0.9em] bg-current align-middle animate-pulse ml-1"></span></span>
-        </span>
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-[2.5rem] xl:text-[3.25rem] leading-[1.08] text-navy">
+          <!-- Screen readers get this sentence instead of the animation (script.js swaps the first phrase for all of them, "a, b, c and d") -->
+          <span id="typewriter-label" class="sr-only">We build emails that recover abandoned carts</span>
+          <span class="block" aria-hidden="true">We build emails that</span>
+          <!-- Grid: script.js stacks an invisible copy of every phrase in this cell, so the heading never changes height while typing. Phrases come from data-phrases (the first is also the starting text, shown as-is without JS or with reduced motion), and the line alternates between blue and orange -->
+          <span class="grid font-semibold max-w-4xl mx-auto lg:mx-0" aria-hidden="true">
+            <span class="col-start-1 row-start-1 text-blue"><span id="typewriter" data-phrases="recover abandoned carts|turn buyers into regulars|win back lapsed customers|make every send count">recover abandoned carts</span><span class="typewriter-cursor inline-block w-[2px] md:w-[3px] h-[0.9em] bg-current align-middle animate-pulse ml-1"></span></span>
+          </span>
         </h1>
         <p class="mt-6 md:mt-8 text-stone text-sm md:text-lg max-w-xl mx-auto lg:mx-0">Book a free strategy call and we'll go through your email setup with you, show you where revenue is slipping away, and what we'd fix first.</p>
         <div class="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 sm:gap-8">
-          <a href="contact.html" class="btn w-full sm:w-auto max-w-md">
+          <a href="#contact" class="btn w-full sm:w-auto max-w-md">
           Book a call with us
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow hidden">
-            <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
         </a>
         <a href="work.html" class="group inline-flex items-center gap-2 text-sm md:text-base font-semibold text-navy">
           See our work
           <span class="text-orange transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
         </a>
         </div>
-        <p class="mt-5 text-xs text-stone">Free &middot; 30 minutes &middot; No obligation</p>
       </div>
 
       <div class="hidden lg:grid grid-cols-2 gap-5 h-[36rem] overflow-hidden [mask-image:linear-gradient(to_bottom,#000_75%,transparent)]" aria-hidden="true">
@@ -105,173 +102,91 @@
   </section>
   </div>
 
-  <!-- ========== STATISTICS ==========
-    Intro line, then three equal stat cards (one row from md): number, one-line description, a small
-    chart pushed to the bottom of the card (mt-auto, so the charts line up), and the source.
-  -->
-  <section id="statistics" class="mx-auto max-w-6xl px-6 md:px-10 py-16 md:py-24">
-    <div class="text-center">
-      <h2 class="font-display text-lg md:text-2xl text-stone">Your customers already said yes to hearing from you.</h2>
-      <p class="mt-2 font-display text-2xl md:text-3xl">Here's what that's <span class="font-semibold text-blue">worth</span>.</p>
-    </div>
-
-    <div class="mt-10 md:mt-14 grid gap-4 md:gap-5 md:grid-cols-3">
-
-      <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
-        <span class="font-display font-semibold text-4xl leading-none">$36</span>
-        <span class="mt-2 text-sm md:text-base leading-snug text-stone">returned for every $1 spent</span>
-        <div class="mt-auto pt-8 flex justify-center">
-          <div class="return-donut flex h-36 w-36 shrink-0 items-center justify-center rounded-full" role="img" aria-label="36 dollar return for every 1 dollar invested">
-            <div class="flex h-[70%] w-[70%] flex-col items-center justify-center rounded-full bg-paper text-center">
-              <span class="font-display text-2xl">36x</span>
-              <span class="mt-0.5 text-[0.55rem] uppercase tracking-widest text-stone">ROI</span>
-            </div>
-          </div>
+  <!-- ========== STATISTICS ========== -->
+  <section id="statistics" class="mx-auto flex flex-col gap-24 max-w-7xl px-6 md:px-10 py-16 md:py-24">
+    <div class="flex flex-col gap-12">
+      <!-- Intro in the same format as #services: eyebrow + heading on the left, a short paragraph on the right (below it on phones) -->
+      <div class="flex flex-col gap-4 md:flex-row md:gap-16 md:justify-between md:items-end">
+        <div>
+          <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-stone">Why email</p>
+          <h2 class="mt-4 font-display text-2xl md:text-3xl lg:text-4xl max-w-md">Email, by the <span class="font-semibold text-blue">numbers</span></h2>
         </div>
-        <a href="https://www.omnisend.com/blog/email-marketing-roi/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">Omnisend, 2025</a>
-      </div>
-
-      <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
-        <span class="font-display font-semibold text-4xl leading-none">$2.87</span>
-        <span class="mt-2 text-sm md:text-base leading-snug text-stone">average revenue per automated email</span>
-        <div class="mt-auto pt-8 space-y-4" role="img" aria-label="Automated emails average 2.87 dollars of revenue each, against 18 cents for scheduled emails">
-          <div>
-            <div class="mb-2 flex justify-between text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">
-              <span>Scheduled</span>
-              <span>$0.18</span>
-            </div>
-            <div class="h-5 overflow-hidden rounded-sm bg-platinum">
-              <div class="share-bar-fill h-full bg-stone" style="--target: 6%"></div>
-            </div>
-          </div>
-          <div>
-            <div class="mb-2 flex justify-between text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">
-              <span>Automated</span>
-              <span>$2.87</span>
-            </div>
-            <div class="h-5 overflow-hidden rounded-sm bg-platinum">
-              <div class="share-bar-fill h-full bg-blue" style="--target: 100%"></div>
-            </div>
-          </div>
-        </div>
-        <a href="https://saasgoodies.com/email-automation-statistics/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">SaasGoodies, 2026</a>
-      </div>
-
-      <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
-        <span class="font-display font-semibold text-4xl leading-none">2%</span>
-        <span class="mt-2 text-sm md:text-base leading-snug text-stone">of sends account for 37% of email-driven sales</span>
-        <!-- Waffle charts: each grid is 100 squares, so the filled squares read directly as a percentage -->
-        <div class="mt-auto pt-8 grid grid-cols-2 gap-5" role="img" aria-label="Of every 100 emails sent, 2 bring in 37 of every 100 dollars of email-driven sales">
-          <div>
-            <div class="grid grid-cols-10 gap-[3px]"><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span></div>
-            <p class="mt-3 text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">Sends</p>
-            <p class="font-display text-lg leading-tight">2 <span class="font-sans text-xs text-stone">in 100</span></p>
-          </div>
-          <div>
-            <div class="grid grid-cols-10 gap-[3px]"><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-blue"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span><span class="aspect-square rounded-[2px] bg-platinum"></span></div>
-            <p class="mt-3 text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">Sales</p>
-            <p class="font-display text-lg leading-tight">37 <span class="font-sans text-xs text-stone">in 100</span></p>
-          </div>
-        </div>
-        <a href="https://www.omnisend.com/2025-ecommerce-marketing-report/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">Omnisend, 2025</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== STATISTICS: SUMMARY ========== -->
-  <section class="bg-paper flex flex-col gap-16 md:gap-24 px-6 md:px-10 py-16 md:py-24">
-    <div class="flex flex-col mx-auto gap-12 md:gap-16 max-w-6xl w-full">
-      <!-- Summary: the comparison headline stacked on the left (the focus), with a smaller "Timing matters."
-           (brush stroke) + 40% block on the right (below it on phones), then the intro -->
-      <div class="flex flex-col gap-6 md:gap-8">
-        <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <h2 class="flex flex-col items-center mx-auto sm:mx-0 self-start font-display text-3xl md:text-4xl leading-[1.05]">
-            <span>More emails</span>
-            <span class="text-blue">&ne;</span>
-            <span>more results</span>
-          </h2>
-          <div class="flex flex-col items-start md:items-end mt-4 sm:mt-0 gap-2 md:text-right text-stone text-base md:text-lg">
-            <p class="brush-stroke">Timing matters.</p>
-            <p class="max-w-xs">We build the email systems that generate 40% of your revenue.</p>
-          </div>
-        </div>
-        <p class="max-w-3xl text-stone text-sm md:text-base leading-relaxed">
-          The inbox is one of the few places you can reach your customers without paying for every view.
-          But most brands either struggle to grow their list, or never get the most out of the one they already have.
-        </p>
-        <div class="mt-2 h-px bg-silver/40"></div>
-      </div>
-
-      <!-- The three common mistakes -->
-      <div class="text-left">
-        <p class="mb-5 text-xs md:text-sm uppercase tracking-[0.2em] text-stone">The mistakes we see most</p>
-        <div class="grid gap-6 md:grid-cols-3">
-
-          <article class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
-            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-36 md:min-h-48 p-4 md:p-6 bg-ink overflow-hidden" aria-hidden="true">
-              <!-- Phosphor "calendar-x-light" (images/svgs/index-page/calendar-x-light.svg), inlined so the colour classes apply -->
-              <svg viewBox="0 0 256 256" class="absolute -right-6 -bottom-3 w-40 sm:w-48 md:-right-8 md:-bottom-16 md:w-64 lg:w-72 h-auto text-stone/30" fill="currentColor"><path d="M208,34H182V24a6,6,0,0,0-12,0V34H86V24a6,6,0,0,0-12,0V34H48A14,14,0,0,0,34,48V208a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V48A14,14,0,0,0,208,34ZM48,46H74V56a6,6,0,0,0,12,0V46h84V56a6,6,0,0,0,12,0V46h26a2,2,0,0,1,2,2V82H46V48A2,2,0,0,1,48,46ZM208,210H48a2,2,0,0,1-2-2V94H210V208A2,2,0,0,1,208,210Zm-51.76-77.76L136.48,152l19.76,19.76a6,6,0,1,1-8.48,8.48L128,160.48l-19.76,19.76a6,6,0,0,1-8.48-8.48L119.52,152,99.76,132.24a6,6,0,1,1,8.48-8.48L128,143.52l19.76-19.76a6,6,0,1,1,8.48,8.48Z"/></svg>
-            </div>
-            <div class="flex flex-col justify-center gap-2 p-5 sm:p-6">
-              <h3 class="text-base sm:text-lg lg:text-xl text-ink">Outdated flows</h3>
-              <p class="text-stone text-xs sm:text-sm leading-relaxed">Automations set up once and forgotten, still sending last year's offers to this year's customers.</p>
-            </div>
-          </article>
-
-          <article class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
-            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-36 md:min-h-48 p-4 md:p-6 bg-ink overflow-hidden" aria-hidden="true">
-              <!-- Phosphor "envelope-simple-open-light" (images/svgs/index-page/envelope-simple-open-light.svg), inlined so the colour classes apply -->
-              <svg viewBox="0 0 256 256" class="absolute -right-6 -bottom-3 w-40 sm:w-48 md:-right-8 md:-bottom-16 md:w-64 lg:w-72 h-auto text-stone/30" fill="currentColor"><path d="M227.33,91l-96-64a6,6,0,0,0-6.66,0l-96,64A6,6,0,0,0,26,96V200a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V96A6,6,0,0,0,227.33,91ZM128,39.21l85.43,57L143.53,146H112.47L42.57,96.17ZM216,202H40a2,2,0,0,1-2-2V107.65l69.06,49.24a6.06,6.06,0,0,0,3.49,1.11h34.9a6.06,6.06,0,0,0,3.49-1.11L218,107.65V200A2,2,0,0,1,216,202Z"/></svg>
-            </div>
-            <div class="flex flex-col justify-center gap-2 p-5 sm:p-6">
-              <h3 class="text-base sm:text-lg lg:text-xl text-ink">One-off campaigns</h3>
-              <p class="text-stone text-xs sm:text-sm leading-relaxed">A send here and there, with long silences in between, so your list forgets who you are.</p>
-            </div>
-          </article>
-
-          <article class="flex md:flex-col bg-paper rounded-[1rem] shadow-xl overflow-hidden">
-            <div class="relative flex items-center justify-center w-2/5 shrink-0 md:w-auto min-h-36 md:min-h-48 p-4 md:p-6 bg-ink overflow-hidden" aria-hidden="true">
-              <!-- Phosphor "strategy-light" (images/svgs/index-page/strategy-light.svg), inlined so the colour classes apply -->
-              <svg viewBox="0 0 256 256" class="absolute -right-6 -bottom-3 w-40 sm:w-48 md:-right-8 md:-bottom-16 md:w-64 lg:w-72 h-auto text-stone/30" fill="currentColor"><path d="M76,154a34,34,0,1,0,34,34A34,34,0,0,0,76,154Zm0,56a22,22,0,1,1,22-22A22,22,0,0,1,76,210ZM43.76,107.76,59.52,92,43.76,76.24a6,6,0,0,1,8.48-8.48L68,83.52,83.76,67.76a6,6,0,0,1,8.48,8.48L76.48,92l15.76,15.76a6,6,0,1,1-8.48,8.48L68,100.48,52.24,116.24a6,6,0,0,1-8.48-8.48Zm184.48,96a6,6,0,1,1-8.48,8.48L204,196.48l-15.76,15.76a6,6,0,0,1-8.48-8.48L195.52,188l-15.76-15.76a6,6,0,0,1,8.48-8.48L204,179.52l15.76-15.76a6,6,0,0,1,8.48,8.48L212.48,188ZM182.55,112.3c-6,21.66-24.55,40.38-45.09,45.52A6.14,6.14,0,0,1,136,158a6,6,0,0,1-1.46-11.82c16.29-4.07,31.62-19.67,36.44-37.09,3.33-12,3.39-30.24-15.22-48.85L150,54.48V80a6,6,0,0,1-12,0V40a6,6,0,0,1,6-6h40a6,6,0,0,1,0,12H158.48l5.76,5.76C182,69.47,188.45,91,182.55,112.3Z"/></svg>
-            </div>
-            <div class="flex flex-col justify-center gap-2 p-5 sm:p-6">
-              <h3 class="text-base sm:text-lg lg:text-xl text-ink">Sending with no plan</h3>
-              <p class="text-stone text-xs sm:text-sm leading-relaxed">Too many random campaigns with no clear strategy, training your customers to tune out.</p>
-            </div>
-          </article>
-
-        </div>
-      </div>
-
-      <!-- Result -->
-      <div class="flex flex-col gap-3 text-stone text-sm md:text-base text-center mx-auto">
-        <p class="font-display text-lg md:text-2xl text-ink">
-          The result? A stagnant list, poor deliverability, and <span class="text-orange">money left on the table.</span>
-        </p>
-        <p class="hidden md:flex max-w-3xl">
-          When set up correctly, email should be the most profitable marketing channel in your mix.
-          That's why we help clients build the systems that generate 40% of their total revenue, and average a 36x return on investment.
+        <p class="text-stone text-sm md:text-lg leading-relaxed max-w-2xl">
+          Your customers have already said yes to hearing from you, making email one of the few channels where you can reach them again with no extra cost. When it's run properly, it earns more than almost any other channel.
         </p>
       </div>
+      <div class="grid gap-4 md:gap-5 md:grid-cols-3">
+        <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
+          <span class="font-display font-semibold text-4xl leading-none">$36</span>
+          <span class="mt-2 text-sm md:text-base leading-snug text-stone">returned for every $1 spent</span>
+          <div class="mt-auto pt-8 flex justify-center">
+            <div class="return-donut flex h-36 w-36 shrink-0 items-center justify-center rounded-full" role="img" aria-label="36 dollar return for every 1 dollar invested">
+              <div class="flex h-[70%] w-[70%] flex-col items-center justify-center rounded-full bg-paper text-center">
+                <span class="font-display text-2xl">36x</span>
+                <span class="mt-0.5 text-[0.55rem] uppercase tracking-widest text-stone">ROI</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://www.omnisend.com/blog/email-marketing-roi/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">Omnisend, 2025</a>
+        </div>
+        <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
+          <span class="font-display font-semibold text-4xl leading-none">$2.87</span>
+          <span class="mt-2 text-sm md:text-base leading-snug text-stone">average revenue per automated email</span>
+          <div class="mt-auto pt-8 space-y-4" role="img" aria-label="Automated emails average 2.87 dollars of revenue each, against 18 cents for scheduled emails">
+            <div>
+              <div class="mb-2 flex justify-between text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">
+                <span>Scheduled</span>
+                <span>$0.18</span>
+              </div>
+              <div class="h-5 overflow-hidden rounded-sm bg-platinum">
+                <div class="share-bar-fill h-full bg-stone" style="--target: 6%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="mb-2 flex justify-between text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">
+                <span>Automated</span>
+                <span>$2.87</span>
+              </div>
+              <div class="h-5 overflow-hidden rounded-sm bg-platinum">
+                <div class="share-bar-fill h-full bg-blue" style="--target: 100%"></div>
+              </div>
+            </div>
+          </div>
+          <a href="https://saasgoodies.com/email-automation-statistics/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">SaasGoodies, 2026</a>
+        </div>
+        <div class="flex flex-col p-6 md:p-8 bg-paper rounded-[1rem]">
+          <span class="font-display font-semibold text-4xl leading-none">2%</span>
+          <span class="mt-2 text-sm md:text-base leading-snug text-stone">of sends account for 37% of email-driven sales</span>
+          <!-- Waffle charts: each grid is 100 squares, so the filled squares read directly as a percentage -->
+          <div class="mt-auto pt-8 grid grid-cols-2 gap-5" role="img" aria-label="Of every 100 emails sent, 2 bring in 37 of every 100 dollars of email-driven sales">
+            <div>
+              <div class="waffle" style="--rows: 0; --rem: 2"></div>
+              <p class="mt-3 text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">Sends</p>
+              <p class="font-display text-lg leading-tight">2 <span class="font-sans text-xs text-stone">in 100</span></p>
+            </div>
+            <div>
+              <div class="waffle" style="--rows: 3; --rem: 7"></div>
+              <p class="mt-3 text-[0.65rem] md:text-xs uppercase tracking-[0.2em] text-stone">Sales</p>
+              <p class="font-display text-lg leading-tight">37 <span class="font-sans text-xs text-stone">in 100</span></p>
+            </div>
+          </div>
+          <a href="https://www.omnisend.com/2025-ecommerce-marketing-report/" target="_blank" rel="noopener noreferrer" class="mt-6 text-xs text-stone/40 hover:underline">Omnisend, 2025</a>
+        </div>
+      </div>
     </div>
-    <!-- Call to action ==========
-      Navy card: heading, one line and the button on the left; on md+ a "who you'll talk to" card on the
-      right (both founders as overlapping avatars, what the call covers, length/cost). On phones the
-      avatars + "You'll speak to Jake or Tom (or both!)" sit above the button instead. Avatars are 160px square
-      crops (images/people/*-avatar.webp), greyscale to match the about page.
-    -->
-    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-12 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
+
+    <!-- Call to action (shared with work.html and about.html; keep in sync apart from the copy) -->
+    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-7 md:p-12 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
         <div class="relative flex flex-col items-center md:items-start text-center md:text-left">
           <h2 class="font-display text-2xl md:text-3xl text-paper">See what your emails could be earning</h2>
           <p class="text-sm md:text-lg text-paper/70 mt-4 max-w-xl">
             <span class="hidden sm:flex">Book a free 30-minute call with one of the founders, and we'll tell you honestly what we'd change first.</span>
-            <span class="flex sm:hidden">Book a free 30m call with us, and we'll tell you what we'd change.</span>
           </p>
-          <div class="md:hidden mt-6 flex items-center gap-3">
+          <div class="md:hidden mt-2 md:mt-5 flex items-center gap-3">
             <span class="flex -space-x-3"><img src="images/people/tom-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"><img src="images/people/jake-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"></span>
             <span class="text-sm text-paper/80 text-left">You'll speak to Jake or Tom <span class="whitespace-nowrap">(or both!)</span></span>
           </div>
-          <a href="contact.html" class="btn w-full max-w-md mt-8 md:mt-10 gap-4 md:gap-12">
+          <a href="#contact" class="btn w-full max-w-md mt-6 md:mt-8 gap-4 md:gap-12">
             Book a strategy call
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
               <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -287,36 +202,302 @@
               <span class="block mt-0.5 text-xs text-stone">Co-founders, FromSendr</span>
             </span>
           </div>
-          <ul class="mt-5 pt-5 border-t border-platinum space-y-3 text-sm text-stone">
-              <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A look through your flows, campaigns and list</span></li>
-              <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The first changes we'd make, in priority order</span></li>
-              <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Honest advice, with no obligation to work with us</span></li>
-          </ul>
-          <p class="mt-5 text-xs font-semibold uppercase tracking-[0.15em] text-navy">30 min &middot; Free</p>
+          <p class="mt-5 pt-5 border-t border-platinum text-xs font-semibold uppercase tracking-[0.15em] text-navy">30 min &middot; Free &middot; No obligation</p>
         </div>
     </div>
   </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section id="services" class="scroll-mt-8 px-6 md:px-10 py-16 md:py-24">
+    <div class="mx-auto max-w-6xl mb-10 md:mb-16 flex flex-col gap-4 md:flex-row md:gap-16 md:justify-between md:items-end">
+      <div>
+        <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-stone">How we work</p>
+        <h2 class="mt-4 font-display text-2xl md:text-3xl lg:text-4xl max-w-md">Email marketing, handled <span class="font-semibold text-blue whitespace-nowrap">end to end</span></h2>
+      </div>
+      <p class="text-stone text-sm md:text-lg leading-relaxed max-w-2xl">
+        Most brands end up juggling a designer, a copywriter and someone who "does the Klaviyo stuff". Things fall through the gaps between them.
+        We handle every part of your email marketing ourselves, so the creative, the tech and the strategy all pull in the same direction.
+      </p>
+    </div>
+    <div class="mx-auto max-w-6xl grid grid-cols-2 auto-rows-fr gap-4 md:gap-6">
+
+      <!-- 01: copy and design -->
+      <article id="copy-design" class="scroll-mt-8 relative flex flex-col gap-2 md:gap-5 p-4 md:p-8 lg:p-10 bg-navy text-paper rounded-[1rem] overflow-hidden">
+        <!-- Phosphor "pen-nib" thin, inlined so the colour classes apply -->
+        <svg viewBox="0 0 256 256" class="absolute -right-5 -bottom-5 w-28 md:-right-8 md:-bottom-8 md:w-48 lg:-right-10 lg:-bottom-10 lg:w-64 h-auto text-blue/20" fill="currentColor" aria-hidden="true"><path d="M244,92.68a11.93,11.93,0,0,0-3.51-8.48L171.8,15.51a12,12,0,0,0-17,0L125.78,44.56,66.92,66.63a12.06,12.06,0,0,0-7.63,9.26L36.05,215.34A4,4,0,0,0,40,220a4.89,4.89,0,0,0,.66-.05L180.1,196.7a12,12,0,0,0,9.27-7.62l22.07-58.86,29-29A11.92,11.92,0,0,0,244,92.68Zm-62.12,93.59a4,4,0,0,1-3.09,2.54L51.66,210l58.45-58.45a24,24,0,1,0-5.66-5.66L46,204.35,67.19,77.21a4,4,0,0,1,2.54-3.09L127,52.64,203.35,129ZM108,132a16,16,0,1,1,16,16A16,16,0,0,1,108,132ZM234.83,95.51,208,122.34,133.66,48l26.82-26.82a4,4,0,0,1,5.66,0l68.69,68.69a4,4,0,0,1,0,5.65Z"/></svg>
+        <div class="relative flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-4">
+          <span class="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 shrink-0 rounded-full bg-blue text-paper font-display text-sm md:text-base">01</span>
+          <h3 class="text-lg leading-tight md:text-2xl md:leading-snug font-semibold">Copy &amp; design</h3>
+        </div>
+        <p class="relative md:hidden text-silver/85 text-xs leading-relaxed pr-6">On-brand copy and mobile-first design, written and built to work together.</p>
+        <p class="relative hidden md:block text-silver/85 text-sm lg:text-base leading-relaxed max-w-sm">
+          A good-looking email still needs a reason to click. We write in your brand's voice and design each layout around the message, so every email is easy to read and easy to act on.
+        </p>
+      </article>
+
+      <!-- 02: flows and automation -->
+      <article id="flows" class="scroll-mt-8 relative flex flex-col gap-2 md:gap-5 p-4 md:p-8 lg:p-10 bg-paper text-ink rounded-[1rem] overflow-hidden">
+        <!-- Phosphor "tree-structure" thin, inlined so the colour classes apply -->
+        <svg viewBox="0 0 256 256" class="absolute -right-5 -bottom-5 w-28 md:-right-8 md:-bottom-8 md:w-48 lg:-right-10 lg:-bottom-10 lg:w-64 h-auto text-silver/30" fill="currentColor" aria-hidden="true"><path d="M160,108h48a12,12,0,0,0,12-12V48a12,12,0,0,0-12-12H160a12,12,0,0,0-12,12V68H128a20,20,0,0,0-20,20v36H68V112a12,12,0,0,0-12-12H24a12,12,0,0,0-12,12v32a12,12,0,0,0,12,12H56a12,12,0,0,0,12-12V132h40v36a20,20,0,0,0,20,20h20v20a12,12,0,0,0,12,12h48a12,12,0,0,0,12-12V160a12,12,0,0,0-12-12H160a12,12,0,0,0-12,12v20H128a12,12,0,0,1-12-12V88a12,12,0,0,1,12-12h20V96A12,12,0,0,0,160,108ZM60,144a4,4,0,0,1-4,4H24a4,4,0,0,1-4-4V112a4,4,0,0,1,4-4H56a4,4,0,0,1,4,4Zm96,16a4,4,0,0,1,4-4h48a4,4,0,0,1,4,4v48a4,4,0,0,1-4,4H160a4,4,0,0,1-4-4Zm0-112a4,4,0,0,1,4-4h48a4,4,0,0,1,4,4V96a4,4,0,0,1-4,4H160a4,4,0,0,1-4-4Z"/></svg>
+        <div class="relative flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-4">
+          <span class="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 shrink-0 rounded-full bg-navy text-paper font-display text-sm md:text-base">02</span>
+          <h3 class="text-lg leading-tight md:text-2xl md:leading-snug font-semibold">Flows &amp; automation</h3>
+        </div>
+        <p class="relative md:hidden text-stone text-xs leading-relaxed pr-6">Automated emails that turn sign-ups into customers, around the clock.</p>
+        <p class="relative hidden md:block text-stone text-sm lg:text-base leading-relaxed max-w-sm">
+          Automated emails reach people at the moment they're most likely to buy, around the clock.
+          We plan, build and maintain the flows that turn sign-ups into customers and customers into regulars.
+        </p>
+      </article>
+
+      <!-- 03: campaign strategy -->
+      <article id="campaigns" class="scroll-mt-8 relative flex flex-col gap-2 md:gap-5 p-4 md:p-8 lg:p-10 bg-paper text-ink rounded-[1rem] overflow-hidden">
+        <!-- Phosphor "calendar-dots" thin, inlined so the colour classes apply -->
+        <svg viewBox="0 0 256 256" class="absolute -right-5 -bottom-5 w-28 md:-right-8 md:-bottom-8 md:w-48 lg:-right-10 lg:-bottom-10 lg:w-64 h-auto text-silver/30" fill="currentColor" aria-hidden="true"><path d="M208,36H180V24a4,4,0,0,0-8,0V36H84V24a4,4,0,0,0-8,0V36H48A12,12,0,0,0,36,48V208a12,12,0,0,0,12,12H208a12,12,0,0,0,12-12V48A12,12,0,0,0,208,36ZM48,44H76V56a4,4,0,0,0,8,0V44h88V56a4,4,0,0,0,8,0V44h28a4,4,0,0,1,4,4V84H44V48A4,4,0,0,1,48,44ZM208,212H48a4,4,0,0,1-4-4V92H212V208A4,4,0,0,1,208,212Zm-72-80a8,8,0,1,1-8-8A8,8,0,0,1,136,132Zm44,0a8,8,0,1,1-8-8A8,8,0,0,1,180,132ZM92,172a8,8,0,1,1-8-8A8,8,0,0,1,92,172Zm44,0a8,8,0,1,1-8-8A8,8,0,0,1,136,172Zm44,0a8,8,0,1,1-8-8A8,8,0,0,1,180,172Z"/></svg>
+        <div class="relative flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-4">
+          <span class="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 shrink-0 rounded-full bg-navy text-paper font-display text-sm md:text-base">03</span>
+          <h3 class="text-lg leading-tight md:text-2xl md:leading-snug font-semibold">Campaign strategy</h3>
+        </div>
+        <p class="relative md:hidden text-stone text-xs leading-relaxed pr-6">Campaigns planned around your launches, seasons and stock.</p>
+        <p class="relative hidden md:block text-stone text-sm lg:text-base leading-relaxed max-w-sm">
+          We plan your campaigns around your launches, seasons and stock, so every email has a clear reason to be sent, and your list hears from you often enough without tiring of you.
+        </p>
+      </article>
+
+      <!-- 04: deliverability and segmentation -->
+      <article id="deliverability" class="scroll-mt-8 relative flex flex-col gap-2 md:gap-5 p-4 md:p-8 lg:p-10 bg-navy text-paper rounded-[1rem] overflow-hidden">
+        <!-- Phosphor "envelope-simple" thin, inlined so the colour classes apply -->
+        <svg viewBox="0 0 256 256" class="absolute -right-5 -bottom-5 w-28 md:-right-8 md:-bottom-8 md:w-48 lg:-right-10 lg:-bottom-10 lg:w-64 h-auto text-blue/20" fill="currentColor" aria-hidden="true"><path d="M224,52H32a4,4,0,0,0-4,4V192a12,12,0,0,0,12,12H216a12,12,0,0,0,12-12V56A4,4,0,0,0,224,52Zm-10.28,8L128,138.57,42.28,60ZM216,196H40a4,4,0,0,1-4-4V65.09L125.3,147a4,4,0,0,0,5.4,0L220,65.09V192A4,4,0,0,1,216,196Z"/></svg>
+        <div class="relative flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-4">
+          <span class="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 shrink-0 rounded-full bg-blue text-paper font-display text-sm md:text-base">04</span>
+          <h3 class="text-lg leading-tight md:text-2xl md:leading-snug font-semibold">Deliverability</h3>
+        </div>
+        <p class="relative md:hidden text-silver/85 text-xs leading-relaxed pr-6">A healthy sender reputation and segments that keep you out of spam.</p>
+        <p class="relative hidden md:block text-silver/85 text-sm lg:text-base leading-relaxed max-w-sm">
+          Even the best email in the world is worthless in a spam folder. We keep your sender reputation healthy, your list clean, and segment your audience so each group only gets the emails they care about.
+        </p>
+      </article>
+
+      <!-- 05: A/B testing -->
+      <article id="ab-testing" class="scroll-mt-8 relative flex flex-col gap-2 md:gap-5 p-4 md:p-8 lg:p-10 bg-navy text-paper rounded-[1rem] overflow-hidden">
+        <!-- Phosphor "scales" thin, inlined so the colour classes apply -->
+        <svg viewBox="0 0 256 256" class="absolute -right-5 -bottom-5 w-28 md:-right-8 md:-bottom-8 md:w-48 lg:-right-10 lg:-bottom-10 lg:w-64 h-auto text-blue/20" fill="currentColor" aria-hidden="true"><path d="M235.71,134.51l-32-80h0a4,4,0,0,0-4.57-2.41L132,67V40a4,4,0,0,0-8,0V68.79L55.13,84.1a4,4,0,0,0-2.84,2.41h0v0h0l-32,80A4,4,0,0,0,20,168c0,20.4,22.08,28,36,28s36-7.6,36-28a4,4,0,0,0-.29-1.49L61.46,90.88,124,77V212H104a4,4,0,0,0,0,8h48a4,4,0,0,0,0-8H132V75.21l61.47-13.66-29.18,73A4,4,0,0,0,164,136c0,20.4,22.08,28,36,28s36-7.6,36-28A4,4,0,0,0,235.71,134.51ZM56,188c-7.15,0-27.37-3.56-28-19.27l28-70,28,70C83.37,184.44,63.15,188,56,188Zm144-32c-7.15,0-27.37-3.56-28-19.27l28-70,28,70C227.37,152.44,207.15,156,200,156Z"/></svg>
+        <div class="relative flex flex-col items-start gap-3 md:flex-row md:items-center md:gap-4">
+          <span class="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 shrink-0 rounded-full bg-blue text-paper font-display text-sm md:text-base">05</span>
+          <h3 class="text-lg leading-tight md:text-2xl md:leading-snug font-semibold">Constant A/B testing</h3>
+        </div>
+        <p class="relative md:hidden text-silver/85 text-xs leading-relaxed pr-6">We test subject lines, layouts and send times to find what really works.</p>
+        <p class="relative hidden md:block text-silver/85 text-sm lg:text-base leading-relaxed max-w-sm">
+          Guesses about what will work are often wrong. We test everything, from subject lines and layouts to send times and offers, so decisions are based on what your audience actually does.
+        </p>
+      </article>
+
+      <!-- 06: fills the last cell of the grid -->
+      <a href="#contact" class="group flex flex-col justify-between gap-4 md:gap-6 p-4 md:p-8 lg:p-10 bg-paper text-ink rounded-[1rem]">
+        <span class="flex items-center justify-center h-8 w-8 md:h-10 md:w-10 rounded-full bg-navy text-paper font-display text-sm md:text-base">+</span>
+        <span>
+          <span class="block text-lg leading-tight md:text-2xl md:leading-snug font-semibold">Want the lot?</span>
+          <span class="block mt-2 md:mt-4 text-xs md:text-base leading-relaxed text-stone max-w-sm">Most brands need all five. We'll show you where to start.</span>
+        </span>
+        <span class="flex items-center gap-2 text-sm md:text-base font-semibold text-ink">
+          Book a call
+          <span class="text-orange transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ========== HOW WE WORK ========== -->
+  <section id="process" class="scroll-mt-8 bg-paper px-6 md:px-10 py-16 md:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="mb-8 md:mb-12">
+        <h2 class="font-display text-2xl md:text-3xl lg:text-4xl">Built around your brand</h2>
+      </div>
+      <ol class="grid gap-x-3 gap-y-6 md:gap-6 grid-cols-2 lg:grid-cols-4 items-start">
+        <li class="process-step relative bg-platinum p-4 md:p-8 rounded-[1rem]">
+          <h3>
+            <button type="button" class="process-step-button block w-full text-left" aria-expanded="false" aria-controls="process-step-1">
+              <span class="flex items-center justify-between">
+                <span class="process-step-number flex items-center justify-center h-8 w-8 md:h-12 md:w-12 rounded-full bg-navy text-paper font-display text-lg md:text-xl">1</span>
+                <span class="process-step-toggle flex items-center justify-center h-7 w-7 md:h-8 md:w-8 rounded-full border border-silver text-stone text-lg leading-none" aria-hidden="true">+</span>
+              </span>
+              <span class="block mt-4 md:mt-6 text-lg md:text-2xl font-semibold">Audit</span>
+            </button>
+          </h3>
+          <div id="process-step-1" class="process-step-detail"><div>
+            <p class="pt-3 text-stone text-xs md:text-base leading-relaxed">We explore your current emails, flows, list and numbers to see what's working and what's being missed.</p>
+          </div></div>
+        </li>
+        <li class="process-step relative bg-platinum p-4 md:p-8 rounded-[1rem]">
+          <h3>
+            <button type="button" class="process-step-button block w-full text-left" aria-expanded="false" aria-controls="process-step-2">
+              <span class="flex items-center justify-between">
+                <span class="process-step-number flex items-center justify-center h-8 w-8 md:h-12 md:w-12 rounded-full bg-navy text-paper font-display text-lg md:text-xl">2</span>
+                <span class="process-step-toggle flex items-center justify-center h-7 w-7 md:h-8 md:w-8 rounded-full border border-silver text-stone text-lg leading-none" aria-hidden="true">+</span>
+              </span>
+              <span class="block mt-4 md:mt-6 text-lg md:text-2xl font-semibold">Plan</span>
+            </button>
+          </h3>
+          <div id="process-step-2" class="process-step-detail"><div>
+            <p class="pt-3 text-stone text-xs md:text-base leading-relaxed">You get a plan tailored to your brand, from a one-off flow build to fully managed email.</p>
+          </div></div>
+        </li>
+        <li class="process-step relative bg-platinum p-4 md:p-8 rounded-[1rem]">
+          <h3>
+            <button type="button" class="process-step-button block w-full text-left" aria-expanded="false" aria-controls="process-step-3">
+              <span class="flex items-center justify-between">
+                <span class="process-step-number flex items-center justify-center h-8 w-8 md:h-12 md:w-12 rounded-full bg-navy text-paper font-display text-lg md:text-xl">3</span>
+                <span class="process-step-toggle flex items-center justify-center h-7 w-7 md:h-8 md:w-8 rounded-full border border-silver text-stone text-lg leading-none" aria-hidden="true">+</span>
+              </span>
+              <span class="block mt-4 md:mt-6 text-lg md:text-2xl font-semibold">Build</span>
+            </button>
+          </h3>
+          <div id="process-step-3" class="process-step-detail"><div>
+            <p class="pt-3 text-stone text-xs md:text-base leading-relaxed">We write, design and set everything up. All you need to do is sign off before anything goes out.</p>
+          </div></div>
+        </li>
+        <li class="process-step relative bg-platinum p-4 md:p-8 rounded-[1rem]">
+          <h3>
+            <button type="button" class="process-step-button block w-full text-left" aria-expanded="false" aria-controls="process-step-4">
+              <span class="flex items-center justify-between">
+                <span class="process-step-number flex items-center justify-center h-8 w-8 md:h-12 md:w-12 rounded-full bg-navy text-paper font-display text-lg md:text-xl">4</span>
+                <span class="process-step-toggle flex items-center justify-center h-7 w-7 md:h-8 md:w-8 rounded-full border border-silver text-stone text-lg leading-none" aria-hidden="true">+</span>
+              </span>
+              <span class="block mt-4 md:mt-6 text-lg md:text-2xl font-semibold">Optimise</span>
+            </button>
+          </h3>
+          <div id="process-step-4" class="process-step-detail"><div>
+            <p class="pt-3 text-stone text-xs md:text-base leading-relaxed">Then we keep testing, documenting, and refining, so your email channel keeps earning more over time.</p>
+          </div></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section id="faq" class="scroll-mt-8 px-6 md:px-10 py-16 md:py-24">
+    <div class="mx-auto max-w-6xl grid gap-10 lg:grid-cols-[2fr_3fr] lg:gap-16 items-start">
+      <div>
+        <p class="mb-5 text-sm uppercase tracking-[0.2em] text-stone">FAQ</p>
+        <h2 class="font-display text-2xl md:text-3xl lg:text-4xl">Questions, <span class="font-semibold text-blue">answered</span></h2>
+        <p class="mt-4 md:mt-6 text-stone text-sm md:text-lg leading-relaxed max-w-md">
+          The things brands usually ask us before getting started. Anything else, just ask on a call.
+        </p>
+        <a href="#contact" class="group mt-6 inline-flex items-center gap-2 text-sm md:text-base font-semibold text-navy">
+          Ask us directly
+          <span class="text-orange transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <details class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base md:text-xl text-ink">How much does it cost?</span>
+            <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-navy text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
+            We don't offer fixed packages, so it depends on what your brand needs. After a free strategy call we'll put together a plan and a price tailored to your brand.
+          </div>
+        </details>
+
+        <details class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base md:text-xl text-ink">Which email platforms do you work with?</span>
+            <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-navy text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
+            We currently work with Klaviyo. If you're on a different platform, we can talk about whether we can support it, or help you move to Klaviyo.
+          </div>
+        </details>
+
+        <details class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base md:text-xl text-ink">Do I have to sign up for the long term?</span>
+            <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-navy text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
+            No. We work on monthly retainers, so you can stop at any time. Some brands just need a one-off flow set-up, others may want us to manage their email long term.
+          </div>
+        </details>
+
+        <details class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base md:text-xl text-ink">How involved do we need to be?</span>
+            <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-navy text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
+            As much or as little as you like. If you want to be hands-off, we handle everything from writing and design to set-up; you just sign off on each email before it goes out.
+          </div>
+        </details>
+
+        <details class="group bg-paper rounded-[1rem] shadow-xl">
+          <summary class="flex items-center justify-between gap-6 p-4 pl-6 md:p-8 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base md:text-xl text-ink">How soon will we see results?</span>
+            <span class="flex items-center justify-center h-9 w-9 shrink-0 rounded-full bg-navy text-paper text-xl leading-none transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-6 md:px-8 pb-6 md:pb-8 text-stone text-sm md:text-base leading-relaxed">
+            Most clients see noticeable results within 60 days, with continued growth over time as we keep testing and optimising.
+            We aim to have a new sign-up pop-up and your first core automations live within the first 14 days.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" class="scroll-mt-8 bg-paper">
+    <div class="mx-auto max-w-6xl px-6 md:px-10 pt-16 md:pt-24 pb-4 md:pb-10 grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-12 items-center">
+      <div>
+        <h2 class="font-display text-2xl md:text-3xl lg:text-4xl text-navy">Book a free <span class="font-semibold text-blue">strategy</span> call with us</h2>
+        <p class="mt-4 md:mt-6 text-stone text-sm md:text-lg max-w-xl leading-relaxed">Pick a time below. It's 30 minutes, it's free, and there's no obligation to work with us afterwards.</p>
+        <p class="mt-6 md:mt-12 text-xs md:text-sm text-stone">
+          Prefer email? <a href="mailto:jake@fromsendr.com" class="text-ink underline decoration-stone/40 hover:decoration-ink">jake@fromsendr.com</a>
+        </p>
+      </div>
+      <div class="hidden md:block bg-platinum rounded-[1rem] p-6 md:p-8">
+        <p class="text-xl font-semibold text-ink">What happens on the call</p>
+        <ol class="mt-5 space-y-4 text-sm text-stone">
+          <li class="flex gap-4"><span class="font-display text-lg leading-6 text-blue">1</span><span>You tell us about your brand and where your email is today.</span></li>
+          <li class="flex gap-4"><span class="font-display text-lg leading-6 text-blue">2</span><span>We look through your flows, campaigns and list together.</span></li>
+          <li class="flex gap-4"><span class="font-display text-lg leading-6 text-blue">3</span><span>You leave with the first changes we'd make, whether or not we end up working together.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div id="booking" class="scroll-mt-8 mx-auto max-w-7xl md:px-10 pt-8 md:pt-0 pb-16 md:pb-24">
+      <div class="px-6">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/fromsendr/30min?background_color=fafaf8&text_color=1c1c1a&primary_color=2d7dd2" data-resize="true" style="min-width:280px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <p class="mt-8 md:mt-0 text-center text-stone text-xs">
+          Can't find a time that works? Email <a href="mailto:jake@fromsendr.com" class="text-ink underline decoration-stone/40 hover:decoration-ink">jake@fromsendr.com</a>,
+          or find us on <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="text-ink underline decoration-stone/40 hover:decoration-ink">Instagram</a>.
+        </p>
+        <p class="mt-3 text-center text-stone text-xs">We only use your booking details to arrange and hold the call. See our <a href="privacy.html" class="text-ink underline decoration-stone/40 hover:decoration-ink">privacy policy</a>.</p>
+      </div>
+    </div>
+  </section>
+  </main>
 
   <!-- ========== FOOTER ========== -->
   <footer class="mx-auto px-6 md:px-10 py-8 text-sm bg-ink border-t-2 border-blue text-stone flex flex-col gap-12">
     <div class="flex justify-between">
       <div class="flex flex-col justify-start gap-8">
         <img src="images/wordmark-platinum-footer.webp" alt="FromSendr" width="400" height="108" loading="lazy" decoding="async" class="w-24 sm:w-32 md:w-48">
-        <img src="images/klaviyo-partner.png" alt="Klaviyo Partner" width="800" height="337" loading="lazy" decoding="async" class="hidden w-14 sm:w-20 md:w-28">
       </div>
       <div class="flex justify-end gap-20">
         <div class="flex flex-col gap-4 text-xs text-right md:text-left md:text-sm">
           <a href="index.html" class="footer-link">Home</a>
-          <a href="services.html" class="footer-link">Services</a>
+          <a href="#services" class="footer-link">Services</a>
           <a href="work.html" class="footer-link">Work</a>
           <a href="about.html" class="footer-link">About</a>
-          <a href="contact.html" class="footer-link">Contact</a>
+          <a href="#contact" class="footer-link">Contact</a>
         </div>
         <div class="hidden md:flex flex-col gap-4 text-xs md:text-sm">
-          <a href="services.html#faq" class="footer-link">FAQs</a>
-          <a href="index.html#statistics" class="footer-link">Email statistics</a>
-          <a href="services.html#process" class="footer-link">Our process</a>
-          <a href="contact.html#booking" class="footer-link">Book a call</a>
+          <a href="#faq" class="footer-link">FAQs</a>
+          <a href="#statistics" class="footer-link">Email statistics</a>
+          <a href="#process" class="footer-link">Our process</a>
+          <a href="#booking" class="footer-link">Book a call</a>
         </div>
         <div class="hidden lg:flex flex-col gap-4 text-xs md:text-sm">
           <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>
@@ -324,8 +505,8 @@
       </div>
     </div>
     <div class="h-[1px] bg-silver/20"></div>
-    <div class="flex justify-between">
-      <span>© 2026 FromSendr</span>
+    <div class="flex justify-between text-xs md:text-sm">
+      <span class="flex flex-wrap gap-x-3 md:gap-x-6 gap-y-2"><span>© 2026 FromSendr</span><a href="privacy.html" class="footer-link">Privacy policy</a><a href="terms.html" class="footer-link">Terms of use</a></span>
       <div class="flex gap-6">
         <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link" title="Instagram" aria-label="FromSendr on Instagram">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">

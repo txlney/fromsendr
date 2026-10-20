@@ -7,6 +7,7 @@
     --color-platinum: #E8E9ED;
     --color-silver: #C5C5C5;
     --color-navy: #011627;
+    --color-dark-navy: #020e18;
     --color-orange: #EB4511;
 }
 
@@ -16,6 +17,32 @@
 .font-display {
     font-weight: 500;
     letter-spacing: -0.02em;
+}
+
+/* "Skip to content": the first thing in every page, off-screen until it gets keyboard focus */
+.skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 60;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-navy);
+    color: var(--color-paper);
+    font-size: 0.875rem;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: none;
+}
+
+/* Index typewriter: with reduced motion the first phrase stays put (script.js), so drop the
+   blinking cursor too (`html` so it outranks the cursor's Tailwind inline-block) */
+@media (prefers-reduced-motion: reduce) {
+    html .typewriter-cursor {
+        display: none;
+    }
 }
 
 /* Site nav: only the logo is visible by default, fixed top-centre. The logo is
@@ -90,7 +117,7 @@
     z-index: 40;
     /* Top padding clears the logo, so the links sit centred just below it */
     padding: 6.5rem 1.5rem 2rem;
-    background-color: var(--color-ink);
+    background-color: var(--color-dark-navy);
     transform: translateY(-100%);
     visibility: hidden;
     /* Closing waits briefly, so a slightly slow move off the logo doesn't drop it */
@@ -212,7 +239,7 @@
     }
 }
 
-/* Buttons: every CTA uses .btn (plus a colour variant like .btn-hero if needed).
+/* Buttons: every CTA uses .btn (plus .btn-sm for the compact header/drawer button).
    Colours come from the --btn-* variables, so a variant only overrides those.
    Base rules use `html body :where(.btn)`: two element selectors (0,0,2) beat
    Tailwind's preflight reset (`* { border-width: 0 }`, `a { color: inherit }`)
@@ -223,7 +250,7 @@
     --btn-bg: var(--color-blue);
     --btn-border: transparent;
     --btn-fill: var(--color-platinum);
-    --btn-hover-color: var(--color-navy);
+    --btn-hover-color: var(--color-blue);
 }
 
 html body :where(.btn) {
@@ -235,13 +262,11 @@ html body :where(.btn) {
     gap: 3rem;
     padding: 1rem 1.5rem;
     border: 2px solid var(--btn-border);
-    border-radius: 0.5rem;
-    /* Crops the ::before fill to the rounded corners (see below). The button's own shadow isn't clipped */
+    border-radius: 3rem;
+    /* Crops the ::before fill to the rounded corners (see below) */
     overflow: hidden;
     background-color: var(--btn-bg);
     color: var(--btn-color);
-    /* Tailwind's shadow-xl */
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     font-family: "Poppins", sans-serif;
     font-size: 1rem;
     line-height: 1.5rem;
@@ -292,7 +317,6 @@ html body .btn-sm {
     padding: 0.5rem 1.25rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 /* Header booking button: fixed top-right, vertically centred on the logo (logo centre is
@@ -351,14 +375,20 @@ html body .btn-sm {
     width: var(--target);
 }
 
-/* White text on a painted blue brush stroke (index "Timing matters."). The SVG
-   stretches to the text's box, so padding sets how far the paint runs past the
-   words. */
-.brush-stroke {
-    width: fit-content;
-    padding: 0.4em 1.2em;
-    color: #fff;
-    background: url(images/brush-stroke.svg) center / 100% 100% no-repeat;
+/* Waffle charts (index "2% of sends / 37% of sales"): a 10x10 grid drawn in CSS instead of 100
+   spans. The mask cuts the element into rounded squares (each tile is a 0.8 square plus a 0.2 gap,
+   and 10 tiles span 9.8 squares' worth so the last gap falls outside). Behind it: platinum, then
+   --rows full rows of blue, then --rem blue squares on the next row (inline style, e.g.
+   `--rows: 3; --rem: 7` for 37). The element is square, so % works for both axes. */
+.waffle {
+    --tile: calc(100% / 9.8);
+    aspect-ratio: 1;
+    background:
+        linear-gradient(to bottom, transparent calc(var(--rows) * var(--tile)), var(--color-blue) 0 calc((var(--rows) + 1) * var(--tile)), transparent 0) 0 0 / calc(var(--rem) * var(--tile)) 100% no-repeat,
+        linear-gradient(to bottom, var(--color-blue) calc(var(--rows) * var(--tile)), transparent 0),
+        var(--color-platinum);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='8' height='8' rx='1.4'/%3E%3C/svg%3E") 0 0 / var(--tile) var(--tile);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='8' height='8' rx='1.4'/%3E%3C/svg%3E") 0 0 / var(--tile) var(--tile);
 }
 
 /* Navy CTA card: soft blue glows in two corners. Gradients rather than blurred spans,
@@ -370,7 +400,130 @@ html body .btn-sm {
         radial-gradient(14rem circle at calc(100% - 3rem) calc(100% - 3rem), rgb(45 125 210 / 0.2) 25%, transparent);
 }
 
-/* Services FAQ: the open answer tucks up 0.5rem into the summary's bottom padding. It's
+/* Process steps (index): each card shows only its number and title. The header is a disclosure
+   <button> whose ::after stretches over the whole card, so a click/tap anywhere toggles .is-open
+   (script.js, which also sets aria-expanded); with a mouse, hovering opens it too.
+   Animating grid-template-rows 0fr -> 1fr works in every browser, unlike height: auto.
+   The closed description is visibility: hidden (after the slide), so screen readers skip it too. */
+.process-step-button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.process-step-button:focus-visible {
+    outline: none;
+}
+
+.process-step:has(.process-step-button:focus-visible) {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+}
+
+.process-step-detail {
+    display: grid;
+    grid-template-rows: 0fr;
+}
+
+.process-step-detail > div {
+    overflow: hidden;
+    visibility: hidden;
+}
+
+/* The open card turns navy with paper text and its number badge flips to silver with navy
+   text (these selectors outrank the Tailwind bg-platinum / bg-navy / text-stone / border-silver
+   classes on the card and its badge) */
+.process-step.is-open .process-step-detail {
+    grid-template-rows: 1fr;
+}
+
+.process-step.is-open .process-step-detail > div {
+    visibility: visible;
+}
+
+.process-step.is-open {
+    background-color: var(--color-navy);
+    color: var(--color-paper);
+}
+
+.process-step.is-open .process-step-number {
+    background-color: var(--color-silver);
+    color: var(--color-navy);
+}
+
+.process-step.is-open p {
+    color: rgb(253 253 253 / 0.85);
+}
+
+.process-step.is-open .process-step-toggle {
+    transform: rotate(45deg);
+    border-color: rgb(253 253 253 / 0.5);
+    color: var(--color-paper);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .process-step:hover .process-step-detail {
+        grid-template-rows: 1fr;
+    }
+
+    .process-step:hover .process-step-detail > div {
+        visibility: visible;
+    }
+
+    .process-step:hover {
+        background-color: var(--color-navy);
+        color: var(--color-paper);
+    }
+
+    .process-step:hover .process-step-number {
+        background-color: var(--color-silver);
+        color: var(--color-navy);
+    }
+
+    .process-step:hover p {
+        color: rgb(253 253 253 / 0.85);
+    }
+
+    .process-step:hover .process-step-toggle {
+        transform: rotate(45deg);
+        border-color: rgb(253 253 253 / 0.5);
+        color: var(--color-paper);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .process-step,
+    .process-step p,
+    .process-step-number {
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .process-step-detail {
+        transition: grid-template-rows 0.3s ease;
+    }
+
+    /* Hide only once the slide has finished closing */
+    .process-step-detail > div {
+        transition: visibility 0s linear 0.3s;
+    }
+
+    .process-step.is-open .process-step-detail > div {
+        transition: none;
+    }
+
+    .process-step-toggle {
+        transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .process-step:hover .process-step-detail > div {
+        transition: none;
+    }
+}
+
+/* Index FAQ: the open answer tucks up 0.5rem into the summary's bottom padding. It's
    done here rather than with -mt-2 on the answer, which the overflow clip below would cut off. */
 #faq details[open]::details-content {
     margin-top: -0.5rem;
@@ -437,7 +590,7 @@ html body .btn-sm {
     color: var(--color-platinum);
     font-size: 0.875rem;
     white-space: nowrap;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .email-preview-cta:hover {
@@ -506,13 +659,17 @@ html body .btn-sm {
    auto-scroll). Each card also scrolls vertically to read the whole email. */
 .archive-strip {
     display: flex;
+    background-color: var(--color-dark-navy);
     align-items: flex-start;
     gap: 0.8rem;
     overflow-x: auto;
-    padding-inline: 1.5rem;
-    padding-bottom: 1rem;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-blue) transparent;
+    padding: 1rem 1.5rem;
+    /* No visible scrollbar: it still scrolls by touch, trackpad, shift+wheel or drag */
+    scrollbar-width: none;
+}
+
+.archive-strip::-webkit-scrollbar {
+    display: none;
 }
 
 /* Mouse users can also click and drag the strip (work.js). No scroll-snap: mandatory
@@ -533,17 +690,16 @@ html body .btn-sm {
     flex: 0 0 auto;
     width: 9rem;
     height: 16rem;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     overflow-y: auto;
     overflow-x: hidden;
-    background: rgb(253 253 253 / 0.12);
-    padding: 4px;
+    background: transparent;
     scrollbar-width: thin;
     scrollbar-color: var(--color-blue) transparent;
 }
 
 .archive-card::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
 }
 
 .archive-card::-webkit-scrollbar-thumb {
@@ -558,6 +714,5 @@ html body .btn-sm {
     .archive-card {
         width: 16rem;
         height: 30rem;
-        padding: 6px;
     }
 }

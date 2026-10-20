@@ -30,10 +30,29 @@ if (!canHover) {
     }, true);
 }
 
+// In-page links (Services and Contact on the home page) don't load a new page,
+// so close the panel ourselves; blurring stops :focus-within holding it open
+siteNav.addEventListener("click", (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    setNavOpen(false);
+    link.blur();
+});
+
 document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
     setNavOpen(false);
     if (siteNav.contains(document.activeElement)) document.activeElement.blur();
+});
+
+// Process steps (index): each card's header is a disclosure button. Clicking, tapping or
+// Enter/Space toggles the description (mouse users also get it on hover, pure CSS)
+document.querySelectorAll(".process-step-button").forEach((button) => {
+    button.addEventListener("click", () => {
+        const open = button.getAttribute("aria-expanded") !== "true";
+        button.setAttribute("aria-expanded", String(open));
+        button.closest(".process-step").classList.toggle("is-open", open);
+    });
 });
 
 const typewriter = document.getElementById("typewriter");
@@ -74,6 +93,13 @@ function tick() {
 }
 
 if (phrases.length) {
+    // Screen readers read the hidden label instead of the animation: give it every phrase
+    const label = document.getElementById("typewriter-label");
+    const allPhrases = phrases.length > 1
+        ? phrases.slice(0, -1).join(", ") + " and " + phrases[phrases.length - 1]
+        : phrases[0];
+    if (label) label.textContent = label.textContent.replace(phrases[0], allPhrases);
+
     // Invisible copies of every phrase share the typed line's grid cell (see index.html),
     // so the heading is always as tall as the longest phrase at the current width and
     // doesn't grow and shrink as a phrase wraps onto a second line mid-typing.
@@ -86,5 +112,11 @@ if (phrases.length) {
         ghost.textContent = phrase + " ";
         typedLine.before(ghost);
     });
-    tick();
+
+    // The first phrase is already in the page. With reduced motion it just stays there (and
+    // styles.css hides the cursor); otherwise clear it and start typing
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        typewriter.textContent = "";
+        tick();
+    }
 }

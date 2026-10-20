@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,7 @@
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="FromSendr work">
   <meta property="og:description" content="Email campaigns and flows designed by FromSendr, from product launches to win-backs. Open any email to read it in full.">
+  <link rel="canonical" href="https://fromsendr.com/work.html">
   <meta property="og:url" content="https://fromsendr.com/work.html">
   <meta property="og:image" content="https://fromsendr.com/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -23,13 +24,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..600&family=Poppins:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Built from tailwind.input.css + tailwind.config.js (see CLAUDE.md); must stay after styles.css -->
+  <!-- Built from tailwind.input.css + tailwind.config.js; must stay after styles.css -->
   <link rel="stylesheet" href="tailwind.css">
 </head>
 
 <body class="bg-platinum text-ink font-sans antialiased">
+
+  <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- ========== NAV (same as index.html) ========== -->
   <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
@@ -39,21 +42,16 @@
   </a>
   <nav id="site-nav" class="site-nav flex flex-col items-end gap-10 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-4 lg:gap-x-32 text-sm font-bold uppercase" aria-label="Main navigation">
     <a href="index.html" class="nav-link">Home</a>
-    <a href="services.html" class="nav-link">Services</a>
     <a href="work.html" class="nav-link-selected">Work</a>
     <a href="about.html" class="nav-link">About</a>
-    <a href="contact.html" class="nav-link">Contact</a>
     <!-- Phones: a booking button at the bottom of the drawer (the fixed .site-cta below is md+ only) -->
-    <a href="contact.html" class="btn btn-sm md:hidden mt-auto w-full justify-center font-normal normal-case">Book a call</a>
+    <a href="index.html#contact" class="btn btn-sm md:hidden mt-auto w-full justify-center font-normal normal-case">Book a call</a>
   </nav>
-  <!-- Always-visible booking button, top-right on md+ (not on contact.html). Sits above the nav panel, see .site-cta -->
-  <a href="contact.html" class="btn btn-sm site-cta hidden md:inline-flex">Book a call</a>
+  <!-- Always-visible booking button, top-right on md+ (on every page). Sits above the nav panel, see .site-cta -->
+  <a href="index.html#contact" class="btn btn-sm site-cta hidden md:inline-flex">Book a call</a>
 
-  <!-- ========== INTRO ==========
-    Navy band: centred headline, then the tops of five real emails (three on phones) rising
-    from the bottom edge, staggered, and cut off by the band. Content height, no background effects.
-    The thumbnails are the same files the grid uses, so they're already cached further down.
-  -->
+  <main id="main">
+  <!-- ========== INTRO ========== -->
   <header class="overflow-hidden bg-navy text-platinum">
     <div class="mx-auto max-w-6xl px-6 md:px-10 pt-28 md:pt-32 text-center">
       <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-silver">Our work</p>
@@ -69,22 +67,10 @@
     </div>
   </header>
 
-  <!-- ========== PROJECTS ==========
-    A featured project (full width) followed by a grid of cards: 2 columns (3 from lg).
-    Below sm the cards shrink to just the preview: the name, type label, description and colour key are hidden
-    (the modal still shows data-title), and styles.css shortens .email-preview and its button.
-    Keep the number of grid cards a multiple of 6 (including the "your brand" card) so both layouts end on a full row.
-    Every project is an <article data-work-item> containing a <button data-open-email> (work.js opens the modal).
-    - Preview: <img src="images/work/name-full-thumb.webp" loading="lazy" ...> (the whole email; the
-      card crops it and .email-preview adds the fade-out). Thumbs are 800px-wide WebP, also used by the archive strip.
-    - Full email: set data-full to a 1200px-wide WebP (images/work/name-full.webp) or an
-      exported HTML file (images/work/name.html), which loads in an iframe.
-      With no data-full, a placeholder is shown (placeholder cards use <div class="email-skeleton">).
-    Don't reference the original 2000px PNG screenshots directly: at 7-29 MB each they dominated load time.
-  -->
+  <!-- ========== PROJECTS ========== -->
   <section id="selected-work" class="scroll-mt-8 mx-auto max-w-6xl px-6 md:px-10 pt-16 md:pt-24 pb-20 md:pb-28">
     <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between border-b border-ink/10 pb-6 mb-4">
-      <h2 class="font-display text-2xl md:text-3xl">Selected work</h2>
+      <h2 class="font-display text-2xl md:text-3xl lg:text-4xl">Selected work</h2>
       <!-- Colour key for the card labels below: flows navy, campaigns blue -->
       <p class="hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-xs md:text-sm uppercase tracking-[0.2em] text-stone">
         <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-navy"></span>Flows</span>
@@ -132,10 +118,10 @@
           <span class="email-preview-cta">View full email</span>
         </button>
         <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
-          <h3 class="font-sans text-2xl">RepLab</h3>
+          <h3 class="text-2xl font-semibold">RepLab</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-blue/10 text-blue">Campaign</p>
         </div>
-        <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
+        <div class="hidden sm:flex flex-col gap-2 mt-2 text-sm text-stone/80">
           <p>An introduction to RepLab's core product, including a breakdown of its contents.</p>
         </div>
       </article>
@@ -146,10 +132,10 @@
           <span class="email-preview-cta">View full email</span>
         </button>
         <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
-          <h3 class="font-sans text-2xl">Buccaneers</h3>
+          <h3 class="text-2xl font-semibold">Buccaneers</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-navy/10 text-navy">Welcome series</p>
         </div>
-        <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
+        <div class="hidden sm:flex flex-col gap-2 mt-2 text-sm text-stone/80">
           <p>A welcome to "the Krewe" for new subscribers, pairing a first-order offer with member perks.</p>
         </div>
       </article>
@@ -160,10 +146,10 @@
           <span class="email-preview-cta">View full email</span>
         </button>
         <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
-          <h3 class="font-sans text-2xl">Kenco</h3>
+          <h3 class="text-2xl font-semibold">Kenco</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-blue/10 text-blue">Campaign</p>
         </div>
-        <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
+        <div class="hidden sm:flex flex-col gap-2 mt-2 text-sm text-stone/80">
           <p>An autumn flavours campaign that introduces new seasonal coffee blends.</p>
         </div>
       </article>
@@ -174,10 +160,10 @@
           <span class="email-preview-cta">View full email</span>
         </button>
         <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
-          <h3 class="font-sans text-2xl">Nut &amp; Noggin</h3>
+          <h3 class="text-2xl font-semibold">Nut &amp; Noggin</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-navy/10 text-navy">Win-back</p>
         </div>
-        <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
+        <div class="hidden sm:flex flex-col gap-2 mt-2 text-sm text-stone/80">
           <p>"We miss you": 20% off to bring lapsed subscribers back, with a P.S. for the new shampoo and conditioner bundle.</p>
         </div>
       </article>
@@ -188,20 +174,20 @@
           <span class="email-preview-cta">View full email</span>
         </button>
         <div class="mt-5 hidden sm:flex items-center justify-between gap-4">
-          <h3 class="font-sans text-2xl">Moon Juice</h3>
+          <h3 class="text-2xl font-semibold">Moon Juice</h3>
           <p class="text-[0.65rem] font-semibold uppercase tracking-[0.2em] whitespace-nowrap rounded-full px-3 py-1 bg-navy/10 text-navy">Post-purchase</p>
         </div>
-        <div class="flex flex-col gap-2 mt-2 hidden sm:flex text-sm text-stone/80">
+        <div class="hidden sm:flex flex-col gap-2 mt-2 text-sm text-stone/80">
           <p>A shipping update that turns order tracking into social proof, with five-star reviews from across the range.</p>
         </div>
       </article>
 
       <!-- Closing card: fills the last slot and points to the contact page -->
-      <a href="contact.html" class="group relative overflow-hidden flex flex-col justify-between min-h-[18rem] sm:h-[28rem] p-4 sm:p-8 bg-navy rounded-[1rem] text-paper">
+      <a href="index.html#contact" class="group relative overflow-hidden flex flex-col justify-between min-h-[18rem] sm:h-[28rem] p-4 sm:p-8 bg-navy rounded-[1rem] text-paper">
         <span class="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-blue/40 blur-3xl" aria-hidden="true"></span>
         <p class="relative text-xs uppercase tracking-[0.2em] text-silver">Next up</p>
         <div class="relative">
-          <p class="font-display text-xl md:text-2xl leading-tight">Your brand could be next.</p>
+          <p class="text-xl md:text-2xl font-semibold leading-tight">Your brand could be next.</p>
           <p class="mt-2 sm:mt-4 text-xs sm:text-sm text-paper/60">Book a free strategy call and we'll show you what we'd build.</p>
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="mt-4 sm:mt-8 text-orange transition-transform duration-300 group-hover:translate-x-2">
             <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -211,44 +197,40 @@
     </div>
   </section>
 
-  <!-- ========== ARCHIVE ==========
-    A row of email thumbnails that scrolls sideways by hand (.archive-strip in styles.css);
-    each card also scrolls vertically to read the whole email.
-  -->
+  <!-- ========== ARCHIVE ========== -->
   <section id="archive" class="bg-navy text-paper py-16 md:py-24">
     <div class="mx-auto max-w-6xl px-6 md:px-10 mb-10 md:mb-14 flex flex-col gap-3 md:flex-row md:justify-between">
-      <h2 class="font-display text-2xl md:text-3xl">From the archive</h2>
+      <h2 class="font-display text-2xl md:text-3xl lg:text-4xl">From the archive</h2>
       <p class="text-xs md:text-sm text-paper/60 max-w-sm md:text-right">More of our designs. Drag or scroll sideways to browse, and scroll inside any email to read it.</p>
     </div>
     <div class="archive-strip">
         <div class="archive-card"><img src="images/work/bucs-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Tampa Bay Buccaneers welcome email"></div>
         <div class="archive-card"><img src="images/work/cstheory-2-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="CS Theory Clay vs Powder campaign"></div>
         <div class="archive-card"><img src="images/work/replab-2-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div>
-        <div class="archive-card"><img src="images/work/fromsendr-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="FromSendr campaign"></div>
-        <div class="archive-card"><img src="images/work/kenco-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Kenco campaign"></div>
+        <div class="archive-card"><img src="images/work/moonjuice-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Moon Juice shipping update email"></div>
+        <div class="archive-card"><img src="images/work/wild-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Wild summer scents campaign"></div>
         <div class="archive-card"><img src="images/work/cstheory-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="CS Theory abandoned cart email"></div>
         <div class="archive-card"><img src="images/work/replab-3-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div>
         <div class="archive-card"><img src="images/work/nutandnoggin-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Nut &amp; Noggin win-back email"></div>
-        <div class="archive-card"><img src="images/work/moonjuice-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Moon Juice shipping update email"></div>
-        <div class="archive-card"><img src="images/work/wild-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Wild summer scents campaign"></div>
+        <div class="archive-card"><img src="images/work/fromsendr-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="FromSendr campaign"></div>
+        <div class="archive-card"><img src="images/work/kenco-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="Kenco campaign"></div>
         <div class="archive-card"><img src="images/work/replab-1-full-thumb.webp" class="w-full rounded-[0.7rem]" loading="lazy" decoding="async" alt="RepLab campaign"></div>
     </div>
   </section>
 
   <!-- ========== CTA ========== -->
   <section class="px-6 md:px-10 py-16 md:py-28">
-    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-12 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
+    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-7 md:p-12 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
       <div class="relative flex flex-col items-center md:items-start text-center md:text-left">
         <h2 class="font-display text-2xl md:text-3xl text-paper">Want emails like these for your brand?</h2>
         <p class="text-sm md:text-lg text-paper/70 mt-4 max-w-xl">
           <span class="hidden sm:flex">Book a free call and we'll talk through what we'd design for you first.</span>
-          <span class="flex sm:hidden">Book a free call and we'll show you what we'd design.</span>
         </p>
-        <div class="md:hidden mt-6 flex items-center gap-3">
+        <div class="md:hidden mt-2 md:mt-5 flex items-center gap-3">
           <span class="flex -space-x-3"><img src="images/people/tom-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"><img src="images/people/jake-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"></span>
           <span class="text-sm text-paper/80 text-left">You'll speak to Jake or Tom <span class="whitespace-nowrap">(or both!)</span></span>
         </div>
-        <a href="contact.html" class="btn w-full max-w-md mt-8 md:mt-10 gap-4 md:gap-12">
+        <a href="index.html#contact" class="btn w-full max-w-md mt-6 md:mt-8 gap-4 md:gap-12">
           Book a strategy call
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
             <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -264,18 +246,14 @@
             <span class="block mt-0.5 text-xs text-stone">Co-founders, FromSendr</span>
           </span>
         </div>
-        <ul class="mt-5 pt-5 border-t border-platinum space-y-3 text-sm text-stone">
-            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A look through your flows, campaigns and list</span></li>
-            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The first changes we'd make, in priority order</span></li>
-            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Honest advice, with no obligation to work with us</span></li>
-        </ul>
-        <p class="mt-5 text-xs font-semibold uppercase tracking-[0.15em] text-navy">30 min &middot; Free</p>
+        <p class="mt-5 pt-5 border-t border-platinum text-xs font-semibold uppercase tracking-[0.15em] text-navy">30 min &middot; Free &middot; No obligation</p>
       </div>
     </div>
   </section>
+  </main>
 
   <!-- ========== FULL EMAIL MODAL ========== -->
-  <dialog id="email-modal" class="m-auto w-[min(86vw,38rem)] max-h-[90vh] p-0 bg-paper rounded-[1rem] shadow-2xl backdrop:bg-navy/60">
+  <dialog id="email-modal" aria-labelledby="email-modal-title" class="m-auto w-[min(86vw,38rem)] max-h-[90vh] p-0 bg-paper rounded-[1rem] shadow-2xl backdrop:bg-navy/60">
     <div class="sticky top-0 z-10 flex items-center justify-between bg-navy px-6 py-3 text-platinum">
       <span id="email-modal-title" class="font-sans text-lg"></span>
       <button type="button" id="email-modal-close" class="text-xl leading-none md:hover:rotate-90 md:duration-200" aria-label="Close">&#x2715;</button>
@@ -288,21 +266,20 @@
     <div class="flex justify-between">
       <div class="flex flex-col justify-start gap-8">
         <img src="images/wordmark-platinum-footer.webp" alt="FromSendr" width="400" height="108" loading="lazy" decoding="async" class="w-24 sm:w-32 md:w-48">
-        <img src="images/klaviyo-partner.png" alt="Klaviyo Partner" width="800" height="337" loading="lazy" decoding="async" class="hidden w-14 sm:w-20 md:w-28">
       </div>
       <div class="flex justify-end gap-20">
         <div class="flex flex-col gap-4 text-xs text-right md:text-left md:text-sm">
           <a href="index.html" class="footer-link">Home</a>
-          <a href="services.html" class="footer-link">Services</a>
+          <a href="index.html#services" class="footer-link">Services</a>
           <a href="work.html" class="footer-link">Work</a>
           <a href="about.html" class="footer-link">About</a>
-          <a href="contact.html" class="footer-link">Contact</a>
+          <a href="index.html#contact" class="footer-link">Contact</a>
         </div>
         <div class="hidden md:flex flex-col gap-4 text-xs md:text-sm">
-          <a href="services.html#faq" class="footer-link">FAQs</a>
+          <a href="index.html#faq" class="footer-link">FAQs</a>
           <a href="index.html#statistics" class="footer-link">Email statistics</a>
-          <a href="services.html#process" class="footer-link">Our process</a>
-          <a href="contact.html#booking" class="footer-link">Book a call</a>
+          <a href="index.html#process" class="footer-link">Our process</a>
+          <a href="index.html#booking" class="footer-link">Book a call</a>
         </div>
         <div class="hidden lg:flex flex-col gap-4 text-xs md:text-sm">
           <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>
@@ -310,8 +287,8 @@
       </div>
     </div>
     <div class="h-[1px] bg-silver/20"></div>
-    <div class="flex justify-between">
-      <span>© 2026 FromSendr</span>
+    <div class="flex justify-between text-xs md:text-sm">
+      <span class="flex flex-wrap gap-x-3 md:gap-x-6 gap-y-2"><span>© 2026 FromSendr</span><a href="privacy.html" class="footer-link">Privacy policy</a><a href="terms.html" class="footer-link">Terms of use</a></span>
       <div class="flex gap-6">
         <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link" title="Instagram" aria-label="FromSendr on Instagram">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">

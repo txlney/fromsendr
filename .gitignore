@@ -1,2 +1,8 @@
 # Tailwind standalone CLI binary (~40 MB); download it again per CLAUDE.md
 .tools/
+
+# Original email screenshots (2-29 MB PNGs): kept locally as sources for the webps, not committed
+images/work/png-backups/
+
+# Claude Code project notes; kept local so GitHub Pages does not publish them
+CLAUDE.md

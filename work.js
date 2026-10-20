@@ -51,8 +51,8 @@ emailModal.addEventListener("close", () => {
 });
 
 // Archive strip: click and drag to scroll with a mouse (touch and trackpads already scroll it
-// natively). Dragging sideways moves the row; dragging up/down scrolls the email under the
-// pointer. Presses on a scrollbar (the strip's or a card's) are left to the browser.
+// natively). Dragging only moves the row sideways; each email still scrolls with the wheel.
+// Presses on a card's scrollbar are left to the browser.
 const archiveStrip = document.querySelector(".archive-strip");
 
 if (archiveStrip) {
@@ -67,8 +67,8 @@ if (archiveStrip) {
     archiveStrip.addEventListener("pointerdown", (event) => {
         if (event.pointerType !== "mouse" || event.button !== 0) return;
         const card = event.target.closest(".archive-card");
-        if (onScrollbar(archiveStrip, event.clientX, event.clientY) || (card && onScrollbar(card, event.clientX, event.clientY))) return;
-        drag = { x: event.clientX, y: event.clientY, left: archiveStrip.scrollLeft, card, top: card ? card.scrollTop : 0, moved: false };
+        if (card && onScrollbar(card, event.clientX, event.clientY)) return;
+        drag = { x: event.clientX, y: event.clientY, left: archiveStrip.scrollLeft, moved: false };
         archiveStrip.setPointerCapture(event.pointerId);
     });
 
@@ -83,7 +83,6 @@ if (archiveStrip) {
             archiveStrip.classList.add("is-dragging");
         }
         archiveStrip.scrollLeft = drag.left - dx;
-        if (drag.card) drag.card.scrollTop = drag.top - dy;
     });
 
     const endDrag = () => {

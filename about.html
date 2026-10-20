@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,7 @@
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="About FromSendr">
   <meta property="og:description" content="A small team of email marketing specialists covering both the creative and the technical side of email for e-commerce brands.">
+  <link rel="canonical" href="https://fromsendr.com/about.html">
   <meta property="og:url" content="https://fromsendr.com/about.html">
   <meta property="og:image" content="https://fromsendr.com/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -23,13 +24,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..600&family=Poppins:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Built from tailwind.input.css + tailwind.config.js (see CLAUDE.md); must stay after styles.css -->
+  <!-- Built from tailwind.input.css + tailwind.config.js; must stay after styles.css -->
   <link rel="stylesheet" href="tailwind.css">
 </head>
 
 <body class="bg-platinum text-ink font-sans antialiased">
+
+  <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- ========== NAV (same as index.html) ========== -->
   <!-- Only the logo shows by default; hovering it (or tapping, on touch) drops the nav panel down. See .site-logo/.site-nav in styles.css -->
@@ -39,26 +42,20 @@
   </a>
   <nav id="site-nav" class="site-nav flex flex-col items-end gap-10 md:flex-row md:flex-wrap md:justify-center md:gap-x-16 md:gap-y-4 lg:gap-x-32 text-sm font-bold uppercase" aria-label="Main navigation">
     <a href="index.html" class="nav-link">Home</a>
-    <a href="services.html" class="nav-link">Services</a>
     <a href="work.html" class="nav-link">Work</a>
     <a href="about.html" class="nav-link-selected">About</a>
-    <a href="contact.html" class="nav-link">Contact</a>
     <!-- Phones: a booking button at the bottom of the drawer (the fixed .site-cta below is md+ only) -->
-    <a href="contact.html" class="btn btn-sm md:hidden mt-auto w-full justify-center font-normal normal-case">Book a call</a>
+    <a href="index.html#contact" class="btn btn-sm md:hidden mt-auto w-full justify-center font-normal normal-case">Book a call</a>
   </nav>
-  <!-- Always-visible booking button, top-right on md+ (not on contact.html). Sits above the nav panel, see .site-cta -->
-  <a href="contact.html" class="btn btn-sm site-cta hidden md:inline-flex">Book a call</a>
+  <!-- Always-visible booking button, top-right on md+ (on every page). Sits above the nav panel, see .site-cta -->
+  <a href="index.html#contact" class="btn btn-sm site-cta hidden md:inline-flex">Book a call</a>
 
-  <!-- ========== INTRO ==========
-    Shared inner-page hero (index's split at content height): headline, intro and quick facts on the
-    left; the founders on the right, in two staggered columns like index's emails (below lg, under
-    the copy). Photos are 600x750 crops in images/people/*-hero.webp, shown in greyscale (the CSS
-    grayscale class) so two very different shots read as a set; drop the class for colour.
-  -->
+  <main id="main">
+  <!-- ========== INTRO ========== -->
   <header class="mx-auto max-w-6xl px-6 md:px-10 pt-28 md:pt-32 pb-14 md:pb-20 grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:gap-12 items-center">
     <div>
       <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-stone">About us</p>
-      <h1 class="mt-5 md:mt-6 font-display text-4xl md:text-[2.75rem] leading-[1.08] text-navy">A small email team for <span class="whitespace-nowrap">e-commerce</span> brands that sweat the <span class="font-semibold text-blue">details</span></h1>
+      <h1 class="mt-5 md:mt-6 font-display text-4xl md:text-[2.75rem] leading-[1.08] text-navy">A small team for <span class="whitespace-nowrap">e-commerce</span> brands that <span class="font-semibold text-blue">obsess</span> over the details</h1>
       <p class="mt-6 text-stone text-sm md:text-lg max-w-xl leading-relaxed">We're co-founders Jake and Tom. We handle the strategy, writing, design and set-up of your email, and you deal with us directly.</p>
       <dl class="mt-8 md:mt-10 grid grid-cols-2 gap-x-6 gap-y-5 max-w-xl border-t border-ink/10 pt-6">
         <div>
@@ -100,7 +97,7 @@
   <!-- ========== Who we are ========== -->
   <section id="who-we-are" class="bg-paper px-6 md:px-10 py-16 md:py-24 text-left">
     <div class="mx-auto md:max-w-6xl flex flex-col gap-4 md:gap-8">
-      <h2 class="font-display text-2xl md:text-3xl">Who we are</h2>
+      <h2 class="font-display text-2xl md:text-3xl lg:text-4xl">Who we are</h2>
       <div class="flex flex-col gap-4 text-stone text-sm md:text-lg leading-relaxed">
         <p>
           We are a small team of email marketing specialists, passionate about converting email channels into revenue streams for e-commerce brands.
@@ -117,19 +114,16 @@
     </div>
   </section>
 
-  <!-- ========== WHAT WE DO / WHAT MAKES US DIFFERENT ==========
-    Two cards (stacked on mobile) in the services.html style: a navy panel with an oversized, faded
-    Phosphor icon (Thin; images/svgs/about-page/) bleeding off its bottom-right, then the copy.
-  -->
+  <!-- ========== WHAT WE DO / WHAT MAKES US DIFFERENT ========== -->
   <section class="px-6 md:px-10 py-16 md:py-28">
     <div class="mx-auto max-w-6xl grid gap-10 md:grid-cols-2 md:gap-16">
       <div id="what-we-do" class="scroll-mt-8 min-w-0 relative flex flex-col bg-paper rounded-[1rem] shadow-xl">
         <div class="relative flex items-center justify-center min-h-40 md:min-h-64 p-6 sm:p-10 bg-navy rounded-t-[1rem] overflow-hidden" aria-hidden="true">
-          <!-- Phosphor "mailbox-thin" (images/svgs/about-page/mailbox-thin.svg), inlined so the colour classes apply -->
+          <!-- Phosphor "mailbox-thin", inlined so the colour classes apply -->
           <svg viewBox="0 0 256 256" class="absolute -right-6 -bottom-10 w-56 sm:w-64 md:-right-10 md:-bottom-20 md:w-80 lg:w-96 h-auto text-blue/30" fill="currentColor"><path d="M100,152a4,4,0,0,1-4,4H56a4,4,0,0,1,0-8H96A4,4,0,0,1,100,152Zm136-36v60a12,12,0,0,1-12,12H132v36a4,4,0,0,1-8,0V188H32a12,12,0,0,1-12-12V116A56.06,56.06,0,0,1,76,60h80V24a4,4,0,0,1,4-4h32a4,4,0,0,1,0,8H164V60h16A56.06,56.06,0,0,1,236,116ZM124,180V116a48,48,0,0,0-96,0v60a4,4,0,0,0,4,4Zm104-64a48.05,48.05,0,0,0-48-48H164v76a4,4,0,0,1-8,0V68H104.82A56,56,0,0,1,132,116v64h92a4,4,0,0,0,4-4Z"/></svg>
         </div>
         <div class="p-8 md:p-10">
-          <h2 class="font-display text-xl md:text-2xl mb-4">What we do</h2>
+          <h2 class="text-xl md:text-2xl font-semibold mb-4">What we do</h2>
           <p class="text-stone text-xs md:text-base leading-relaxed">
             We start by getting to know your brand and taking a proper look at your current email set-up.
             If we think we can help, we'll put together a plan that fits your brand and budget, whether that's a one-off flow build or managing your email month to month.
@@ -139,11 +133,11 @@
       </div>
       <div id="different" class="scroll-mt-8 min-w-0 relative flex flex-col bg-paper rounded-[1rem] shadow-xl">
         <div class="relative flex items-center justify-center min-h-40 md:min-h-64 p-6 sm:p-10 bg-navy rounded-t-[1rem] overflow-hidden" aria-hidden="true">
-          <!-- Phosphor "signature-thin" (images/svgs/about-page/signature-thin.svg), inlined so the colour classes apply -->
+          <!-- Phosphor "signature-thin", inlined so the colour classes apply -->
           <svg viewBox="0 0 256 256" class="absolute -right-6 -bottom-10 w-56 sm:w-64 md:-right-8 md:-bottom-24 md:w-80 lg:w-96 h-auto text-blue/30" fill="currentColor"><path d="M232,172H57.32c4-7.83,8.18-16.11,12.21-24.56,15.14,3.55,34.13-8.06,56.54-34.59,3.67,12.5,12.53,34.83,29.08,35.15h.35c8.71,0,17.64-6.25,27.16-19.06C187.17,137.14,199.31,148,232,148a4,4,0,0,0,0-8c-42.88,0-44-19.24-44-20a4,4,0,0,0-7.35-2.18C168.74,136.1,160.42,140,155.48,140h-.18c-13-.25-21.29-26.52-23.38-36.61a4,4,0,0,0-7-1.69c-20.94,26.27-39.06,39.55-51.8,38.2C97.31,87.5,105.19,53.16,96.49,37.77,94,33.31,88.7,28,77.91,28,64.09,28,52.54,42.41,47,66.54A122.7,122.7,0,0,0,45.46,113c2.64,15.29,8.39,26.05,16.69,31.35-4.58,9.6-9.3,19-13.84,27.68H24a4,4,0,0,0,0,8H44.1c-12.87,24.17-23.37,41.68-23.53,41.94a4,4,0,0,0,1.37,5.49A3.93,3.93,0,0,0,24,228a4,4,0,0,0,3.43-1.94c.16-.27,11.85-19.75,25.72-46.06H232a4,4,0,0,0,0-8ZM53.34,111.61a114.81,114.81,0,0,1,1.49-43.29C58.4,52.7,66.34,36,77.91,36c7.52,0,10.23,3.26,11.61,5.7C99,58.4,79.92,106,65.6,137,59.76,132.69,55.46,123.83,53.34,111.61Z"/></svg>
         </div>
         <div class="p-8 md:p-10">
-          <h2 class="font-display text-xl md:text-2xl mb-4">How we're different</h2>
+          <h2 class="text-xl md:text-2xl font-semibold mb-4">How we're different</h2>
           <p class="text-stone text-xs md:text-base leading-relaxed">
             Many agencies focus on either the creative side of email or the technical side. We do both: emails that look good and read well, sent from an account that's set up properly and lands in the inbox.
             And because we're a small team, you deal directly with the people doing the work, not an account manager passing messages along.
@@ -156,7 +150,7 @@
   <!-- ========== WHAT TO EXPECT ========== -->
   <section id="core-concepts" class="bg-paper px-6 md:px-10 py-16 md:py-28">
     <div class="mx-auto max-w-6xl">
-      <h2 class="mb-8 md:mb-10 font-display text-2xl md:text-3xl">What you can expect from us</h2>
+      <h2 class="mb-8 md:mb-10 font-display text-2xl md:text-3xl lg:text-4xl">What you can expect from us</h2>
       <ol class="grid gap-3 md:gap-4 grid-cols-2 lg:grid-cols-4">
         <li class="bg-platinum p-4 sm:p-8 rounded-[1rem]">
           <span class="font-display text-xl md:text-2xl text-blue">01</span>
@@ -182,22 +176,17 @@
     </div>
   </section>
 
-  <!-- ========== CTA ==========
-    Navy card (shared by work.html, about.html and services.html; keep in sync apart from the copy):
-    heading, copy and button on one side; on md+ a "who you'll talk to" card with both founders' avatars
-    (on phones the avatars + "You'll speak to..." sit above the button instead). Same card as index.html.
-    The two soft glows are the card's .cta-glow background (styles.css).
-  -->
+  <!-- ========== CTA ========== -->
   <section class="px-6 md:px-10 py-16 md:py-28">
-    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-8 md:p-12 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
+    <div class="relative cta-glow mx-auto max-w-6xl grid gap-10 md:gap-12 md:grid-cols-[3fr_2fr] items-center px-5 py-7 md:p-12 bg-navy rounded-[1rem] shadow-xl overflow-hidden">
       <div class="relative flex flex-col items-center md:items-start text-center md:text-left">
         <h2 class="font-display text-2xl md:text-3xl text-paper">Like the sound of how we work?</h2>
-        <p class="text-sm md:text-lg text-paper/70 mt-4 max-w-xl">Let's talk about what email could do for your brand.</p>
-        <div class="md:hidden mt-6 flex items-center gap-3">
+        <p class="hidden sm:flex text-sm md:text-lg text-paper/70 mt-4 max-w-xl">Let's talk about what email could do for your brand.</p>
+        <div class="md:hidden mt-5 flex items-center gap-3">
           <span class="flex -space-x-3"><img src="images/people/tom-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"><img src="images/people/jake-avatar.webp" alt="" width="160" height="160" loading="lazy" decoding="async" class="h-10 w-10 rounded-full object-cover grayscale ring-2 ring-navy"></span>
           <span class="text-sm text-paper/80 text-left">You'll speak to Jake or Tom <span class="whitespace-nowrap">(or both!)</span></span>
         </div>
-        <a href="contact.html" class="btn w-full max-w-md mt-8 md:mt-10 gap-4 md:gap-12">
+        <a href="index.html#contact" class="btn w-full max-w-md mt-6 md:mt-8 gap-4 md:gap-12">
           Book a strategy call
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="16" viewBox="0 0 48 16" fill="none" aria-hidden="true" class="btn-arrow">
             <path d="M1 8H43M43 8L36 1M43 8L36 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -213,36 +202,31 @@
             <span class="block mt-0.5 text-xs text-stone">Co-founders, FromSendr</span>
           </span>
         </div>
-        <ul class="mt-5 pt-5 border-t border-platinum space-y-3 text-sm text-stone">
-            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A look through your flows, campaigns and list</span></li>
-            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The first changes we'd make, in priority order</span></li>
-            <li class="flex gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="mt-0.5 h-4 w-4 shrink-0 text-blue"><path d="M3 8.5L6.5 12L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Honest advice, with no obligation to work with us</span></li>
-        </ul>
-        <p class="mt-5 text-xs font-semibold uppercase tracking-[0.15em] text-navy">30 min &middot; Free</p>
+        <p class="mt-5 pt-5 border-t border-platinum text-xs font-semibold uppercase tracking-[0.15em] text-navy">30 min &middot; Free &middot; No obligation</p>
       </div>
     </div>
   </section>
+  </main>
 
   <!-- ========== FOOTER (same as index.html) ========== -->
   <footer class="mx-auto px-6 md:px-10 py-8 text-sm bg-ink border-t-2 border-blue text-stone flex flex-col gap-12">
     <div class="flex justify-between">
       <div class="flex flex-col justify-start gap-8">
         <img src="images/wordmark-platinum-footer.webp" alt="FromSendr" width="400" height="108" loading="lazy" decoding="async" class="w-24 sm:w-32 md:w-48">
-        <img src="images/klaviyo-partner.png" alt="Klaviyo Partner" width="800" height="337" loading="lazy" decoding="async" class="hidden w-14 sm:w-20 md:w-28">
       </div>
       <div class="flex justify-end gap-20">
         <div class="flex flex-col gap-4 text-xs text-right md:text-left md:text-sm">
           <a href="index.html" class="footer-link">Home</a>
-          <a href="services.html" class="footer-link">Services</a>
+          <a href="index.html#services" class="footer-link">Services</a>
           <a href="work.html" class="footer-link">Work</a>
           <a href="about.html" class="footer-link">About</a>
-          <a href="contact.html" class="footer-link">Contact</a>
+          <a href="index.html#contact" class="footer-link">Contact</a>
         </div>
         <div class="hidden md:flex flex-col gap-4 text-xs md:text-sm">
-          <a href="services.html#faq" class="footer-link">FAQs</a>
+          <a href="index.html#faq" class="footer-link">FAQs</a>
           <a href="index.html#statistics" class="footer-link">Email statistics</a>
-          <a href="services.html#process" class="footer-link">Our process</a>
-          <a href="contact.html#booking" class="footer-link">Book a call</a>
+          <a href="index.html#process" class="footer-link">Our process</a>
+          <a href="index.html#booking" class="footer-link">Book a call</a>
         </div>
         <div class="hidden lg:flex flex-col gap-4 text-xs md:text-sm">
           <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram</a>
@@ -250,8 +234,8 @@
       </div>
     </div>
     <div class="h-[1px] bg-silver/20"></div>
-    <div class="flex justify-between">
-      <span>© 2026 FromSendr</span>
+    <div class="flex justify-between text-xs md:text-sm">
+      <span class="flex flex-wrap gap-x-3 md:gap-x-6 gap-y-2"><span>© 2026 FromSendr</span><a href="privacy.html" class="footer-link">Privacy policy</a><a href="terms.html" class="footer-link">Terms of use</a></span>
       <div class="flex gap-6">
         <a href="https://www.instagram.com/fromsendr/" target="_blank" rel="noopener noreferrer" class="footer-link" title="Instagram" aria-label="FromSendr on Instagram">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
