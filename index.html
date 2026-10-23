@@ -21,6 +21,71 @@
   <meta property="og:image:alt" content="FromSendr: email marketing for e-commerce brands">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Structured data: tells search engines (and AI answers) what FromSendr is. Add new social profiles to sameAs; keep the FAQ answers word for word in line with the #faq section -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://fromsendr.com/#website",
+        "url": "https://fromsendr.com/",
+        "name": "FromSendr",
+        "inLanguage": "en-GB",
+        "publisher": { "@id": "https://fromsendr.com/#organization" }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://fromsendr.com/#organization",
+        "name": "FromSendr",
+        "url": "https://fromsendr.com/",
+        "logo": "https://fromsendr.com/images/favicon-v4.png",
+        "image": "https://fromsendr.com/images/og-image.jpg",
+        "description": "FromSendr is a UK email marketing agency for e-commerce brands. We design, write and run email marketing on Klaviyo: automated flows, campaigns, deliverability and A/B testing.",
+        "email": "jake@fromsendr.com",
+        "areaServed": "GB",
+        "knowsAbout": ["Email marketing", "Klaviyo", "Email automation", "Email deliverability", "A/B testing", "E-commerce marketing"],
+        "founder": [
+          { "@type": "Person", "name": "Jake Parsons", "jobTitle": "Co-founder" },
+          { "@type": "Person", "name": "Tom Olney", "jobTitle": "Co-founder" }
+        ],
+        "sameAs": ["https://www.instagram.com/fromsendr/"]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://fromsendr.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much does it cost?",
+            "acceptedAnswer": { "@type": "Answer", "text": "We don't offer fixed packages, so it depends on what your brand needs. After a free strategy call we'll put together a plan and a price tailored to your brand." }
+          },
+          {
+            "@type": "Question",
+            "name": "Which email platforms do you work with?",
+            "acceptedAnswer": { "@type": "Answer", "text": "We currently work with Klaviyo. If you're on a different platform, we can talk about whether we can support it, or help you move to Klaviyo." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I have to sign up for the long term?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. We work on monthly retainers, so you can stop at any time. Some brands just need a one-off flow set-up, others may want us to manage their email long term." }
+          },
+          {
+            "@type": "Question",
+            "name": "How involved do we need to be?",
+            "acceptedAnswer": { "@type": "Answer", "text": "As much or as little as you like. If you want to be hands-off, we handle everything from writing and design to set-up; you just sign off on each email before it goes out." }
+          },
+          {
+            "@type": "Question",
+            "name": "How soon will we see results?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most clients see noticeable results within 60 days, with continued growth over time as we keep testing and optimising. We aim to have a new sign-up pop-up and your first core automations live within the first 14 days." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
 
   <!-- Fonts: Poppins for body/UI, Space Grotesk for headlines (font-display) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
